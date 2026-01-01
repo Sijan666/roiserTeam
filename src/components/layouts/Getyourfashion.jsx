@@ -1,17 +1,19 @@
 import Container from "../Container";
 import Flex from "../Flex";
 import Product from "../Product";
-import productImg from "/src/assets/productImg.png";
+// import productImg from "/src/assets/productImg.png";
 import { LiaStarSolid } from "react-icons/lia";
 import { IoStarHalfOutline } from "react-icons/io5";
 import "slick-carousel/slick/slick.css";
 import Slider from "react-slick";
 import NextArrow from "../NextArrow";
 import PrevArrow from "../PrevArrow";
+import { useEffect, useState } from "react";
+import axios from "axios";
 // import "slick-carousel/slick/slick-theme.css";
 
 const Getyourfashion = () => {
-  var settings = {
+var settings = {
     dots: false,
     infinite: true,
     speed: 500,
@@ -19,7 +21,17 @@ const Getyourfashion = () => {
     slidesToScroll: 1,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
-  };
+};
+
+    let [allData, setAllData] = useState([]);
+    useEffect(() => {
+        async function alldatas() {
+        let data = await axios.get("https://dummyjson.com/products");
+        setAllData(data.data.products);
+        }
+        alldatas();
+    });
+    
   return (
     <div className="py-25">
       <Container>
@@ -34,26 +46,16 @@ const Getyourfashion = () => {
         <div className="">
           <div className="">
             <Slider {...settings}>
-              <div className="w-1/4 -mx-3">
-                <Product
-                  badgeText={"New"}
-                  prductImg={productImg}
-                  productType={"Levi’s Cotton"}
-                  productTitle={"Monica Diara Party Dress"}
-                  reviewStars={
-                    <>
-                      <LiaStarSolid />
-                      <LiaStarSolid />
-                      <LiaStarSolid />
-                      <LiaStarSolid />
-                      <LiaStarSolid />
-                    </>
-                  }
-                  reviewNo={"(15 Reviews)"}
-                  productPrice={"$893.00"}
-                />
-              </div>
-              <div className="w-1/4 -mx-3">
+                {allData.slice(0,10).map((item)=>(
+                    <Product
+                    prductImg={item.thumbnail}
+                    productTitle={item.title}
+                    productPrice={item.price}
+                    productType={item.brand}
+                    reviewStars={item.rating}
+                    />
+                ))}
+              {/* <div className="w-1/4 -mx-3">
                 <Product
                   badgeText={"New"}
                   prductImg={productImg}
@@ -124,7 +126,7 @@ const Getyourfashion = () => {
                   reviewNo={"(10 Reviews)"}
                   productPrice={"$360.00"}
                 />
-              </div>
+              </div> */}
             </Slider>
           </div>
         </div>

@@ -16,7 +16,7 @@ const Product = ({
 }) => {
   return (
     <div className="relative group cursor-pointer mx-3">
-      <Images imgSrc={prductImg} />
+      <Images imgSrc={prductImg} className={'bg-[#D9D9D9] w-full mx-auto'}/>
       <Badge
         badgeText={badgeText}
         className={
