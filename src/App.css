@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+
+@theme {
+    --font-Jost: "Jost", sans-serif; 
+    --font-redHatDisplay: "Red Hat Display", sans-serif; 
+    /* --font-papRika: "Paprika", system-ui;  */
+    --shadow-newMade: 0 30px 42px rgba(0, 0, 0, 0.04);
+    --shadow-newTwo: 0 4px 21px 0 rgba(229, 62, 62, 0.08);
+}
