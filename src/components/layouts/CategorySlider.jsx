@@ -1,9 +1,11 @@
 import Container from "../Container";
 import ProductCS from "../ProductCS";
-import whiteBg from '../../assets/whiteBg.png'
+// import whiteBg from '../../assets/whiteBg.png'
 import NextArrow from "../NextArrow";
 import PrevArrow from "../PrevArrow";
 import Slider from "react-slick";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 
 const CategorySlider = () => {
@@ -16,6 +18,15 @@ var settings = {
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
 };
+
+    let [allData, setAllData] = useState([]);
+    useEffect(() => {
+        async function alldatas() {
+        let data = await axios.get("https://dummyjson.com/products");
+        setAllData(data.data.products);
+        }
+        alldatas();
+    });
     return (
         <div className="py-25">
             <Container>
@@ -29,33 +40,12 @@ var settings = {
                 </div>
                 {/* <div className="flex gap-x-4 items-center"> */}
                 <Slider {...settings}>
-                    <div className="w-1/6 rounded-md overflow-hidden ">
-                        <ProductCS className={'hover:bg-[#E53E3E] bg-[#F6F6F7] text-black hover:text-white duration-300'} csImg={whiteBg} csText={'Women Wear'}/>
-                    </div>
-                    <div className="w-1/6 rounded-md overflow-hidden ">
-                        <ProductCS className={'hover:bg-[#E53E3E] bg-[#F6F6F7] text-black hover:text-white duration-300'} csImg={whiteBg} csText={'Shoes Collection'}/>
-                    </div>
-                    <div className="w-1/6 rounded-md overflow-hidden ">
-                        <ProductCS className={'hover:bg-[#E53E3E] bg-[#F6F6F7] text-black hover:text-white duration-300'} csImg={whiteBg} csText={'Bag Collection'}/>
-                    </div>
-                    <div className="w-1/6 rounded-md overflow-hidden ">
-                        <ProductCS className={'hover:bg-[#E53E3E] bg-[#F6F6F7] text-black hover:text-white duration-300'} csImg={whiteBg} csText={'Watch Hare'}/>
-                    </div>
-                    <div className="w-1/6 rounded-md overflow-hidden ">
-                        <ProductCS className={'hover:bg-[#E53E3E] bg-[#F6F6F7] text-black hover:text-white duration-300'} csImg={whiteBg} csText={'Accessories'}/>
-                    </div>
-                    <div className="w-1/6 rounded-md overflow-hidden ">
-                        <ProductCS className={'hover:bg-[#E53E3E] bg-[#F6F6F7] text-black hover:text-white duration-300'} csImg={whiteBg} csText={'Sunglasses'}/>
-                    </div>
-                    <div className="w-1/6 rounded-md overflow-hidden ">
-                        <ProductCS className={'hover:bg-[#E53E3E] bg-[#F6F6F7] text-black hover:text-white duration-300'} csImg={whiteBg} csText={'Women Wear'}/>
-                    </div>
-                    <div className="w-1/6 rounded-md overflow-hidden ">
-                        <ProductCS className={'hover:bg-[#E53E3E] bg-[#F6F6F7] text-black hover:text-white duration-300'} csImg={whiteBg} csText={'Shoes Collection'}/>
-                    </div>
-                    <div className="w-1/6 rounded-md overflow-hidden ">
-                        <ProductCS className={'hover:bg-[#E53E3E] bg-[#F6F6F7] text-black hover:text-white duration-300'} csImg={whiteBg} csText={'Bag Collection'}/>
-                    </div>
+                    {allData.slice(0,10).map((item)=>(
+                        <div className="w-1/4">
+                            <ProductCS csImg={item.thumbnail} csText={item.title}/>
+                        </div>
+                        ))} 
+                    
                 </Slider>
                 {/* </div> */}
             </Container>
