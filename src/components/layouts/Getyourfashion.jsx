@@ -46,7 +46,7 @@ var settings = {
         <div className="">
           <div className="">
             <Slider {...settings}>
-                {allData.slice(0,10).map((item)=>(
+                {allData.slice(5 ,15).map((item)=>(
                     <Product
                     prductImg={item.thumbnail}
                     productTitle={item.title}
