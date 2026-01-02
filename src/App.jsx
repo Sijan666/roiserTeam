@@ -9,6 +9,7 @@ import MyAccount from './components/pages/MyAccount'
 import Wishlist from './components/pages/Wishlist'
 import Checkout from './components/pages/Checkout'
 import StoreLocation from './components/pages/StoreLocation'
+import Faq from './components/pages/Faq'
 
 
 function App () {
@@ -23,6 +24,7 @@ function App () {
           <Route path="/wishlist" element={<Wishlist/>} />
           <Route path="/checkout" element={<Checkout/>} />
           <Route path="/storelocation" element={<StoreLocation/>} />
+          <Route path="/faq" element={<Faq/>} />
         </Route>
           <Route path="*" element={<Error/>} />
       </Routes>
