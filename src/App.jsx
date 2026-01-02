@@ -11,6 +11,7 @@ import Checkout from './components/pages/Checkout'
 import StoreLocation from './components/pages/StoreLocation'
 import Login from './components/Login'
 import Signup from './components/Signup'
+import Faq from './components/pages/Faq'
 
 
 function App () {
@@ -27,6 +28,7 @@ function App () {
           <Route path="/storelocation" element={<StoreLocation/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/signup" element={<Signup/>} />
+          <Route path="/faq" element={<Faq/>} />
         </Route>
           <Route path="*" element={<Error/>} />
       </Routes>
