@@ -16,11 +16,26 @@ const HeaderTop = () => {
                     About
                 </Link>
               </li>
-              <li className="font-medium text-sm text-white font-Jost">
-                <Link to={"/myaccount"}>
+              {/* <li className="font-medium text-sm text-white font-Jost"> */}
+                {/* <Link to={"/myaccount"}>
                     My Account
-                </Link>
-              </li>
+                </Link> */}
+              <Popover className="relative">
+                <PopoverButton className={'font-medium text-sm text-white font-Jost flex items-center gap-x-2 outline-none'}>My Account<span><IoIosArrowDown /></span></PopoverButton>
+                <PopoverPanel anchor="bottom" className="flex flex-col bg-[#e53e3ece] p-5 rounded-b-md text-white font-bold z-10">
+                  <a href="/analytics" className="mb-2">
+                    <Link to={'/login'}>
+                      Login
+                    </Link>
+                  </a>
+                  <a href="/engagement">
+                    <Link to={'/signup'}>
+                      Sign Up
+                    </Link>
+                  </a>
+                </PopoverPanel>
+              </Popover>
+              {/* </li> */}
               <li className="font-medium text-sm text-white font-Jost">
                 <Link to={"/wishlist"}>
                     Wishlist

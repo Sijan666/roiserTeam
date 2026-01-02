@@ -9,6 +9,8 @@ import MyAccount from './components/pages/MyAccount'
 import Wishlist from './components/pages/Wishlist'
 import Checkout from './components/pages/Checkout'
 import StoreLocation from './components/pages/StoreLocation'
+import Login from './components/Login'
+import Signup from './components/Signup'
 
 
 function App () {
@@ -23,6 +25,8 @@ function App () {
           <Route path="/wishlist" element={<Wishlist/>} />
           <Route path="/checkout" element={<Checkout/>} />
           <Route path="/storelocation" element={<StoreLocation/>} />
+          <Route path="/login" element={<Login/>} />
+          <Route path="/signup" element={<Signup/>} />
         </Route>
           <Route path="*" element={<Error/>} />
       </Routes>
