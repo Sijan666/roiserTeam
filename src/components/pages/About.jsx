@@ -1,4 +1,5 @@
 import React from 'react'
+import ProductsDetails from './ProductsDetails'
 // import Button from "../Button"
 // import bgImg from "../../assets/bg.png"
 // import Badge from "../Badge";
@@ -7,6 +8,7 @@ import React from 'react'
 const About = () => {
     return (
         <>
+        <ProductsDetails/>
         </>
         // <div 
         //     className="p-10 border border-gray-100 h-[250px] bg-cover bg-center bg-no-repeat flex flex-col justify-center"
