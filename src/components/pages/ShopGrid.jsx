@@ -59,7 +59,7 @@ const ShopGrid = () => {
             </Flex>
             <div>
               <Flex className={"mb-6 justify-between"}>
-                <Product
+                <Product 
                   prductImg={Proimg}
                   productType={"Levi’s Cotton"}
                   productTitle={"Monica Diara Party Dress"}
