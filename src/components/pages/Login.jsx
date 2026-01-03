@@ -1,6 +1,6 @@
 import React from 'react'
-import Container from './Container'
-import Flex from './Flex'
+import Container from '../Container'
+import Flex from '../Flex'
 import { MdKeyboardArrowRight } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import { FcGoogle } from 'react-icons/fc'
