@@ -12,6 +12,7 @@ import StoreLocation from './components/pages/StoreLocation'
 import Login from './components/Login'
 import Signup from './components/Signup'
 import Faq from './components/pages/Faq'
+import ShopGrid from './components/pages/ShopGrid'
 
 
 function App () {
@@ -29,6 +30,7 @@ function App () {
           <Route path="/login" element={<Login/>} />
           <Route path="/signup" element={<Signup/>} />
           <Route path="/faq" element={<Faq/>} />
+          <Route path="/shopgrid" element={<ShopGrid/>} />
         </Route>
           <Route path="*" element={<Error/>} />
       </Routes>

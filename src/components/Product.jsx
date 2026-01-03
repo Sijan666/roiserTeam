@@ -15,8 +15,8 @@ const Product = ({
   className,
 }) => {
   return (
-    <div className="relative group cursor-pointer mx-3">
-      <Images imgSrc={prductImg} className={'bg-[#D9D9D9] w-full mx-auto'}/>
+    <div className="relative group cursor-pointer mx-3 rounded-[5px] overflow-hidden">
+      <Images imgSrc={prductImg} className={'bg-[#D9D9D9] w-full mx-auto '}/>
       <Badge
         badgeText={badgeText}
         className={
@@ -78,7 +78,7 @@ const Product = ({
         </div>
       </div>
 
-      <div className="px-6 py-6.5 bg-white rounded-md border-b border-b-[#E8E8E8] border-l border-l-[#E8E8E8] border-r border-r-[#E8E8E8]">
+      <div className="px-6 py-6.5 bg-white border border-[#E8E8E8] border-t-0">
         <h5 className={`mb-1 font-Jost font-normal text-[12px] text-[#74787C]`}>
           {productType}
         </h5>
