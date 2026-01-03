@@ -20,17 +20,19 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import NextArrow from "../NextArrow";
 import PrevArrow from "../PrevArrow";
+import NextArrowforJaber from "../NextArrowforJaber";
+import PrevArrowforJaber from "../PrevArrowforJaber";
 
 const ProductsDetails = () => {
-   var settings = {
-     dots: true,
-     infinite: true,
-     speed: 500,
-     slidesToShow: 1,
-     slidesToScroll: 1,
-     nextArrow: <NextArrow />,
-     prevArrow: <PrevArrow />,
-   };
+    var settings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      nextArrow: <NextArrowforJaber />,
+      prevArrow: <PrevArrowforJaber />,
+    };
   let [user, setUser] = useState(1);
 
   const handleplus = () => {
@@ -74,8 +76,8 @@ const ProductsDetails = () => {
             <Slider {...settings}>
               <div className="relative outline-0">
                 <Images imgSrc={pro} className={"h-[775px]"} />
-                <NextArrow className="absolute top-1/2  text-black bg-white p-2 rounded-[50%] text-4xl right-12 cursor-pointer" />
-                <PrevArrow className="absolute top-1/2  text-black bg-white p-2 rounded-[50%] text-4xl left-12 cursor-pointer" />
+                {/* <NextArrowforJaber className="absolute top-1/2  text-black bg-white p-2 rounded-[50%] text-4xl right-12 cursor-pointer" /> */}
+                {/* <PrevArrowforJaber className="absolute top-1/2  text-black bg-white p-2 rounded-[50%] text-4xl left-12 cursor-pointer" /> */}
                 <div className="bg-black text-white py-3 px-2.5 rounded-[50%] absolute top-12 left-12">
                   Sale
                 </div>
@@ -103,7 +105,7 @@ const ProductsDetails = () => {
               Tony Gold Neaklaces
             </h3>
             <div className="flex gap-x-3">
-              <Images imgSrc={start} />
+              <Images imgSrc={start} className={'w-[90px]'}/>
               <p className="text-[#141414] text-sm font-Jost">
                 (1 customer review)
               </p>
