@@ -9,10 +9,11 @@ import MyAccount from './components/pages/MyAccount'
 import Wishlist from './components/pages/Wishlist'
 import Checkout from './components/pages/Checkout'
 import StoreLocation from './components/pages/StoreLocation'
-import Login from './components/Login'
-import Signup from './components/Signup'
 import Faq from './components/pages/Faq'
 import ShopGrid from './components/pages/ShopGrid'
+import Login from './components/pages/Login'
+import Signup from './components/pages/Signup'
+import Contact from './components/pages/Contact'
 
 
 function App () {
@@ -31,6 +32,7 @@ function App () {
           <Route path="/signup" element={<Signup/>} />
           <Route path="/faq" element={<Faq/>} />
           <Route path="/shopgrid" element={<ShopGrid/>} />
+          <Route path="/contact" element={<Contact/>} />
         </Route>
           <Route path="*" element={<Error/>} />
       </Routes>
