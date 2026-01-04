@@ -9,11 +9,14 @@ import MyAccount from './components/pages/MyAccount'
 import Wishlist from './components/pages/Wishlist'
 import Checkout from './components/pages/Checkout'
 import StoreLocation from './components/pages/StoreLocation'
-import Faq from './components/pages/Faq'
+import FAQ from './components/pages/FAQ'
 import ShopGrid from './components/pages/ShopGrid'
 import Login from './components/pages/Login'
 import Signup from './components/pages/Signup'
 import Contact from './components/pages/Contact'
+import Blog from './components/pages/Bloglist'
+import Bloglist from './components/pages/Bloglist'
+import Bloggrid from './components/pages/Bloggrid'
 
 
 function App () {
@@ -30,9 +33,11 @@ function App () {
           <Route path="/storelocation" element={<StoreLocation/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/signup" element={<Signup/>} />
-          <Route path="/faq" element={<Faq/>} />
+          <Route path="/faq" element={<FAQ/>} />
           <Route path="/shopgrid" element={<ShopGrid/>} />
           <Route path="/contact" element={<Contact/>} />
+          <Route path="/bloglist" element={<Bloglist/>} />
+          <Route path="/bloggrid" element={<Bloggrid/>} />
         </Route>
           <Route path="*" element={<Error/>} />
       </Routes>
