@@ -74,8 +74,8 @@ const ProductsDetails = () => {
             <Slider {...settings}>
               <div className="relative outline-0">
                 <Images imgSrc={pro} className={"h-[775px]"} />
-                <NextArrow className="absolute top-1/2  text-black bg-white p-2 rounded-[50%] text-4xl right-12 cursor-pointer" />
-                <PrevArrow className="absolute top-1/2  text-black bg-white p-2 rounded-[50%] text-4xl left-12 cursor-pointer" />
+                <FaAngleRight className="absolute top-1/2  text-black bg-white p-2 rounded-[50%] text-4xl right-12 cursor-pointer" />
+                <FaAngleLeft className="absolute top-1/2  text-black bg-white p-2 rounded-[50%] text-4xl left-12 cursor-pointer" />
                 <div className="bg-black text-white py-3 px-2.5 rounded-[50%] absolute top-12 left-12">
                   Sale
                 </div>
@@ -83,8 +83,8 @@ const ProductsDetails = () => {
               </div>
               <div className="relative outline-0">
                 <Images imgSrc={pro} className={"h-[775px]"} />
-                <NextArrow className="absolute top-1/2  text-black bg-white p-2 rounded-[50%] text-4xl right-12 cursor-pointer" />
-                <PrevArrow className="absolute top-1/2  text-black bg-white p-2 rounded-[50%] text-4xl left-12 cursor-pointer" />
+                <FaAngleRight className="absolute top-1/2  text-black bg-white p-2 rounded-[50%] text-4xl right-12 cursor-pointer" />
+                <FaAngleLeft className="absolute top-1/2  text-black bg-white p-2 rounded-[50%] text-4xl left-12 cursor-pointer" />
                 <div className="bg-black text-white py-3 px-2.5 rounded-[50%] absolute top-12 left-12">
                   Sale
                 </div>
