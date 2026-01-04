@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Container from "../Container";
 import Flex from "../Flex";
 import { FaAngleRight, FaCodeCompare } from "react-icons/fa6";
@@ -20,17 +20,21 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import NextArrow from "../NextArrow";
 import PrevArrow from "../PrevArrow";
+import mixitup from "mixitup";
 
 const ProductsDetails = () => {
-   var settings = {
-     dots: true,
-     infinite: true,
-     speed: 500,
-     slidesToShow: 1,
-     slidesToScroll: 1,
-     nextArrow: <NextArrow />,
-     prevArrow: <PrevArrow />,
-   };
+  const containerRef = useRef(null);
+
+  var settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
+  };
+  
   let [user, setUser] = useState(1);
 
   const handleplus = () => {
@@ -43,6 +47,27 @@ const ProductsDetails = () => {
       setUser((user) => user - 1);
     }
   };
+
+  useEffect(() => {
+    let mixer = null;
+    if (containerRef.current) {
+      mixer = mixitup(containerRef.current, {
+        selectors: {
+            target: '.mix' 
+        },
+        animation: {
+          duration: 300
+        },
+        load:{
+          filter:".description"
+        }
+      });
+    }
+    return () => {
+        if(mixer) mixer.destroy();
+    }
+  }, []);
+
   return (
     <>
       <div className="bg-[url('/src/assets/productsdetailsbg.png')] bg-cover bg-center bg-no-repeat py-[150px]">
@@ -178,32 +203,81 @@ const ProductsDetails = () => {
           </div>
         </Flex>
 
+        {/* 3. Filter Buttons: added dot (.) for class selection */}
         <div className="flex gap-x-7 mt-20 border-b border-[#E8E8E8] pb-5">
-          <h3 className="text-[#74787C] text-[18px] font-medium font-Jost hover:text-[#141414]">
+          <h3
+            data-filter=".description"
+            className="text-[#74787C] text-[18px] font-medium font-Jost hover:text-[#141414] cursor-pointer"
+          >
             Description
           </h3>
-          <h3 className="text-[#74787C] text-[18px] font-medium font-Jost hover:text-[#141414]">
+          <h3
+            data-filter=".additional"
+            className="text-[#74787C] text-[18px] font-medium font-Jost hover:text-[#141414] cursor-pointer"
+          >
             Additional information
           </h3>
-          <h3 className="text-[#74787C] text-[18px] font-medium font-Jost hover:text-[#141414]">
+          <h3
+            data-filter=".reviews"
+            className="text-[#74787C] text-[18px] font-medium font-Jost hover:text-[#141414] cursor-pointer"
+          >
             Reviews (2)
           </h3>
         </div>
-        <Flex className={"gap-x-5 items-start mt-10"}>
-          <p className="w-[730px] text-[#74787C] text-base font-Jost leading-6">
-            Sed porttitor lectus nibh. Donec sollicitudin molestie malesuada.
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-            magna justo, lacinia eget consectetur sed, convallis at tellus.
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-            magna justo, lacinia eget consectetur sed, convallis at tellus.
-            <p className="pt-5">
-              Lobortis rhoncus litora pretium tempor mattis proin, auctor dis
-              massa enim himenaeos. Torquent senectus dui vehicula libero cum
-              vitae natoque magna commodo quam,
-            </p>
-          </p>
-          <Images imgSrc={video} />
-        </Flex>
+
+        {/* 4. Container Ref Added */}
+        <div className="" ref={containerRef}>
+          <Flex className={"gap-x-5 items-start mt-10"}>
+            
+            {/* 5. Changed <p> to <div> and used className for mixitup */}
+            <div
+              className="mix description w-[730px] text-[#74787C] text-base font-Jost leading-6"
+            >
+              Sed porttitor lectus nibh. Donec sollicitudin molestie malesuada.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+              magna justo, lacinia eget consectetur sed, convallis at tellus.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+              magna justo, lacinia eget consectetur sed, convallis at tellus.
+              <p className="pt-5">
+                Lobortis rhoncus litora pretium tempor mattis proin, auctor dis
+                massa enim himenaeos. Torquent senectus dui vehicula libero cum
+                vitae natoque magna commodo quam,
+              </p>
+            </div>
+
+            <div
+              className="mix additional w-[730px] text-[#74787C] text-base font-Jost leading-6"
+            >
+              Sed porttitor lectus nibh. Donec sollicitudin molestie malesuada.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+              magna justo, lacinia eget consectetur sed, convallis at tellus.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+              magna justo, lacinia eget consectetur sed, convallis at tellus.
+              <p className="pt-5">
+                Lobortis rhoncus litora pretium tempor mattis proin, auctor dis
+                massa enim himenaeos. Torquent senectus dui vehicula libero cum
+                vitae natoque magna commodo quam,
+              </p>
+            </div>
+
+            <div
+              className="mix reviews w-[730px] text-[#74787C] text-base font-Jost leading-6"
+            >
+              Sed porttitor lectus nibh. Donec sollicitudin molestie malesuada.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+              magna justo, lacinia eget consectetur sed, convallis at tellus.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+              magna justo, lacinia eget consectetur sed, convallis at tellus.
+              <p className="pt-5">
+                Lobortis rhoncus litora pretium tempor mattis proin, auctor dis
+                massa enim himenaeos. Torquent senectus dui vehicula libero cum
+                vitae natoque magna commodo quam,
+              </p>
+            </div>
+            
+            <Images imgSrc={video} />
+          </Flex>
+        </div>
       </Container>
     </>
   );
