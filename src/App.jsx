@@ -11,6 +11,7 @@ import Checkout from "./components/pages/Checkout";
 import StoreLocation from "./components/pages/StoreLocation";
 import ShopGrid from "./components/pages/ShopGrid";
 import BlogDetailes from "./components/pages/BlogDetailes";
+import Shop_Grid from "./components/pages/Shop_Grid";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/shopgrid" element={<ShopGrid />} />
           <Route path="/blogdetailes" element={<BlogDetailes />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/shop_grid" element={<Shop_Grid />} />
         </Route>
         <Route path="*" element={<Error />} />
       </Routes>
