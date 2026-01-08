@@ -16,6 +16,7 @@ import Signup from './components/pages/Signup'
 import Contact from './components/pages/Contact'
 import Bloglist from './components/pages/Bloglist'
 import Bloggrid from './components/pages/Bloggrid'
+import BlogDetailes from './components/pages/BlogDetailes'
 
 function App() {
   return (
@@ -45,7 +46,7 @@ function App() {
           <Route path="/storelocation" element={<StoreLocation />} />
           <Route path="/shopgrid" element={<ShopGrid />} />
           <Route path="/blogdetailes" element={<BlogDetailes />} />
-          <Route path="/checkout" element={<Checkout />} />
+          {/* <Route path="/checkout" element={<Checkout />} /> */}
         </Route>
         <Route path="*" element={<Error />} />
       </Routes>
