@@ -18,6 +18,7 @@ import Bloggrid from "./components/pages/Bloggrid";
 import Login from "./components/pages/Login";
 import Signup from "./components/pages/Signup";
 import Contact from "./components/pages/Contact";
+import ProductsDetails from "./components/pages/ProductsDetails";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
           <Route path="/bloggrid" element={<Bloggrid/>} />
           <Route path="/blogdetailes" element={<BlogDetailes />} />
           <Route path="/shop_grid" element={<Shop_Grid />} />
+          <Route path="/productdetails" element={<ProductsDetails />} />
         </Route>
         <Route path="*" element={<Error />} />
       </Routes>
