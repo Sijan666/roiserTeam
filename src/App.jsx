@@ -1,22 +1,17 @@
-import './App.css'
-import Home from './components/pages/Home'
-import { Routes , Route } from 'react-router-dom'
-import RootLayouts from './components/layouts/RootLayouts'
-import About from './components/pages/About'
-import Error from './components/pages/Error'
-import Women from './components/pages/Women'
-import MyAccount from './components/pages/MyAccount'
-import Wishlist from './components/pages/Wishlist'
-import Checkout from './components/pages/Checkout'
-import StoreLocation from './components/pages/StoreLocation'
-import FAQ from './components/pages/FAQ'
-import ShopGrid from './components/pages/ShopGrid'
-import Login from './components/pages/Login'
-import Signup from './components/pages/Signup'
-import Contact from './components/pages/Contact'
-import Bloglist from './components/pages/Bloglist'
-import Bloggrid from './components/pages/Bloggrid'
-import BlogDetailes from './components/pages/BlogDetailes'
+import "./App.css";
+import Home from "./components/pages/Home";
+import { Routes, Route } from "react-router-dom";
+import RootLayouts from "./components/layouts/RootLayouts";
+import About from "./components/pages/About";
+import Error from "./components/pages/Error";
+import Women from "./components/pages/Women";
+import MyAccount from "./components/pages/MyAccount";
+import Wishlist from "./components/pages/Wishlist";
+import Checkout from "./components/pages/Checkout";
+import StoreLocation from "./components/pages/StoreLocation";
+import ShopGrid from "./components/pages/ShopGrid";
+import BlogDetailes from "./components/pages/BlogDetailes";
+import Shop_Grid from "./components/pages/Shop_Grid";
 
 function App() {
   return (
@@ -47,6 +42,7 @@ function App() {
           <Route path="/shopgrid" element={<ShopGrid />} />
           <Route path="/blogdetailes" element={<BlogDetailes />} />
           {/* <Route path="/checkout" element={<Checkout />} /> */}
+          <Route path="/shop_grid" element={<Shop_Grid />} />
         </Route>
         <Route path="*" element={<Error />} />
       </Routes>
