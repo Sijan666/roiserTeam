@@ -14,12 +14,10 @@ import ShopGrid from './components/pages/ShopGrid'
 import Login from './components/pages/Login'
 import Signup from './components/pages/Signup'
 import Contact from './components/pages/Contact'
-import Blog from './components/pages/Bloglist'
 import Bloglist from './components/pages/Bloglist'
 import Bloggrid from './components/pages/Bloggrid'
 
-
-function App () {
+function App() {
   return (
     <>
       <Routes>
@@ -38,13 +36,21 @@ function App () {
           <Route path="/contact" element={<Contact/>} />
           <Route path="/bloglist" element={<Bloglist/>} />
           <Route path="/bloggrid" element={<Bloggrid/>} />
+          <Route index element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/women" element={<Women />} />
+          <Route path="/myaccount" element={<MyAccount />} />
+          <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/storelocation" element={<StoreLocation />} />
+          <Route path="/shopgrid" element={<ShopGrid />} />
+          <Route path="/blogdetailes" element={<BlogDetailes />} />
+          <Route path="/checkout" element={<Checkout />} />
         </Route>
-          <Route path="*" element={<Error/>} />
+        <Route path="*" element={<Error />} />
       </Routes>
     </>
-  )
+  );
 }
 
-export default App
-
-
+export default App;
