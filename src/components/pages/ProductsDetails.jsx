@@ -124,7 +124,7 @@ const ProductsDetails = () => {
               </h4>
               <Images imgSrc={statlogo} />
             </div>
-            <h3 className="text-[#141414] text-3xl font-Jost font-semibold py-5">
+            <h3 className="text-[#141414] text-3xl font-Jost font-semibold py-4">
               Tony Gold Neaklaces
             </h3>
             <div className="flex gap-x-3">
