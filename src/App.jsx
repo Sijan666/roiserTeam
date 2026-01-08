@@ -12,6 +12,12 @@ import StoreLocation from "./components/pages/StoreLocation";
 import ShopGrid from "./components/pages/ShopGrid";
 import BlogDetailes from "./components/pages/BlogDetailes";
 import Shop_Grid from "./components/pages/Shop_Grid";
+import FAQ from "./components/pages/FAQ";
+import Bloglist from "./components/pages/Bloglist";
+import Bloggrid from "./components/pages/Bloggrid";
+import Login from "./components/pages/Login";
+import Signup from "./components/pages/Signup";
+import Contact from "./components/pages/Contact";
 
 function App() {
   return (
@@ -32,16 +38,7 @@ function App() {
           <Route path="/contact" element={<Contact/>} />
           <Route path="/bloglist" element={<Bloglist/>} />
           <Route path="/bloggrid" element={<Bloggrid/>} />
-          <Route index element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/women" element={<Women />} />
-          <Route path="/myaccount" element={<MyAccount />} />
-          <Route path="/wishlist" element={<Wishlist />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/storelocation" element={<StoreLocation />} />
-          <Route path="/shopgrid" element={<ShopGrid />} />
           <Route path="/blogdetailes" element={<BlogDetailes />} />
-          {/* <Route path="/checkout" element={<Checkout />} /> */}
           <Route path="/shop_grid" element={<Shop_Grid />} />
         </Route>
         <Route path="*" element={<Error />} />

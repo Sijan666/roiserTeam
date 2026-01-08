@@ -5,7 +5,7 @@ import { MdKeyboardArrowRight, MdKeyboardArrowDown } from "react-icons/md";
 import Button from "../Button";
 import { useState } from "react";
 
-const Faq = () => {
+const FAQ = () => {
   const [dropOne, setDropOne] = useState(false);
   const [dropTwo, setDropTwo] = useState(false);
   const [dropThree, setDropThree] = useState(false);
@@ -240,4 +240,4 @@ const Faq = () => {
   );
 };
 
-export default Faq;
+export default FAQ;
