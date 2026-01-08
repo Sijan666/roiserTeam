@@ -10,6 +10,7 @@ import Wishlist from './components/pages/Wishlist'
 import Checkout from './components/pages/Checkout'
 import StoreLocation from './components/pages/StoreLocation'
 import ShopGrid from './components/pages/ShopGrid'
+import BlogDetailes from './components/pages/BlogDetailes'
 
 
 function App () {
@@ -25,6 +26,7 @@ function App () {
           <Route path="/checkout" element={<Checkout/>} />
           <Route path="/storelocation" element={<StoreLocation/>} />
           <Route path="/shopgrid" element={<ShopGrid/>} />
+          <Route path="/blogdetailes" element={<BlogDetailes/>} />
         </Route>
           <Route path="*" element={<Error/>} />
       </Routes>
