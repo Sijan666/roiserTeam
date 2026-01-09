@@ -162,19 +162,19 @@ const Shop_Grid = () => {
             Products from 1 to 8 of 80
           </p>
           <Flex className="gap-x-4">
-            <div className="bg-[#1A1A1A] text-white border border-[#1A1A1A] hover:bg-white hover:text-[#1A1A1A] cursor-pointer duration-300 w-9 h-9 flex justify-center items-center text-sm font-semibold">
+            <div className="bg-[#E53E3E] text-white border border-[#F0F0F0] hover:bg-[#E53E3E] hover:text-white cursor-pointer duration-300 w-9 h-9 flex justify-center items-center text-sm font-semibold rounded-sm">
               1
             </div>
-            <div className="bg-white text-[#767676] border border-[#F0F0F0] hover:bg-[#1A1A1A] hover:text-white cursor-pointer duration-300 w-9 h-9 flex justify-center items-center text-sm font-semibold">
+            <div className="bg-[#F6F6F7] text-black border border-[#F0F0F0] hover:bg-[#E53E3E] hover:text-white cursor-pointer duration-300 w-9 h-9 flex justify-center items-center text-sm font-semibold rounded-sm">
               2
             </div>
-            <div className="bg-white text-[#767676] border border-[#F0F0F0] hover:bg-[#1A1A1A] hover:text-white cursor-pointer duration-300 w-9 h-9 flex justify-center items-center text-sm font-semibold">
+            <div className="bg-[#F6F6F7] text-black border border-[#F0F0F0] hover:bg-[#E53E3E] hover:text-white cursor-pointer duration-300 w-9 h-9 flex justify-center items-center text-sm font-semibold rounded-sm">
               3
             </div>
-            <div className="bg-white text-[#767676] border border-[#F0F0F0] hover:bg-[#1A1A1A] hover:text-white cursor-pointer duration-300 w-9 h-9 flex justify-center items-center text-sm font-semibold">
+            <div className="bg-[#F6F6F7] text-black border border-[#F0F0F0] hover:bg-[#E53E3E] hover:text-white cursor-pointer duration-300 w-9 h-9 flex justify-center items-center text-sm font-semibold rounded-sm">
               4
             </div>
-            <div className="bg-white text-[#767676] border border-[#F0F0F0] hover:bg-[#1A1A1A] hover:text-white cursor-pointer duration-300 w-9 h-9 flex justify-center items-center text-xl font-semibold">
+            <div className="bg-[#F6F6F7] text-black border border-[#F0F0F0] hover:bg-[#E53E3E] hover:text-white cursor-pointer duration-300 w-9 h-9 flex justify-center items-center text-xl font-semibold rounded-sm">
               <MdKeyboardDoubleArrowRight />
             </div>
           </Flex>
