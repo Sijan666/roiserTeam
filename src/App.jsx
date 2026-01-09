@@ -36,11 +36,11 @@ function App() {
           <Route path="/signup" element={<Signup/>} />
           <Route path="/faq" element={<FAQ/>} />
           <Route path="/shopgrid" element={<ShopGrid/>} />
+          <Route path="/shop_grid" element={<Shop_Grid />} />
           <Route path="/contact" element={<Contact/>} />
           <Route path="/bloglist" element={<Bloglist/>} />
           <Route path="/bloggrid" element={<Bloggrid/>} />
           <Route path="/blogdetailes" element={<BlogDetailes />} />
-          <Route path="/shop_grid" element={<Shop_Grid />} />
           <Route path="/productdetails" element={<ProductsDetails />} />
         </Route>
         <Route path="*" element={<Error />} />
