@@ -21,7 +21,7 @@ const Banner = () => {
   };
   return (
     <>
-    <div className="relative z-1">
+    <div className="relative z-1 ">
         <Slider {...settings} >
           <div className="outline-none">
             <Images imgSrc={banner1} className={'w-full'}/>

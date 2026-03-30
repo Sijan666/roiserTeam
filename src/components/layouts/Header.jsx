@@ -28,8 +28,8 @@ const Header = () => {
                 <Images imgSrc={Logo} />
               </Link>
             </div>
-            <div className="lg:w-[58%]">
-              <Flex className="border-2 rounded-[3px] border-[#E8E8E8] p-2.5 lg:w-[80%] lg:ml-[70px] flex flex-col lg:flex-row gap-y-5">
+            <div className="lg:w-[58%] w-full">
+              <Flex className="border-2 rounded-[3px] border-[#E8E8E8] p-2.5 lg:w-[80%] lg:ml-[70px] flex flex-col md:flex-row gap-y-5 justify-between">
                 <Popover className="relative">
                   <PopoverButton className="text-sm text-[#1A1A1A] font-bold px-2 border-[#CFCFCF] lg:border-r-2 flex items-center outline-none">
                     All Categories <FaChevronDown className="ml-2" />
@@ -50,15 +50,15 @@ const Header = () => {
                 <input
                   type="text"
                   placeholder="Search Keywords..."
-                  className="mx-5 outline-none lg:w-[340px]"
+                  className="outline-none md:w-[340px]"
                 />
-                <div className="bg-[#E53E3E] text-white px-[18px] py-1 rounded-[3px] cursor-pointer">
+                <button className="bg-[#E53E3E] text-white px-[18px] py-1 rounded-[3px] cursor-pointer">
                   Search Here
-                </div>
+                </button>
               </Flex>
             </div>
             <div className="lg:w-[32%] justify-end">
-              <Flex className="lg:justify-end flex flex-col lg:flex-row justify-center gap-y-5">
+              <Flex className="lg:justify-end flex flex-col md:flex-row justify-center md:gap-x-10 lg:gap-x-0 gap-y-5">
                 <div className="lg:pr-[15px]">
                   <p className="text-sm text-[#74787C] text-end">
                     Call Us Now:
