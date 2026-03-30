@@ -6,36 +6,27 @@ import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
 
 const HeaderTop = () => {
   return (
-    <div className="bg-[#E53E3E] py-2.5">
+    <div className="bg-[#E53E3E] py-2.5 hidden lg:block">
       <Container>
-        <Flex className={'justify-between'}>
+        <Flex className={'justify-between flex flex-col lg:flex-row gap-y-4'}>
           <div>
-            <ul className="flex items-center gap-6">
+            <ul className="flex items-center lg:gap-6 gap-4">
               <li className="font-medium text-sm text-white font-Jost">
                 <Link to={"/about"}>
                     About
                 </Link>
               </li>
-              {/* <li className="font-medium text-sm text-white font-Jost"> */}
-                {/* <Link to={"/myaccount"}>
-                    My Account
-                </Link> */}
               <Popover className="relative">
                 <PopoverButton className={'font-medium text-sm text-white font-Jost flex items-center gap-x-2 outline-none'}>My Account<span><IoIosArrowDown /></span></PopoverButton>
                 <PopoverPanel anchor="bottom" className="flex flex-col bg-[#e53e3ece] p-5 rounded-b-md text-white font-bold z-10">
-                  
                     <Link to={'/login'} className="mb-2">
                       Login
                     </Link>
-                  
-                  
                     <Link to={'/signup'}>
                       Sign Up
                     </Link>
-                  
                 </PopoverPanel>
               </Popover>
-              {/* </li> */}
               <li className="font-medium text-sm text-white font-Jost">
                 <Link to={"/wishlist"}>
                     Wishlist
@@ -54,7 +45,7 @@ const HeaderTop = () => {
             </p>
           </div>
           <div>
-            <ul className="flex items-center gap-6">
+            <ul className="flex items-center lg:gap-6 gap-3">
               <li className="font-medium text-sm text-white font-Jost">
                 <Link to={"/storelocation"}>
                     Store Location
