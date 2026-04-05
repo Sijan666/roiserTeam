@@ -54,7 +54,7 @@ const Footer = () => {
             
           </Flex>
           {/* Footer Info Bar End*/}
-          <Flex className={"py-[60px] justify-between items-start"}>
+          <Flex className={"py-[60px] justify-between items-start flex flex-col lg:flex-row gap-y-10"}>
             {/* 1 */}
             <div className="">
               <h3 className="text-[#1A1A1A] text-[18px] font-medium pb-[25px]">About Store</h3>
@@ -107,10 +107,10 @@ const Footer = () => {
             {/* 5 */}
             <div className="">
               <h3 className="text-[#1A1A1A] text-[18px] font-medium pb-[25px]">Our Newsletter</h3>
-              <div className="w-[400px]">
-                <p className="text-[#74787C] text-sm pb-6">Subscribe to the mailing list to receive updates one the new arrivals and other discounts</p>
+              <div className="lg:w-[400px] w-full">
+                <p className="text-[#74787C] lg:text-sm pb-6">Subscribe to the mailing list to receive updates one the new arrivals and other discounts</p>
               <div className="bg-white flex justify-between py-1.5 px-3 border border-[#E4E5EE] rounded-sm">
-                  <input className="pr-15 pl-2 outline-0" type="email" name="" id="" placeholder="Your email address" />
+                  <input className="lg:pr-15 lg:pl-2 outline-0" type="email" name="" id="" placeholder="Your email address" />
                   <Button btnText={"Subscribe"} className={'text-white font-extrabold text-sm bg-[#E53E3E] uppercase '}/>
               </div>
                   <p className="text-[#74787C] text-sm pt-5">I would like to receive news and special offer</p>
@@ -119,8 +119,8 @@ const Footer = () => {
 
           </Flex>
           {/* Footer Bottom */}
-          <Flex className={'justify-between border-t border-[#DDDDDE] py-6'}>
-            <div className="flex items-center">
+          <Flex className={'justify-between border-t border-[#DDDDDE] py-6 flex flex-col lg:flex-row gap-y-5'}>
+            <div className=" items-center flex flex-col lg:flex-row">
               <h3 className="text-[#1A1A1A] text-[16px] font-medium pr-1">Payment System:</h3>
               <Images imgSrc={CadrLogo}/>
             </div>

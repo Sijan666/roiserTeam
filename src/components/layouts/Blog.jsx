@@ -13,7 +13,7 @@ const Blog = () => {
       <Flex className={"mt-10 gap-x-5 gap-y-10 flex flex-col lg:flex-row"}>
         <div className="">
           <div className="h-[250px] lg:w-[465px] bg-[#D9D9D9] rounded-tr-md rounded-tl-md"></div>
-          <div className="p-10 shadow-newMade h-[250px] lg:w-[465px] rounded-bl-md rounded-br-md">
+          <div className="p-10 shadow-newMade lg:h-[250px] lg:w-[465px] rounded-bl-md rounded-br-md">
             <Flex className={"gap-x-8"}>
               <Link className="flex  gap-x-2">
                 <FaCalendarAlt className="text-[#E53E3E]" />
@@ -40,7 +40,7 @@ const Blog = () => {
         </div>
         <div className="">
           <div className="h-[250px] lg:w-[465px] bg-[#D9D9D9] rounded-tr-md rounded-tl-md"></div>
-          <div className="p-10 shadow-newMade h-[250px] lg:w-[465px] rounded-bl-md rounded-br-md">
+          <div className="p-10 shadow-newMade lg:h-[250px] lg:w-[465px] rounded-bl-md rounded-br-md">
             <Flex className={"gap-x-8"}>
               <Link className="flex gap-x-2">
                 <FaCalendarAlt className="text-[#E53E3E]" />
@@ -67,7 +67,7 @@ const Blog = () => {
         </div>
         <div className="">
           <div className="h-[250px] lg:w-[465px] bg-[#D9D9D9] rounded-tr-md rounded-tl-md"></div>
-          <div className="p-10 shadow-newMade h-[250px] lg:w-[465px] rounded-bl-md rounded-br-md">
+          <div className="p-10 shadow-newMade lg:h-[250px] lg:w-[465px] rounded-bl-md rounded-br-md">
             <Flex className={"gap-x-8"}>
               <Link className="flex gap-x-2">
                 <FaCalendarAlt className="text-[#E53E3E]" />
