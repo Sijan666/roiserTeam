@@ -19,12 +19,12 @@ const Products = ({
         badgeText={badgeText}
       />
       <Images imgSrc={productImg} />
-      <div className="w-[342px] bg-white rounded-b-md py-[30px] pl-[30px] pr-[75px] ">
+      <div className="lg:w-[342px] w-full bg-white rounded-b-md py-[30px] lg:pl-[30px] lg:pr-[75px] px-5">
         <p className="font-normal text-xs text-[#74787C] uppercase pb-1">
           {productsType}
         </p>
         <h3 className="font-semibold text-xl text-[#1A1A1A]">{productsName}</h3>
-        <Flex className={"pt-1.5 pb-3"}>
+        <Flex className={"pt-1.5 pb-3 "}>
           <div className="flex text-[#E53E3E] pr-2">
             <FaStar />
             <FaStar />

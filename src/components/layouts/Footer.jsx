@@ -18,11 +18,11 @@ const Footer = () => {
       <div className="bg-[#F6F6F7] pt-[60px] pb-[25px] selection:bg-[#b2bec3] selection:text-[#E53E3E]">
         <Container>
           {/* Footer Info Bar Start*/}
-          <Flex className={'p-[25px] bg-white justify-between'}>
+          <Flex className={'p-[25px] bg-white justify-between flex flex-col lg:flex-row gap-y-5 items-start'}>
             {/* 1 */}
             <div className="flex items-center">
                 <Images imgSrc={Box}/>
-            <div className="pr-[65px] pl-[15px] border-[#E7E7E7] border-r">
+            <div className="lg:pr-[65px] lg:pl-[15px] px-5 border-[#E7E7E7] lg:border-r">
               <h5 className="text-[#1A1A1A] font-semibold text-[18px]">Free shipping</h5>
               <p className="text-[#74787C]  text-sm">Free shipping on orders over $65.</p>
             </div>
@@ -30,7 +30,7 @@ const Footer = () => {
             {/* 2 */}
             <div className="flex items-center">
                 <Images imgSrc={Car}/>
-            <div className="pr-[65px] pl-[15px] border-[#E7E7E7] border-r">
+            <div className="lg:pr-[65px] lg:pl-[15px] px-5 border-[#E7E7E7] lg:border-r">
               <h5 className="text-[#1A1A1A] font-semibold text-[18px]">Free Returns</h5>
               <p className="text-[#74787C]  text-sm">30-days free return policy</p>
             </div>
@@ -38,7 +38,7 @@ const Footer = () => {
             {/* 3 */}
             <div className="flex items-center">
                 <Images imgSrc={Card}/>
-            <div className="pr-[65px] pl-[15px] border-[#E7E7E7] border-r">
+            <div className="lg:pr-[65px] lg:pl-[15px] px-5 border-[#E7E7E7] lg:border-r">
               <h5 className="text-[#1A1A1A] font-semibold text-[18px]">Secured Payments</h5>
               <p className="text-[#74787C]  text-sm">We accept all major credit cards</p>
             </div>
@@ -46,7 +46,7 @@ const Footer = () => {
             {/* 4 */}
             <div className="flex items-center">
                 <Images imgSrc={Time}/>
-            <div className="pr-[65px] pl-[15px] ">
+            <div className="lg:pr-[65px] lg:pl-[15px] px-5 ">
               <h5 className="text-[#1A1A1A] font-semibold text-[18px]">Customer Service</h5>
               <p className="text-[#74787C]  text-sm">Top notch customer service</p>
             </div>
