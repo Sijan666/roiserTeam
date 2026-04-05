@@ -1,14 +1,16 @@
 import Container from "../Container";
 import Product from "../Product";
-import "slick-carousel/slick/slick.css";
-import Slider from "react-slick";
-import NextArrow from "../NextArrow";
-import PrevArrow from "../PrevArrow";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+
 
 const Getyourfashion = () => {
     let [allData, setAllData] = useState([]);
+    
     useEffect(() => {
         async function alldatas() {
             try {
@@ -21,65 +23,50 @@ const Getyourfashion = () => {
         alldatas();
     }, []);
 
-    var settings = {
-        dots: false,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        nextArrow: <NextArrow />,
-        prevArrow: <PrevArrow />,
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 1,
-                }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                }
-            }
-        ]
-    };
-
     return (
-        <div className="py-25">
+        <div className="py-10 md:py-16 lg:py-25"> 
             <Container>
-                <div className="pb-7.5 border-b border-b-[#E9E9E9] mb-10">
-                    <h3 className="font-Jost font-semibold text-4xl text-[#1A1A1A] mb-4.5">
+                <div className="pb-4 md:pb-7.5 border-b border-b-[#E9E9E9] mb-6 md:mb-10"> 
+                    <h3 className="font-Jost font-semibold text-2xl md:text-3xl lg:text-4xl text-[#1A1A1A] mb-2 md:mb-4.5 text-center md:text-left">
                         GET YOUR FASHION STYLE
                     </h3>
-                    <h6 className="font-Jost font-normal text-[16px] text-[#74787C]">
+                    <h6 className="font-Jost font-normal text-sm md:text-[16px] text-[#74787C] text-center md:text-left">
                         29 categories belonging to a total 15,892 products
                     </h6>
                 </div>
                 
-                <div className="slider-container">
-                    <Slider {...settings}>
+                <div className="slider-container relative">
+                    <Swiper
+                        modules={[Navigation]}
+                        spaceBetween={0}
+                        slidesPerView={1} 
+                        loop={true} 
+                        breakpoints={{
+                            480: {
+                                slidesPerView: 2,
+                            },
+                            768: {
+                                slidesPerView: 3,
+                            },
+                            1024: {
+                                slidesPerView: 4,
+                            }
+                        }}
+                    >
                         {allData.slice(5, 15).map((item) => (
-                            <div key={item.id} className="px-2">
-                                <Product
-                                    prductImg={item.thumbnail}
-                                    productTitle={item.title}
-                                    productPrice={item.price}
-                                    productType={item.brand}
-                                    reviewStars={item.rating}
-                                />
-                            </div>
+                            <SwiperSlide key={item.id}>
+                                <div className="px-2">
+                                    <Product
+                                        prductImg={item.thumbnail}
+                                        productTitle={item.title}
+                                        productPrice={item.price}
+                                        productType={item.brand}
+                                        reviewStars={item.rating}
+                                    />
+                                </div>
+                            </SwiperSlide>
                         ))}
-                    </Slider>
+                    </Swiper>
                 </div>
             </Container>
         </div>
