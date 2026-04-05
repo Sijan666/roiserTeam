@@ -4,12 +4,12 @@ import Container from "../Container";
 
 const CtaandBrand = () => {
     return (
-        <div className="bg-[#E53E3E] items-center p-[100px]">
+        <div className="bg-[#E53E3E] items-center p-15 lg:p-[100px]">
             <Container className={"text-center"}>
                 <p className="text-sm font-Jost font-medium text-white pb-9">
                 Spring summer 22 women’s collection
                 </p>
-                <h1 className="px-[450px] text-[60px] font-semibold font-Jost leading-[70px] text-white">
+                <h1 className="lg:px-[450px] text-[30px] lg:text-[60px] font-semibold font-Jost lg:leading-[70px] text-white">
                 -15% Off Discount All Here
                 </h1>
                 <Link to={"/women"}>
