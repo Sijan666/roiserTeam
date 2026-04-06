@@ -1,6 +1,5 @@
 import Container from "../Container";
-import Flex from "../Flex";
-import Images from "../Images";
+import Images from "../Images"; // Flex কম্পোনেন্ট আর লাগছে না, তাই বাদ দেওয়া হয়েছে
 import mg from "/src/assets/mg.png";
 import bg from "/src/assets/bg.png";
 import img1 from "/src/assets/img1.png";
@@ -13,46 +12,19 @@ import img7 from "/src/assets/img7.png";
 import img8 from "/src/assets/img8.png";
 
 const CBrand = () => {
+  const allImages = [mg, img1, img2, img3, img4, bg, img5, img6, img7, img8];
+
   return (
-    <div className="lg:p-[100px] py-25">
+    <div className="py-24 lg:p-[100px]">
       <Container>
-        <div className="border-2 border-[#EBEBEB]">
-          <Flex className={'flex flex-col lg:flex-row'}>
-            <div className="px-[72px] py-[55px] lg:border-r-2 lg:border-r-[#EBEBEB] hover:border-0 hover:scale-125">
-              <Images imgSrc={mg} />
-            </div>
-            <div className="px-[72px] py-[55px] lg:border-r-2 lg:border-r-[#EBEBEB] hover:border-0 hover:scale-125">
-              <Images imgSrc={img1} />
-            </div>
-            <div className="px-[72px] py-[55px] lg:border-r-2 lg:border-r-[#EBEBEB] hover:border-0 hover:scale-125">
-              <Images imgSrc={img2} />
-            </div>
-            <div className="px-[72px] py-[55px] lg:border-r-2 lg:border-r-[#EBEBEB] hover:border-0 hover:scale-125">
-              <Images imgSrc={img3} />
-            </div>
-            <div className="px-[72px] py-[55px] lg:border-r-2 lg:border-r-[#EBEBEB] hover:border-0 hover:scale-125">
-              <Images imgSrc={img4} />
-            </div>
-          </Flex>
-          <div className="lg:border-t-2 lg:border-t-[#EBEBEB]">
-            <Flex className={'flex flex-col lg:flex-row'}>
-              <div className="px-[72px] py-[55px] lg:border-r-2 lg:border-r-[#EBEBEB] hover:border-0 hover:scale-125">
-                <Images imgSrc={bg} />
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 border-l-2 border-t-2 border-[#EBEBEB] overflow-hidden">
+          {allImages.map((img, index) => (
+            <div key={index} className="group flex justify-center items-center py-[55px] px-4 border-r-2 border-b-2 border-[#EBEBEB] cursor-pointer">
+              <div className="transition-transform duration-300 group-hover:scale-125">
+                <Images imgSrc={img} className="w-full h-auto object-contain" />
               </div>
-              <div className="px-[72px] py-[55px] lg:border-r-2 lg:border-r-[#EBEBEB] hover:border-0 hover:scale-125">
-                <Images imgSrc={img5} />
-              </div>
-              <div className="px-[72px] py-[55px] lg:border-r-2 lg:border-r-[#EBEBEB] hover:border-0 hover:scale-125">
-                <Images imgSrc={img6} />
-              </div>
-              <div className="px-[72px] py-[55px] lg:border-r-2 lg:border-r-[#EBEBEB] hover:border-0 hover:scale-125">
-                <Images imgSrc={img7} />
-              </div>
-              <div className="px-[72px] py-[55px] lg:border-r-2 lg:border-r-[#EBEBEB] hover:border-0 hover:scale-125">
-                <Images imgSrc={img8} />
-              </div>
-            </Flex>
-          </div>
+            </div>
+          ))}
         </div>
       </Container>
     </div>
