@@ -184,7 +184,7 @@ const ProductsDetails = () => {
                   +
                 </h3>
               </div>
-              <div className="py-2 lg:px-40 px-10 border border-[#141414] rounded-md">
+              <div className="py-2 lg:py-3 lg:px-40 px-10 border border-[#141414] rounded-md">
                 <h3 className="flex items-center gap-x-2">
                   Add To Cart
                   <HiOutlineShoppingBag />
