@@ -1,18 +1,16 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import Container from "../Container";
 import Flex from "../Flex";
-import { FaAngleRight, FaCodeCompare } from "react-icons/fa6";
+import { FaAngleRight, FaCodeCompare, FaStar } from "react-icons/fa6";
 import Images from "../Images";
 import pro from "/src/assets/productsdelailsslider.png";
 import { FaAngleLeft } from "react-icons/fa6";
 import { FaSearchPlus, FaEye } from "react-icons/fa";
-import start from "/src/assets/productsdelailsstars.png";
-import statlogo from "/src/assets/productsdelailsstarslogo.png";
 import { LuArrowRightLeft } from "react-icons/lu";
 import { MdLocalShipping } from "react-icons/md";
 import { IoIosArrowDropdown } from "react-icons/io";
 import { HiOutlineShoppingBag } from "react-icons/hi";
-import { CiShare2 } from "react-icons/ci";
+import { CiShare2, CiStar } from "react-icons/ci";
 import { GoInfo } from "react-icons/go";
 import video from "/src/assets/productsdelailsvideo.png";
 import "slick-carousel/slick/slick.css";
@@ -34,7 +32,7 @@ const ProductsDetails = () => {
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
   };
-  
+
   let [user, setUser] = useState(1);
 
   const handleplus = () => {
@@ -53,27 +51,27 @@ const ProductsDetails = () => {
     if (containerRef.current) {
       mixer = mixitup(containerRef.current, {
         selectors: {
-            target: '.mix' 
+          target: ".mix",
         },
         animation: {
-          duration: 300
+          duration: 300,
         },
-        load:{
-          filter:".description"
-        }
+        load: {
+          filter: ".description",
+        },
       });
     }
     return () => {
-        if(mixer) mixer.destroy();
-    }
+      if (mixer) mixer.destroy();
+    };
   }, []);
 
   return (
     <>
-      <div className="bg-[url('/src/assets/productsdetailsbg.png')] bg-cover bg-center bg-no-repeat py-[150px]">
+      <div className="bg-[url('/src/assets/productsdetailsbg.png')] bg-cover bg-center bg-no-repeat lg:py-[150px] py-25">
         <Container>
-          <Flex className={"justify-between"}>
-            <h3 className="text-[#141414] text-6xl font-semibold font-Jost">
+          <Flex className={"justify-between flex-col lg:flex-row gap-y-3"}>
+            <h3 className="text-[#141414] lg:text-6xl text-4xl font-semibold font-Jost">
               Product Details
             </h3>
             <div className="flex gap-x-3">
@@ -87,9 +85,9 @@ const ProductsDetails = () => {
           </Flex>
         </Container>
       </div>
-      <Container className={"my-25"}>
-        <Flex className={"items-start gap-x-6"}>
-          <div>
+      <Container className={"my-20 lg:my-25"}>
+        <Flex className={"items-start lg:gap-x-6"}>
+          <div className="hidden lg:block">
             <div className="h-28 w-28 bg-[#D9D9D9]"></div>
             <div className="h-28 w-28 bg-[#D9D9D9] my-5"></div>
             <div className="h-28 w-28 bg-[#D9D9D9]"></div>
@@ -119,16 +117,26 @@ const ProductsDetails = () => {
           </div>
           <div className="">
             <div className="flex justify-between">
-              <h4 className="text-[#E53E3E] text-[12px] font-Jost font-semibold">
-                Modern Dress
-              </h4>
-              <Images imgSrc={statlogo} />
+              <div className="">
+                <h4 className="text-[#E53E3E] text-[12px] font-Jost font-semibold uppercase">
+                  Modern Dress
+                </h4>
+                <h3 className="text-[#141414] text-3xl font-Jost font-semibold py-4">
+                  Tony Gold Neaklaces
+                </h3>
+              </div>
+              <div className="w-10 h-10 rounded-full border-2 text-[#141414] border-[#E6E6E6] relative text-xl hidden lg:block">
+                <CiStar className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+              </div>
             </div>
-            <h3 className="text-[#141414] text-3xl font-Jost font-semibold py-4">
-              Tony Gold Neaklaces
-            </h3>
             <div className="flex gap-x-3">
-              <Images imgSrc={start} />
+              <Flex>
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+              </Flex>
               <p className="text-[#141414] text-sm font-Jost">
                 (1 customer review)
               </p>
@@ -136,7 +144,7 @@ const ProductsDetails = () => {
             <h4 className="text-[#141414] text-[18px] font-Jost py-5 border-b border-[#EBEBEB]">
               $260.00 <span className="text-[#74787C]"> $360.00</span>
             </h4>
-            <p className="mt-8 text-[#74787C] font-Jost text-base w-[535px] leading-7">
+            <p className="mt-8 text-[#74787C] font-Jost text-base lg:w-[535px] w-[300px] leading-7">
               Eget taciti odio cum habitant egestas conubia turpis phasellus,
               ante parturient donec duis primis nam faucibus augue malesuada
               venenatis
@@ -151,8 +159,8 @@ const ProductsDetails = () => {
               Only 15 items left in stock!
             </p>
             <div className="flex mt-3">
-              <div className="w-60 h-1 bg-[#E53E3E]"></div>
-              <div className="w-96 h-1 bg-[#EBEBEB]"></div>
+              <div className="lg:w-60 w-20 h-1 bg-[#E53E3E]"></div>
+              <div className="lg:w-96 w-50 h-1 bg-[#EBEBEB]"></div>
             </div>
             <div className="mt-11 flex items-center gap-x-2">
               <LuArrowRightLeft />
@@ -166,8 +174,8 @@ const ProductsDetails = () => {
               <IoIosArrowDropdown />
               <h4>All taxes and customs duties included</h4>
             </div>
-            <div className="mt-8 flex items-center gap-x-5">
-              <div className="inline-flex items-center  rounded-md gap-x-7 text-2xl border border-[#E8E8E8] p-2.5">
+            <div className="mt-8 flex lg:flex-row items-center gap-x-5">
+              <div className="inline-flex items-center rounded-md lg:gap-x-7 gap-x-4 lg:text-2xl text-base border border-[#E8E8E8] px-4 py-2">
                 <h3 className="cursor-pointer" onClick={handleminus}>
                   --
                 </h3>
@@ -176,17 +184,17 @@ const ProductsDetails = () => {
                   +
                 </h3>
               </div>
-              <div className="py-3 px-40 border border-[#141414] rounded-md">
+              <div className="py-2 lg:px-40 px-10 border border-[#141414] rounded-md">
                 <h3 className="flex items-center gap-x-2">
                   Add To Cart
                   <HiOutlineShoppingBag />
                 </h3>
               </div>
             </div>
-            <div className="mt-5 py-5 px-60 bg-[#E53E3E] rounded-md text-white text-sm font-semibold font-Jos uppercase">
+            <div className="mt-5 py-5 lg:px-60 px-20 bg-[#E53E3E] rounded-md text-white text-sm font-semibold font-Jos uppercase">
               Buy The Item Now
             </div>
-            <div className="flex items-center gap-x-7 mt-9">
+            <div className="flex items-center lg:gap-x-7 gap-x-3 mt-9">
               <h4 className="flex items-center gap-x-2">
                 <FaCodeCompare />
                 Compare
@@ -204,22 +212,22 @@ const ProductsDetails = () => {
         </Flex>
 
         {/* 3. Filter Buttons: added dot (.) for class selection */}
-        <div className="flex gap-x-7 mt-20 border-b border-[#E8E8E8] pb-5">
+        <div className="flex lg:gap-x-7 gap-x-2 mt-20 border-b border-[#E8E8E8] pb-5">
           <h3
             data-filter=".description"
-            className="text-[#74787C] text-[18px] font-medium font-Jost hover:text-[#141414] cursor-pointer"
+            className="text-[#74787C] lg:text-[18px] text-sm font-medium font-Jost hover:text-[#141414] cursor-pointer"
           >
             Description
           </h3>
           <h3
             data-filter=".additional"
-            className="text-[#74787C] text-[18px] font-medium font-Jost hover:text-[#141414] cursor-pointer"
+            className="text-[#74787C] lg:text-[18px] text-sm font-medium font-Jost hover:text-[#141414] cursor-pointer"
           >
             Additional information
           </h3>
           <h3
             data-filter=".reviews"
-            className="text-[#74787C] text-[18px] font-medium font-Jost hover:text-[#141414] cursor-pointer"
+            className="text-[#74787C] lg:text-[18px] text-sm font-medium font-Jost hover:text-[#141414] cursor-pointer"
           >
             Reviews (2)
           </h3>
@@ -227,12 +235,11 @@ const ProductsDetails = () => {
 
         {/* 4. Container Ref Added */}
         <div className="" ref={containerRef}>
-          <Flex className={"gap-x-5 items-start mt-10"}>
-            
+          <Flex
+            className={"gap-x-5 items-start mt-10 flex-col lg:flex-row gap-y-8"}
+          >
             {/* 5. Changed <p> to <div> and used className for mixitup */}
-            <div
-              className="mix description w-[730px] text-[#74787C] text-base font-Jost leading-6"
-            >
+            <div className="mix description lg:w-[730px] w-[300px] text-[#74787C] text-base font-Jost leading-6">
               Sed porttitor lectus nibh. Donec sollicitudin molestie malesuada.
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
               magna justo, lacinia eget consectetur sed, convallis at tellus.
@@ -245,9 +252,7 @@ const ProductsDetails = () => {
               </p>
             </div>
 
-            <div
-              className="mix additional w-[730px] text-[#74787C] text-base font-Jost leading-6"
-            >
+            <div className="mix additional lg:w-[730px] w-[300px] text-[#74787C] text-base font-Jost leading-6">
               Sed porttitor lectus nibh. Donec sollicitudin molestie malesuada.
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
               magna justo, lacinia eget consectetur sed, convallis at tellus.
@@ -260,9 +265,7 @@ const ProductsDetails = () => {
               </p>
             </div>
 
-            <div
-              className="mix reviews w-[730px] text-[#74787C] text-base font-Jost leading-6"
-            >
+            <div className="mix reviews lg:w-[730px] w-[300px] text-[#74787C] text-base font-Jost leading-6">
               Sed porttitor lectus nibh. Donec sollicitudin molestie malesuada.
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
               magna justo, lacinia eget consectetur sed, convallis at tellus.
@@ -274,7 +277,7 @@ const ProductsDetails = () => {
                 vitae natoque magna commodo quam,
               </p>
             </div>
-            
+
             <Images imgSrc={video} />
           </Flex>
         </div>
