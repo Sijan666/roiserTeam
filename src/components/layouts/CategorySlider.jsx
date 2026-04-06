@@ -63,6 +63,8 @@ const CategorySlider = () => {
                             </SwiperSlide>
                         ))}
                     </Swiper>
+
+                    {/* prev arrow */}
                     <button 
                         ref={(node) => setPrevBtn(node)} 
                         className="absolute top-1/2 left-0 z-10 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-md hover:bg-gray-100 transition text-xl text-black cursor-pointer"
@@ -70,6 +72,7 @@ const CategorySlider = () => {
                         &#8592;
                     </button>
 
+                    {/* next arrow */}
                     <button 
                         ref={(node) => setNextBtn(node)} 
                         className="absolute top-1/2 right-0 z-10 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-md hover:bg-gray-100 transition text-xl text-black cursor-pointer"

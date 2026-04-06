@@ -7,10 +7,11 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 
-
 const Getyourfashion = () => {
     let [allData, setAllData] = useState([]);
-    
+    const [prevBtn, setPrevBtn] = useState(null);
+    const [nextBtn, setNextBtn] = useState(null);
+
     useEffect(() => {
         async function alldatas() {
             try {
@@ -34,23 +35,20 @@ const Getyourfashion = () => {
                         29 categories belonging to a total 15,892 products
                     </h6>
                 </div>
-                
-                <div className="slider-container relative">
+                <div className="slider-container relative px-8">
                     <Swiper
                         modules={[Navigation]}
                         spaceBetween={0}
                         slidesPerView={1} 
                         loop={true} 
+                        navigation={{
+                            prevEl: prevBtn,
+                            nextEl: nextBtn,
+                        }}
                         breakpoints={{
-                            480: {
-                                slidesPerView: 2,
-                            },
-                            768: {
-                                slidesPerView: 3,
-                            },
-                            1024: {
-                                slidesPerView: 4,
-                            }
+                            480: { slidesPerView: 2 },
+                            768: { slidesPerView: 3 },
+                            1024: { slidesPerView: 4 }
                         }}
                     >
                         {allData.slice(5, 15).map((item) => (
@@ -67,6 +65,22 @@ const Getyourfashion = () => {
                             </SwiperSlide>
                         ))}
                     </Swiper>
+
+                    {/* prev arrow */}
+                    <button 
+                        ref={(node) => setPrevBtn(node)} 
+                        className="absolute top-1/2 left-0 z-10 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-md hover:bg-gray-100 transition text-xl text-black cursor-pointer"
+                    >
+                        &#8592;
+                    </button>
+
+                    {/* next arrow  */}
+                    <button 
+                        ref={(node) => setNextBtn(node)} 
+                        className="absolute top-1/2 right-0 z-10 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-md hover:bg-gray-100 transition text-xl text-black cursor-pointer"
+                    >
+                        &#8594;
+                    </button>
                 </div>
             </Container>
         </div>
