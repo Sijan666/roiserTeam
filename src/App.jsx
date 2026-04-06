@@ -20,9 +20,7 @@ const Bloggrid = lazy(() => import("./components/pages/Bloggrid"));
 const Login = lazy(() => import("./components/pages/Login"));
 const Signup = lazy(() => import("./components/pages/Signup"));
 const Contact = lazy(() => import("./components/pages/Contact"));
-const ProductsDetails = lazy(
-  () => import("./components/pages/ProductsDetails"),
-);
+const ProductsDetails = lazy(() => import("./components/pages/ProductsDetails"),);
 const Error = lazy(() => import("./components/pages/Error"));
 
 function App() {
