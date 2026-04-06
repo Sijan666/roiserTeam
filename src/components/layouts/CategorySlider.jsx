@@ -9,6 +9,8 @@ import "swiper/css/navigation";
 
 const CategorySlider = () => {
     let [allData, setAllData] = useState([]);
+    const [prevBtn, setPrevBtn] = useState(null);
+    const [nextBtn, setNextBtn] = useState(null);
 
     useEffect(() => {
         async function alldatas() {
@@ -34,35 +36,23 @@ const CategorySlider = () => {
                     </h6>
                 </div>
                 
-                <div className="slider-container relative">
+                <div className="slider-container relative px-8"> 
                     <Swiper
                         modules={[Navigation]}
                         spaceBetween={0}
                         slidesPerView={1}
                         loop={true} 
                         navigation={{
-                            nextEl: ".custom-next-cs",
-                            prevEl: ".custom-prev-cs"
+                            prevEl: prevBtn,
+                            nextEl: nextBtn,
                         }}
                         breakpoints={{
-                            480: {
-                                slidesPerView: 2,
-                            },
-                            640: {
-                                slidesPerView: 2,
-                            },
-                            768: {
-                                slidesPerView: 3,
-                            },
-                            1024: {
-                                slidesPerView: 4,
-                            },
-                            1280: {
-                                slidesPerView: 5,
-                            },
-                            1440: {
-                                slidesPerView: 6,
-                            }
+                            480: { slidesPerView: 2 },
+                            640: { slidesPerView: 2 },
+                            768: { slidesPerView: 3 },
+                            1024: { slidesPerView: 4 },
+                            1280: { slidesPerView: 5 },
+                            1440: { slidesPerView: 6 }
                         }}
                     >
                         {allData.slice(0, 10).map((item) => (
@@ -73,6 +63,19 @@ const CategorySlider = () => {
                             </SwiperSlide>
                         ))}
                     </Swiper>
+                    <button 
+                        ref={(node) => setPrevBtn(node)} 
+                        className="absolute top-1/2 left-0 z-10 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-md hover:bg-gray-100 transition text-xl text-black cursor-pointer"
+                    >
+                        &#8592;
+                    </button>
+
+                    <button 
+                        ref={(node) => setNextBtn(node)} 
+                        className="absolute top-1/2 right-0 z-10 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-md hover:bg-gray-100 transition text-xl text-black cursor-pointer"
+                    >
+                        &#8594;
+                    </button>
                 </div>
             </Container>
         </div>
