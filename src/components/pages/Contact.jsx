@@ -16,7 +16,7 @@ const Contact = () => {
               Contact
             </h3>
             <div className="flex gap-x-3 items-center">
-              <p className="text-[#74787C] text-[18px] hover:text-[#1A1A1A] hover:font-semibold duration-300">
+              <p className="text-[#74787C] text-[18px]">
                 <Link to={"/"}>Home</Link>
               </p>
               <MdKeyboardArrowRight className="text-[#74787C]" />
@@ -28,25 +28,27 @@ const Contact = () => {
         </Container>
       </div>
       <div className="lg:py-25 py-10">
-        <Container className={"bg-[#F6F6F7] lg:px-[120px] lg:py-25 px-5 py-7 rounded-md"}>
+        <Container
+          className={"bg-[#F6F6F7] lg:px-[120px] lg:py-25 px-5 py-7 rounded-md"}
+        >
           <Flex
             className={
               "items-start gap-x-10 justify-center flex-col lg:flex-row"
             }
           >
-            <div className="left lg:w-[55%]">
+            <div className="left lg:w-[60%]">
               <h3 className="text-[#141414] text-[36px] font-semibold">
                 Get In Touch
               </h3>
               <div className="my-6">
-                <div className="flex items-center justify-between gap-x-5 flex-col lg:flex-row">
+                <div className="flex items-center gap-x-5 flex-col lg:flex-row w-full">
                   <div className="">
                     <p className="text-[#74787C] text-base pb-[15px] ">
                       Your name
                     </p>
                     <input
                       type="text"
-                      className="p-5 bg-white border border-[#EBEBEB] rounded-[5px] outline-none w-70 lg:w-[380px]"
+                      className="lg:p-5 p-3 bg-white border border-[#EBEBEB] rounded-[5px] outline-none w-70 lg:w-[350px]"
                     />
                   </div>
                   <div className="pt-6 lg:pt-0">
@@ -55,7 +57,7 @@ const Contact = () => {
                     </p>
                     <input
                       type="email"
-                      className="p-5 bg-white border border-[#EBEBEB] rounded-[5px] outline-none w-70 lg:w-[380px]"
+                      className="lg:p-5 p-3 bg-white border border-[#EBEBEB] rounded-[5px] outline-none w-70 lg:w-[350px]"
                     />
                   </div>
                 </div>
@@ -64,7 +66,7 @@ const Contact = () => {
                 </p>
                 <input
                   type="text"
-                  className="w-full p-5 bg-white border border-[#EBEBEB] rounded-[5px] outline-none"
+                  className="w-full lg:p-5 p-3 bg-white border border-[#EBEBEB] rounded-[5px] outline-none"
                 />
                 <p className="text-[#74787C] text-base pt-6 pb-[15px] ">
                   Write Your Message
@@ -82,7 +84,7 @@ const Contact = () => {
                 </button>
               </div>
             </div>
-            <div className="right lg:w-[35%] bg-white lg:p-8 p-5 rounded-md">
+            <div className="right lg:w-[40%] bg-white lg:p-8 p-5 rounded-md">
               <Images imgSrc={ashBg} className={"mx-auto mb-[35px] w-full"} />
               <h3 className="text-[#141414] font-semibold text-[24px] pb-[25px]">
                 Clothing Store
