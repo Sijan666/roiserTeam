@@ -15,13 +15,11 @@ const Login = () => {
               Account Login
             </h3>
             <div className="flex gap-x-3 items-center">
-              <p className="text-[#74787C] text-[18px] hover:text-[#1A1A1A] hover:font-semibold duration-300">
+              <p className="text-[#74787C] text-[18px]">
                 <Link to={"/"}>Home</Link>
               </p>
               <MdKeyboardArrowRight className="text-[#74787C]" />
-              <p className="text-[#74787C] text-[18px] hover:text-[#1A1A1A] hover:font-semibold duration-300">
-                Login
-              </p>
+              <p className="text-[18px] text-[#1A1A1A] font-semibold">Login</p>
             </div>
           </Flex>
         </Container>
