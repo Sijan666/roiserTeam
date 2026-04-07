@@ -18,7 +18,7 @@ const FAQ = () => {
       {/* Banner Part  */}
       <div className="bg-[url('/src/assets/faqBanner.jpg')] bg-center bg-cover bg-no-repeat py-[150px]">
         <Container>
-          <Flex className={"justify-between"}>
+          <Flex className={"justify-between flex flex-col lg:flex-row gap-10"}>
             <h3 className="font-semibold font-Jost text-6xl text-[#1A1A1A]">
               Frequently asked questions
             </h3>
@@ -40,12 +40,12 @@ const FAQ = () => {
           <h4 className="text-3xl font-Jost font-semibold text-[#141414] pb-6">
             Frequently asked questions
           </h4>
-          <Flex className={"items-start gap-x-6"}>
+          <Flex className={"items-start gap-x-6 flex flex-col lg:flex-row"}>
             <div className="">
               <ul>
                 {/* Drop down one  */}
                 <div
-                  className="font-Jost py-5 px-6 border border-[#E8E8E8] w-[830px] flex flex-col"
+                  className="font-Jost py-5 px-6 border border-[#E8E8E8] lg:w-[830px] flex flex-col"
                   onClick={() => setDropOne(!dropOne)}
                 >
                   <div className="flex items-center justify-between">
@@ -68,7 +68,7 @@ const FAQ = () => {
                 {/* Drop down one  */}
                 {/* Drop down two  */}
                 <div
-                  className="font-Jost py-5 px-6 border border-[#E8E8E8] w-[830px] flex flex-col mt-3"
+                  className="font-Jost py-5 px-6 border border-[#E8E8E8] lg:w-[830px] flex flex-col mt-3"
                   onClick={() => setDropTwo(!dropTwo)}
                   // aria-expanded={dropTwo} 
                 >
@@ -93,7 +93,7 @@ const FAQ = () => {
                 {/* Drop down two  */}
                 {/* Drop down three  */}
                 <div
-                  className="font-Jost py-5 px-6 border border-[#E8E8E8] w-[830px] flex flex-col mt-3"
+                  className="font-Jost py-5 px-6 border border-[#E8E8E8] lg:w-[830px] flex flex-col mt-3"
                   onClick={() => setDropThree(!dropThree)}
                 >
                   <div className="flex items-center justify-between">
@@ -116,7 +116,7 @@ const FAQ = () => {
                 {/* Drop down three  */}
                 {/* Drop down four  */}
                 <div
-                  className="font-Jost py-5 px-6 border border-[#E8E8E8] w-[830px] flex flex-col mt-3"
+                  className="font-Jost py-5 px-6 border border-[#E8E8E8] lg:w-[830px] flex flex-col mt-3"
                   onClick={() => setDropFour(!dropFour)}
                 >
                   <div className="flex items-center justify-between">
@@ -139,7 +139,7 @@ const FAQ = () => {
                 {/* Drop down four  */}
                 {/* Drop down five  */}
                 <div
-                  className="font-Jost py-5 px-6 border border-[#E8E8E8] w-[830px] flex flex-col mt-3"
+                  className="font-Jost py-5 px-6 border border-[#E8E8E8] lg:w-[830px] flex flex-col mt-3"
                   onClick={() => setDropFive(!dropFive)}
                 >
                   <div className="flex items-center justify-between">
@@ -149,7 +149,7 @@ const FAQ = () => {
                     <MdKeyboardArrowDown className="hover:rotate-180 duration-300" />
                   </div>
                   {dropFive && (
-                    <p className="text-base text-[#7B7E86] font-Jost w-[776px] leading-[26px] pt-2">
+                    <p className="text-base text-[#7B7E86] font-Jost lg:w-[776px] leading-[26px] pt-2">
                       Convallis a pellentesque nec, egestas non nisi. Nulla
                       porttitor accumsan tincidunt. Vestibulum diam sit amet
                       quam vehicula elementum sed sit amet dui. Curabitur
@@ -162,7 +162,7 @@ const FAQ = () => {
                 {/* Drop down five  */}
                 {/* Drop down six  */}
                 <div
-                  className="font-Jost py-5 px-6 border border-[#E8E8E8] w-[830px] flex flex-col mt-3"
+                  className="font-Jost py-5 px-6 border border-[#E8E8E8] lg:w-[830px] flex flex-col mt-3"
                   onClick={() => setDropSix(!dropSix)}
                 >
                   <div className="flex items-center justify-between">
@@ -172,7 +172,7 @@ const FAQ = () => {
                     <MdKeyboardArrowDown className="hover:rotate-180 duration-300" />
                   </div>
                   {dropSix && (
-                    <p className="text-base text-[#7B7E86] font-Jost w-[776px] leading-[26px] pt-2">
+                    <p className="text-base text-[#7B7E86] font-Jost lg:w-[776px] leading-[26px] pt-2">
                       Convallis a pellentesque nec, egestas non nisi. Nulla
                       porttitor accumsan tincidunt. Vestibulum diam sit amet
                       quam vehicula elementum sed sit amet dui. Curabitur
@@ -185,7 +185,7 @@ const FAQ = () => {
                 {/* Drop down six  */}
                 {/* Drop down seven  */}
                 <div
-                  className="font-Jost py-5 px-6 border border-[#E8E8E8] w-[830px] flex flex-col mt-3"
+                  className="font-Jost py-5 px-6 border border-[#E8E8E8] lg:w-[830px] flex flex-col mt-3"
                   onClick={() => setDropSeven(!dropSeven)}
                 >
                   <div className="flex items-center justify-between">
@@ -195,7 +195,7 @@ const FAQ = () => {
                     <MdKeyboardArrowDown className="hover:rotate-180 duration-300" />
                   </div>
                   {dropSeven && (
-                    <p className="text-base text-[#7B7E86] font-Jost w-[776px] leading-[26px] pt-2">
+                    <p className="text-base text-[#7B7E86] font-Jost lg:w-[776px] leading-[26px] pt-2">
                       Convallis a pellentesque nec, egestas non nisi. Nulla
                       porttitor accumsan tincidunt. Vestibulum diam sit amet
                       quam vehicula elementum sed sit amet dui. Curabitur
@@ -211,23 +211,23 @@ const FAQ = () => {
             {/* Input part  */}
             <div className="bg-[#F6F6F6] p-10">
               <input
-                className="bg-white w-[477px] p-6 font-Jost text-base border border-[#E8E8E8]"
+                className="bg-white lg:w-[477px] p-6 font-Jost text-base border border-[#E8E8E8]"
                 type="text"
                 placeholder="Your Name"
               />
               <input
-                className="bg-white w-[477px] p-6 my-4 font-Jost text-base border border-[#E8E8E8]"
+                className="bg-white lg:w-[477px] p-6 my-4 font-Jost text-base border border-[#E8E8E8]"
                 type="email"
                 placeholder="Email Address"
               />
               <input
-                className="bg-white w-[477px] px-6 h-[145px] pb-18 font-Jost text-base border border-[#E8E8E8]"
+                className="bg-white lg:w-[477px] px-6 h-[145px] pb-18 font-Jost text-base border border-[#E8E8E8]"
                 type="text"
                 placeholder="Type Message"
               />
               <Button
                 className={
-                  "bg-[#E53E3E] mt-3 w-[477px] text-sm font-semibold text-white hover:text-[#E53E3E] hover:bg-transparent hover:border"
+                  "bg-[#E53E3E] mt-3 lg:w-[477px] text-sm font-semibold text-white hover:text-[#E53E3E] hover:bg-transparent hover:border"
                 }
                 btnText={"Submit Now"}
               />
