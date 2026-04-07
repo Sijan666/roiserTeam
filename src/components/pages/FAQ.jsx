@@ -55,7 +55,7 @@ const FAQ = () => {
                     <MdKeyboardArrowDown className="hover:rotate-180 duration-300" />
                   </div>
                   {dropOne && (
-                    <p className="text-base text-[#7B7E86] font-Jost w-[776px] leading-[26px] pt-2">
+                    <p className="text-base text-[#7B7E86] font-Jost lg:w-[776px] leading-[26px] pt-2">
                       Convallis a pellentesque nec, egestas non nisi. Nulla
                       porttitor accumsan tincidunt. Vestibulum diam sit amet
                       quam vehicula elementum sed sit amet dui. Curabitur
@@ -80,7 +80,7 @@ const FAQ = () => {
                     {/* <MdKeyboardArrowDown className="duration-300 group-aria-expanded:rotate-180" /> */}
                   </div>
                   {dropTwo && (
-                    <p className="text-base text-[#7B7E86] font-Jost w-[776px] leading-[26px] pt-2">
+                    <p className="text-base text-[#7B7E86] font-Jost lg:w-[776px] leading-[26px] pt-2">
                       Convallis a pellentesque nec, egestas non nisi. Nulla
                       porttitor accumsan tincidunt. Vestibulum diam sit amet
                       quam vehicula elementum sed sit amet dui. Curabitur
@@ -103,7 +103,7 @@ const FAQ = () => {
                     <MdKeyboardArrowDown className="hover:rotate-180 duration-300" />
                   </div>
                   {dropThree && (
-                    <p className="text-base text-[#7B7E86] font-Jost w-[776px] leading-[26px] pt-2">
+                    <p className="text-base text-[#7B7E86] font-Jost lg:w-[776px] leading-[26px] pt-2">
                       Convallis a pellentesque nec, egestas non nisi. Nulla
                       porttitor accumsan tincidunt. Vestibulum diam sit amet
                       quam vehicula elementum sed sit amet dui. Curabitur
@@ -126,7 +126,7 @@ const FAQ = () => {
                     <MdKeyboardArrowDown className="hover:rotate-180 duration-300" />
                   </div>
                   {dropFour && (
-                    <p className="text-base text-[#7B7E86] font-Jost w-[776px] leading-[26px] pt-2">
+                    <p className="text-base text-[#7B7E86] font-Jost lg:w-[776px] leading-[26px] pt-2">
                       Convallis a pellentesque nec, egestas non nisi. Nulla
                       porttitor accumsan tincidunt. Vestibulum diam sit amet
                       quam vehicula elementum sed sit amet dui. Curabitur
