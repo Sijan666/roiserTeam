@@ -4,7 +4,6 @@ import Flex from "../Flex"
 import { MdKeyboardArrowRight } from "react-icons/md"
 import Images from "../Images"
 import bgForBlog from '../../assets/bgForBlog.png'
-import { BsFillArrowRightCircleFill } from "react-icons/bs"
 import { TbArrowNarrowRight } from "react-icons/tb"
 import blogPost from '../../assets/blogPost.png'
 

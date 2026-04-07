@@ -27,8 +27,8 @@ const Contact = () => {
           </Flex>
         </Container>
       </div>
-      <div className="py-25">
-        <Container className={"bg-[#F6F6F7] p-[60px] rounded-md"}>
+      <div className="lg:py-25 py-10">
+        <Container className={"bg-[#F6F6F7] lg:px-[120px] lg:py-25 px-5 py-7 rounded-md"}>
           <Flex
             className={
               "items-start gap-x-10 justify-center flex-col lg:flex-row"
@@ -77,12 +77,12 @@ const Contact = () => {
                   className="w-full p-5 bg-white border border-[#EBEBEB] rounded-[5px] outline-none"
                   id=""
                 ></textarea>
-                <button className="bg-[#E53E3E] text-white py-3.5 px-8 rounded-[5px] cursor-pointer mt-[30px]">
+                <button className="bg-[#E53E3E] text-white lg:py-3.5 py-3 px-8 rounded-[5px] cursor-pointer mt-[30px]">
                   <p className="text-base font-semibold">Send Message</p>
                 </button>
               </div>
             </div>
-            <div className="right lg:w-[35%] bg-white p-8 rounded-md">
+            <div className="right lg:w-[35%] bg-white lg:p-8 p-5 rounded-md">
               <Images imgSrc={ashBg} className={"mx-auto mb-[35px] w-full"} />
               <h3 className="text-[#141414] font-semibold text-[24px] pb-[25px]">
                 Clothing Store
