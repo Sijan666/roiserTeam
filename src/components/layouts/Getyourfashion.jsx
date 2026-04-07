@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
+import { Link } from "react-router-dom";
 
 const Getyourfashion = () => {
     let [allData, setAllData] = useState([]);
@@ -54,13 +55,15 @@ const Getyourfashion = () => {
                         {allData.slice(5, 15).map((item) => (
                             <SwiperSlide key={item.id}>
                                 <div className="px-2">
-                                    <Product
-                                        prductImg={item.thumbnail}
-                                        productTitle={item.title}
-                                        productPrice={item.price}
-                                        productType={item.brand}
-                                        reviewStars={item.rating}
-                                    />
+                                    <Link to={'/productdetails'}>
+                                        <Product
+                                            prductImg={item.thumbnail}
+                                            productTitle={item.title}
+                                            productPrice={item.price}
+                                            productType={item.brand}
+                                            reviewStars={item.rating}
+                                            />
+                                    </Link>
                                 </div>
                             </SwiperSlide>
                         ))}

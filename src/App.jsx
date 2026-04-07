@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import RootLayouts from "./components/layouts/RootLayouts";
 import Loader from "./components/Loader";
 import ReactLenis from "lenis/react";
+import ScrollToTop from "./components/ScrollToTop";
 const Home = lazy(() => import("./components/pages/Home"));
 const About = lazy(() => import("./components/pages/About"));
 const Women = lazy(() => import("./components/pages/Women"));
@@ -28,28 +29,29 @@ function App() {
     <>
       <ReactLenis root options={{lerp: 0.05, duration: 1.5, smoothWheel: true, wheelMultiplier: 0.8,}}>
         <Suspense fallback={<Loader />}>
-          <Routes>
-            <Route path="/" element={<RootLayouts />}>
-              <Route index element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/women" element={<Women />} />
-              <Route path="/myaccount" element={<MyAccount />} />
-              <Route path="/wishlist" element={<Wishlist />} />
-              <Route path="/checkout" element={<Checkout />} />
-              <Route path="/storelocation" element={<StoreLocation />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/faq" element={<FAQ />} />
-              <Route path="/shopgrid" element={<ShopGrid />} />
-              <Route path="/shop_grid" element={<Shop_Grid />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/bloglist" element={<Bloglist />} />
-              <Route path="/bloggrid" element={<Bloggrid />} />
-              <Route path="/blogdetailes" element={<BlogDetailes />} />
-              <Route path="/productdetails" element={<ProductsDetails />} />
-            </Route>
-            <Route path="*" element={<Error />} />
-          </Routes>
+          <ScrollToTop/>
+            <Routes>
+              <Route path="/" element={<RootLayouts />}>
+                <Route index element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/women" element={<Women />} />
+                <Route path="/myaccount" element={<MyAccount />} />
+                <Route path="/wishlist" element={<Wishlist />} />
+                <Route path="/checkout" element={<Checkout />} />
+                <Route path="/storelocation" element={<StoreLocation />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/faq" element={<FAQ />} />
+                <Route path="/shopgrid" element={<ShopGrid />} />
+                <Route path="/shop_grid" element={<Shop_Grid />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/bloglist" element={<Bloglist />} />
+                <Route path="/bloggrid" element={<Bloggrid />} />
+                <Route path="/blogdetailes" element={<BlogDetailes />} />
+                <Route path="/productdetails" element={<ProductsDetails />} />
+              </Route>
+              <Route path="*" element={<Error />} />
+            </Routes>
         </Suspense>
       </ReactLenis>
     </>
