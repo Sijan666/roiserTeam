@@ -1,11 +1,10 @@
 import { useEffect, useState, useRef } from "react";
 import Container from "../Container";
 import Flex from "../Flex";
-import { FaAngleRight, FaCodeCompare, FaStar } from "react-icons/fa6";
+import { FaAngleRight, FaCodeCompare, FaStar, FaAngleLeft } from "react-icons/fa6";
+import { FaSearchPlus, FaEye } from "react-icons/fa";
 import Images from "../Images";
 import pro from "/src/assets/productsdelailsslider.png";
-import { FaAngleLeft } from "react-icons/fa6";
-import { FaSearchPlus, FaEye } from "react-icons/fa";
 import { LuArrowRightLeft } from "react-icons/lu";
 import { MdLocalShipping } from "react-icons/md";
 import { IoIosArrowDropdown } from "react-icons/io";
@@ -13,25 +12,14 @@ import { HiOutlineShoppingBag } from "react-icons/hi";
 import { CiShare2, CiStar } from "react-icons/ci";
 import { GoInfo } from "react-icons/go";
 import video from "/src/assets/productsdelailsvideo.png";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
-import NextArrow from "../NextArrow";
-import PrevArrow from "../PrevArrow";
 import mixitup from "mixitup";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
 
 const ProductsDetails = () => {
   const containerRef = useRef(null);
-
-  var settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
-  };
 
   let [user, setUser] = useState(1);
 
@@ -86,34 +74,53 @@ const ProductsDetails = () => {
         </Container>
       </div>
       <Container className={"my-20 lg:my-25"}>
-        <Flex className={"items-start lg:gap-x-6"}>
-          <div className="hidden lg:block">
-            <div className="h-28 w-28 bg-[#D9D9D9]"></div>
-            <div className="h-28 w-28 bg-[#D9D9D9] my-5"></div>
-            <div className="h-28 w-28 bg-[#D9D9D9]"></div>
+        <Flex className={"items-start lg:gap-x-6 flex flex-col lg:flex-row"}>
+          <div className="flex lg:flex-col flex-row gap-5 lg:gap-0 mx-auto lg:mx-0 mb-5 lg:mb-0">
+            <div className="lg:h-28 h-15 w-15 lg:w-28 bg-[#D9D9D9]"></div>
+            <div className="lg:h-28 h-15 w-15 lg:w-28 bg-[#D9D9D9] lg:my-5"></div>
+            <div className="lg:h-28 h-15 w-15 lg:w-28 bg-[#D9D9D9]"></div>
           </div>
-
           <div className="w-full relative overflow-hidden">
-            <Slider {...settings}>
-              <div className="relative outline-0">
-                <Images imgSrc={pro} className={"h-[775px]"} />
-                <FaAngleRight className="absolute top-1/2  text-black bg-white p-2 rounded-[50%] text-4xl right-12 cursor-pointer" />
-                <FaAngleLeft className="absolute top-1/2  text-black bg-white p-2 rounded-[50%] text-4xl left-12 cursor-pointer" />
-                <div className="bg-black text-white py-3 px-2.5 rounded-[50%] absolute top-12 left-12">
-                  Sale
-                </div>
-                <FaSearchPlus className="bg-white text-black p-3.5 rounded-[50%] absolute top-12 right-12 text-5xl cursor-pointer " />
+            <Swiper
+              modules={[Navigation]}
+              spaceBetween={0}
+              slidesPerView={1}
+              navigation={{
+                nextEl: '.custom-next',
+                prevEl: '.custom-prev',
+              }}
+              loop={true}
+              speed={500}
+              className="relative group"
+            >
+              <div className="custom-prev absolute top-1/2 -translate-y-1/2 left-12 z-20 cursor-pointer">
+                <FaAngleLeft className="text-black bg-white p-2 rounded-full text-4xl transition-all hover:bg-gray-200 shadow-md" />
               </div>
-              <div className="relative outline-0">
-                <Images imgSrc={pro} className={"h-[775px]"} />
-                <FaAngleRight className="absolute top-1/2  text-black bg-white p-2 rounded-[50%] text-4xl right-12 cursor-pointer" />
-                <FaAngleLeft className="absolute top-1/2  text-black bg-white p-2 rounded-[50%] text-4xl left-12 cursor-pointer" />
-                <div className="bg-black text-white py-3 px-2.5 rounded-[50%] absolute top-12 left-12">
-                  Sale
-                </div>
-                <FaSearchPlus className="bg-white text-black p-3.5 rounded-[50%] absolute top-12 right-12 text-5xl cursor-pointer " />
+              
+              <div className="custom-next absolute top-1/2 -translate-y-1/2 right-12 z-20 cursor-pointer">
+                <FaAngleRight className="text-black bg-white p-2 rounded-full text-4xl transition-all hover:bg-gray-200 shadow-md" />
               </div>
-            </Slider>
+              {/* Items */}
+              <SwiperSlide>
+                <div className="relative outline-0">
+                  <Images imgSrc={pro} className={"lg:h-[775px] h-auto w-full object-cover"} />
+                  <div className="bg-black text-white py-3 px-2.5 rounded-full absolute top-12 left-12 z-10">
+                    Sale
+                  </div>
+                  <FaSearchPlus className="bg-white text-black p-3.5 rounded-full absolute top-12 right-12 text-5xl cursor-pointer z-10" />
+                </div>
+              </SwiperSlide>
+              
+              <SwiperSlide>
+                <div className="relative outline-0">
+                  <Images imgSrc={pro} className={"lg:h-[775px] h-auto w-full object-cover"} />
+                  <div className="bg-black text-white py-3 px-2.5 rounded-full absolute top-12 left-12 z-10">
+                    Sale
+                  </div>
+                  <FaSearchPlus className="bg-white text-black p-3.5 rounded-full absolute top-12 right-12 text-5xl cursor-pointer z-10" />
+                </div>
+              </SwiperSlide>
+            </Swiper>
           </div>
           <div className="">
             <div className="flex justify-between">
@@ -184,26 +191,26 @@ const ProductsDetails = () => {
                   +
                 </h3>
               </div>
-              <div className="py-2 lg:py-3 lg:px-40 px-10 border border-[#141414] rounded-md">
-                <h3 className="flex items-center gap-x-2">
+              <div className="py-2 lg:py-3 lg:px-40 px-10 border border-[#141414] rounded-md cursor-pointer">
+                <h3 className="flex items-center gap-x-2 ">
                   Add To Cart
                   <HiOutlineShoppingBag />
                 </h3>
               </div>
             </div>
-            <div className="mt-5 py-5 lg:px-60 px-20 bg-[#E53E3E] rounded-md text-white text-sm font-semibold font-Jos uppercase">
+            <div className="mt-5 py-5 lg:px-60 px-20 bg-[#E53E3E] rounded-md text-white text-sm font-semibold font-Jos uppercase text-center cursor-pointer">
               Buy The Item Now
             </div>
             <div className="flex items-center lg:gap-x-7 gap-x-3 mt-9">
-              <h4 className="flex items-center gap-x-2">
+              <h4 className="flex items-center gap-x-2 cursor-pointer">
                 <FaCodeCompare />
                 Compare
               </h4>
-              <h4 className="flex items-center gap-x-2">
+              <h4 className="flex items-center gap-x-2 cursor-pointer">
                 <GoInfo />
                 Ask a question
               </h4>
-              <h4 className="flex items-center gap-x-2">
+              <h4 className="flex items-center gap-x-2 cursor-pointer">
                 <CiShare2 />
                 Share
               </h4>
@@ -211,7 +218,7 @@ const ProductsDetails = () => {
           </div>
         </Flex>
 
-        {/* 3. Filter Buttons: added dot (.) for class selection */}
+        {/* Filter Buttons */}
         <div className="flex lg:gap-x-7 gap-x-2 mt-20 border-b border-[#E8E8E8] pb-5">
           <h3
             data-filter=".description"
@@ -233,12 +240,11 @@ const ProductsDetails = () => {
           </h3>
         </div>
 
-        {/* 4. Container Ref Added */}
+        {/* Container Ref for MixItUp */}
         <div className="" ref={containerRef}>
           <Flex
             className={"gap-x-5 items-start mt-10 flex-col lg:flex-row gap-y-8"}
           >
-            {/* 5. Changed <p> to <div> and used className for mixitup */}
             <div className="mix description lg:w-[730px] w-[300px] text-[#74787C] text-base font-Jost leading-6">
               Sed porttitor lectus nibh. Donec sollicitudin molestie malesuada.
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
