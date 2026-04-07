@@ -2,11 +2,85 @@ import Container from "../Container";
 import Flex from "../Flex";
 import { Link } from "react-router-dom";
 import { MdKeyboardArrowRight } from "react-icons/md";
-import Images from "../Images";
 import blogGrid from "../../assets/blogGrid.png";
-import { TbArrowNarrowRight } from "react-icons/tb";
+import BlogCommon from "../../BlogCommon";
 
 const Bloggrid = () => {
+  const gridApi = [
+    {
+      id: 1,
+      blogImg: blogGrid,
+      blogDate: "MARCH 15, 2022",
+      blogCategory: "OIL CHANGE",
+      blogTitle: "How to Decorate Your Car for Halloween",
+      blogBtn: "Read More",
+    },
+    {
+      id: 2,
+      blogImg: blogGrid,
+      blogDate: "MARCH 15, 2022",
+      blogCategory: "OIL CHANGE",
+      blogTitle: "How to Decorate Your Car for Halloween",
+      blogBtn: "Read More",
+    },
+    {
+      id: 3,
+      blogImg: blogGrid,
+      blogDate: "MARCH 15, 2022",
+      blogCategory: "OIL CHANGE",
+      blogTitle: "How to Decorate Your Car for Halloween",
+      blogBtn: "Read More",
+    },
+    {
+      id: 4,
+      blogImg: blogGrid,
+      blogDate: "MARCH 15, 2022",
+      blogCategory: "OIL CHANGE",
+      blogTitle: "How to Decorate Your Car for Halloween",
+      blogBtn: "Read More",
+    },
+    {
+      id: 5,
+      blogImg: blogGrid,
+      blogDate: "MARCH 15, 2022",
+      blogCategory: "OIL CHANGE",
+      blogTitle: "How to Decorate Your Car for Halloween",
+      blogBtn: "Read More",
+    },
+    {
+      id: 6,
+      blogImg: blogGrid,
+      blogDate: "MARCH 15, 2022",
+      blogCategory: "OIL CHANGE",
+      blogTitle: "How to Decorate Your Car for Halloween",
+      blogBtn: "Read More",
+    },
+    {
+      id: 7,
+      blogImg: blogGrid,
+      blogDate: "MARCH 15, 2022",
+      blogCategory: "OIL CHANGE",
+      blogTitle: "How to Decorate Your Car for Halloween",
+      blogBtn: "Read More",
+    },
+    {
+      id: 8,
+      blogImg: blogGrid,
+      blogDate: "MARCH 15, 2022",
+      blogCategory: "OIL CHANGE",
+      blogTitle: "How to Decorate Your Car for Halloween",
+      blogBtn: "Read More",
+    },
+    {
+      id: 9,
+      blogImg: blogGrid,
+      blogDate: "MARCH 15, 2022",
+      blogCategory: "OIL CHANGE",
+      blogTitle: "How to Decorate Your Car for Halloween",
+      blogBtn: "Read More",
+    },
+  ];
+
   return (
     <>
       <div className="bg-[url('/src/assets/loginBg.png')] bg-cover bg-center bg-no-repeat lg:py-[150px] py-25">
@@ -29,174 +103,19 @@ const Bloggrid = () => {
       </div>
       <div className="lg:py-25 py-10">
         <Container>
-          <Flex className={"justify-between gap-5 lg:flex-row flex-col"}>
-            <div className="product lg:w-1/3 w-[90%] rounded-md overflow-hidden shadow-newMade">
-              <Images imgSrc={blogGrid} className={"w-full"} />
-              <div className="lg:p-10 p-5">
-                <div className="flex gap-x-5">
-                  <p className="text-[12px] text-[#74787C]">MARCH 15, 2022</p>
-                  <p className="text-[12px] text-[#74787C]">OIL CHANGE</p>
-                </div>
-                <h4 className="lg:py-6 py-3 font-semibold text-[20px] lg:w-[345px] text-[#121212] border-b border-[#EAEAEA] mb-[18px]">
-                  How to Decorate Your Car for Halloween
-                </h4>
-                <div className="flex gap-x-1 items-center  group">
-                  <button className="text-base text-[#E53E3E] cursor-pointer">
-                    Read More{" "}
-                  </button>
-                  <TbArrowNarrowRight className="text-[#E53E3E] cursor-pointer" />
-                </div>
+          <div className="grid lg:grid-cols-3 gap-5 grid-cols-1 sm:grid-cols-2 grid-rows-1">
+            {gridApi.map((item) => (
+              <div key={item.id} className="">
+                <BlogCommon
+                  blogImg={item.blogImg}
+                  blogDate={item.blogDate}
+                  blogCategory={item.blogCategory}
+                  blogTitle={item.blogTitle}
+                  blogBtn={item.blogBtn}
+                />
               </div>
-            </div>
-            <div className="product lg:w-1/3 w-[90%] rounded-md overflow-hidden shadow-newMade">
-              <Images imgSrc={blogGrid} className={"w-full"} />
-              <div className="lg:p-10 p-5">
-                <div className="flex gap-x-5">
-                  <p className="text-[12px] text-[#74787C]">MARCH 15, 2022</p>
-                  <p className="text-[12px] text-[#74787C]">OIL CHANGE</p>
-                </div>
-                <h4 className="lg:py-6 py-3 font-semibold text-[20px] lg:w-[345px] text-[#121212] border-b border-[#EAEAEA] mb-[18px]">
-                  How to Decorate Your Car for Halloween
-                </h4>
-                <div className="flex gap-x-1 items-center  group">
-                  <button className="text-base text-[#E53E3E] cursor-pointer">
-                    Read More{" "}
-                  </button>
-                  <TbArrowNarrowRight className="text-[#E53E3E] cursor-pointer" />
-                </div>
-              </div>
-            </div>
-            <div className="product lg:w-1/3 w-[90%] rounded-md overflow-hidden shadow-newMade">
-              <Images imgSrc={blogGrid} className={"w-full"} />
-              <div className="lg:p-10 p-5">
-                <div className="flex gap-x-5">
-                  <p className="text-[12px] text-[#74787C]">MARCH 15, 2022</p>
-                  <p className="text-[12px] text-[#74787C]">OIL CHANGE</p>
-                </div>
-                <h4 className="lg:py-6 py-3 font-semibold text-[20px] lg:w-[345px] text-[#121212] border-b border-[#EAEAEA] mb-[18px]">
-                  How to Decorate Your Car for Halloween
-                </h4>
-                <div className="flex gap-x-1 items-center  group">
-                  <button className="text-base text-[#E53E3E] cursor-pointer">
-                    Read More{" "}
-                  </button>
-                  <TbArrowNarrowRight className="text-[#E53E3E] cursor-pointer" />
-                </div>
-              </div>
-            </div>
-          </Flex>
-          <Flex className={"justify-between gap-5 lg:flex-row flex-col mt-5"}>
-            <div className="product lg:w-1/3 w-[90%] rounded-md overflow-hidden shadow-newMade">
-              <Images imgSrc={blogGrid} className={"w-full"} />
-              <div className="lg:p-10 p-5">
-                <div className="flex gap-x-5">
-                  <p className="text-[12px] text-[#74787C]">MARCH 15, 2022</p>
-                  <p className="text-[12px] text-[#74787C]">OIL CHANGE</p>
-                </div>
-                <h4 className="lg:py-6 py-3 font-semibold text-[20px] lg:w-[345px] text-[#121212] border-b border-[#EAEAEA] mb-[18px]">
-                  How to Decorate Your Car for Halloween
-                </h4>
-                <div className="flex gap-x-1 items-center  group">
-                  <button className="text-base text-[#E53E3E] cursor-pointer">
-                    Read More{" "}
-                  </button>
-                  <TbArrowNarrowRight className="text-[#E53E3E] cursor-pointer" />
-                </div>
-              </div>
-            </div>
-            <div className="product lg:w-1/3 w-[90%] rounded-md overflow-hidden shadow-newMade">
-              <Images imgSrc={blogGrid} className={"w-full"} />
-              <div className="lg:p-10 p-5">
-                <div className="flex gap-x-5">
-                  <p className="text-[12px] text-[#74787C]">MARCH 15, 2022</p>
-                  <p className="text-[12px] text-[#74787C]">OIL CHANGE</p>
-                </div>
-                <h4 className="lg:py-6 py-3 font-semibold text-[20px] lg:w-[345px] text-[#121212] border-b border-[#EAEAEA] mb-[18px]">
-                  How to Decorate Your Car for Halloween
-                </h4>
-                <div className="flex gap-x-1 items-center  group">
-                  <button className="text-base text-[#E53E3E] cursor-pointer">
-                    Read More{" "}
-                  </button>
-                  <TbArrowNarrowRight className="text-[#E53E3E] cursor-pointer" />
-                </div>
-              </div>
-            </div>
-            <div className="product lg:w-1/3 w-[90%] rounded-md overflow-hidden shadow-newMade">
-              <Images imgSrc={blogGrid} className={"w-full"} />
-              <div className="lg:p-10 p-5">
-                <div className="flex gap-x-5">
-                  <p className="text-[12px] text-[#74787C]">MARCH 15, 2022</p>
-                  <p className="text-[12px] text-[#74787C]">OIL CHANGE</p>
-                </div>
-                <h4 className="lg:py-6 py-3 font-semibold text-[20px] lg:w-[345px] text-[#121212] border-b border-[#EAEAEA] mb-[18px]">
-                  How to Decorate Your Car for Halloween
-                </h4>
-                <div className="flex gap-x-1 items-center  group">
-                  <button className="text-base text-[#E53E3E] cursor-pointer">
-                    Read More{" "}
-                  </button>
-                  <TbArrowNarrowRight className="text-[#E53E3E] cursor-pointer" />
-                </div>
-              </div>
-            </div>
-          </Flex>
-          <Flex className={"justify-between gap-5 lg:flex-row flex-col mt-5"}>
-            <div className="product lg:w-1/3 w-[90%] rounded-md overflow-hidden shadow-newMade">
-              <Images imgSrc={blogGrid} className={"w-full"} />
-              <div className="lg:p-10 p-5">
-                <div className="flex gap-x-5">
-                  <p className="text-[12px] text-[#74787C]">MARCH 15, 2022</p>
-                  <p className="text-[12px] text-[#74787C]">OIL CHANGE</p>
-                </div>
-                <h4 className="lg:py-6 py-3 font-semibold text-[20px] lg:w-[345px] text-[#121212] border-b border-[#EAEAEA] mb-[18px]">
-                  How to Decorate Your Car for Halloween
-                </h4>
-                <div className="flex gap-x-1 items-center  group">
-                  <button className="text-base text-[#E53E3E] cursor-pointer">
-                    Read More{" "}
-                  </button>
-                  <TbArrowNarrowRight className="text-[#E53E3E] cursor-pointer" />
-                </div>
-              </div>
-            </div>
-            <div className="product lg:w-1/3 w-[90%] rounded-md overflow-hidden shadow-newMade">
-              <Images imgSrc={blogGrid} className={"w-full"} />
-              <div className="lg:p-10 p-5">
-                <div className="flex gap-x-5">
-                  <p className="text-[12px] text-[#74787C]">MARCH 15, 2022</p>
-                  <p className="text-[12px] text-[#74787C]">OIL CHANGE</p>
-                </div>
-                <h4 className="lg:py-6 py-3 font-semibold text-[20px] lg:w-[345px] text-[#121212] border-b border-[#EAEAEA] mb-[18px]">
-                  How to Decorate Your Car for Halloween
-                </h4>
-                <div className="flex gap-x-1 items-center  group">
-                  <button className="text-base text-[#E53E3E] cursor-pointer">
-                    Read More{" "}
-                  </button>
-                  <TbArrowNarrowRight className="text-[#E53E3E] cursor-pointer" />
-                </div>
-              </div>
-            </div>
-            <div className="product lg:w-1/3 w-[90%] rounded-md overflow-hidden shadow-newMade">
-              <Images imgSrc={blogGrid} className={"w-full"} />
-              <div className="lg:p-10 p-5">
-                <div className="flex gap-x-5">
-                  <p className="text-[12px] text-[#74787C]">MARCH 15, 2022</p>
-                  <p className="text-[12px] text-[#74787C]">OIL CHANGE</p>
-                </div>
-                <h4 className="lg:py-6 py-3 font-semibold text-[20px] lg:w-[345px] text-[#121212] border-b border-[#EAEAEA] mb-[18px]">
-                  How to Decorate Your Car for Halloween
-                </h4>
-                <div className="flex gap-x-1 items-center  group">
-                  <button className="text-base text-[#E53E3E] cursor-pointer">
-                    Read More{" "}
-                  </button>
-                  <TbArrowNarrowRight className="text-[#E53E3E] cursor-pointer" />
-                </div>
-              </div>
-            </div>
-          </Flex>
+            ))}
+          </div>
         </Container>
       </div>
     </>
