@@ -40,7 +40,7 @@ const Shop_Grid = () => {
           ))}
         </div>
         {/* Pagination */}
-        <Flex className="gap-x-[15px] mt-[50px] justify-between md:justify-end items-center">
+        <Flex className="gap-x-[15px] mt-[50px] justify-between md:justify-end items-center flex flex-col lg:flex-row gap-5">
           <p className="text-[#767676] text-sm font-normal leading-[30px]">
             Products from 1 to 8 of 80
           </p>
