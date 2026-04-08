@@ -6,25 +6,7 @@
 // import Proimg from "/src/assets/Car.png";
 // import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 
-// const Shop_Grid = () => {
-//   return (
-//     <>
-//       <div className="bg-[url(/src/assets/shopGrid.png)] py-25">
-//         <Container>
-//           <Flex className={"justify-between"}>
-//             <h3 className="text-[#1A1A1A] text-[60px] font-semibold">
-//               Shop Grid
-//             </h3>
-//             <Flex className={"gap-x-4"}>
-//               <p className="text-[#74787C] text-[18px]">Home</p>
-//               <RiArrowRightSLine className="text-[#74787C] text-xl" />
-//               <p className="text-[#1A1A1A] text-[18px] font-semibold">
-//                 Shop Grid
-//               </p>
-//             </Flex>
-//           </Flex>
-//         </Container>
-//       </div>
+
 
 
 
