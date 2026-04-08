@@ -106,11 +106,10 @@
 
 
 import React from "react";
-// আপনার ফোল্ডার স্ট্রাকচার অনুযায়ী পাথ ঠিক করে নিন
 import Container from "../Container"; 
 import Flex from "../Flex"; 
 import Product from "../Product"; 
-import Proimg from "/src/assets/Car.png"; // পাথ চেক করুন
+import Proimg from "/src/assets/Car.png";
 
 // Icons
 import { RiArrowRightSLine } from "react-icons/ri";
@@ -119,8 +118,6 @@ import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 const Shop_Grid = () => {
   return (
     <>
-      {/* Header Section */}
-      {/* py-25 কাজ করে না, তাই py-24 (96px) বা py-[100px] ব্যবহার করুন */}
       <div className="bg-[#F5F5F3] py-24 w-full"> 
         <Container>
           <Flex className="justify-between items-center w-full">
@@ -140,18 +137,16 @@ const Shop_Grid = () => {
 
       {/* Product Grid Section */}
       <Container className="my-24">
-        {/* Flex এর বদলে Grid ব্যবহার করা অনেক বেশি নিরাপদ এবং রেস্পন্সিভ */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full">
-          {/* এখানে আমি লুপ ব্যবহার করার পরামর্শ দিব, কোড ক্লিন রাখার জন্য */}
           {[...Array(8)].map((_, index) => (
             <Product
               key={index}
-              className="w-full" // প্রোডাক্ট যেন পুরো বক্স নেয়
+              className="w-full"
               prductImg={Proimg}
               productType={"Levi’s Cotton"}
               productTitle={"Monica Diara Party Dress"}
               productPrice={"$893.00"}
-              badgeText={index === 0 ? "New" : null} // উদাহরণস্বরূপ প্রথমটাতে ব্যাজ দিলাম
+              badgeText={index === 0 ? "New" : null} 
             />
           ))}
         </div>
