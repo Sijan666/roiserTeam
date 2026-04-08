@@ -25,81 +25,7 @@
 //           </Flex>
 //         </Container>
 //       </div>
-//       <Container className={"my-25"}>
-//         <Flex className={"flex-wrap gap-y-6"}>
-//           <Product
-//             prductImg={Proimg}
-//             productType={"Levi’s Cotton"}
-//             productTitle={"Monica Diara Party Dress"}
-//             productPrice={"$893.00"}
-//             badgeText={"New"}
-//           />
-//           <Product
-//             prductImg={Proimg}
-//             productType={"Levi’s Cotton"}
-//             productTitle={"Monica Diara Party Dress"}
-//             productPrice={"$893.00"}
-//           />
-//           <Product
-//             prductImg={Proimg}
-//             productType={"Levi’s Cotton"}
-//             productTitle={"Monica Diara Party Dress"}
-//             productPrice={"$893.00"}
-//           />
-//           <Product
-//             prductImg={Proimg}
-//             productType={"Levi’s Cotton"}
-//             productTitle={"Monica Diara Party Dress"}
-//             productPrice={"$893.00"}
-//           />
-//           <Product
-//             prductImg={Proimg}
-//             productType={"Levi’s Cotton"}
-//             productTitle={"Monica Diara Party Dress"}
-//             productPrice={"$893.00"}
-//           />
-//           <Product
-//             prductImg={Proimg}
-//             productType={"Levi’s Cotton"}
-//             productTitle={"Monica Diara Party Dress"}
-//             productPrice={"$893.00"}
-//           />
-//           <Product
-//             prductImg={Proimg}
-//             productType={"Levi’s Cotton"}
-//             productTitle={"Monica Diara Party Dress"}
-//             productPrice={"$893.00"}
-//           />
-//           <Product
-//             prductImg={Proimg}
-//             productType={"Levi’s Cotton"}
-//             productTitle={"Monica Diara Party Dress"}
-//             productPrice={"$893.00"}
-//           />
-//         </Flex>
-//         <Flex className="gap-x-[7px] mt-[50px] justify-center">
-//           <div className="bg-[#E53E3E] text-white rounded-sm py-4.5 px-5 text-sm font-semibold">
-//             01
-//           </div>
-//           <div className="bg-[#F6F6F7] text-[#1A1A1A] rounded-sm py-4.5 px-5 text-sm font-semibold">
-//             02
-//           </div>
-//           <div className="bg-[#F6F6F7] text-[#1A1A1A] rounded-sm py-4.5 px-5 text-sm font-semibold">
-//             03
-//           </div>
-//           <div className="bg-[#F6F6F7] text-[#1A1A1A] rounded-sm py-4.5 px-5 text-sm font-semibold">
-//             04
-//           </div>
-//           <div className="bg-[#F6F6F7] text-[#1A1A1A] rounded-sm py-4.5 px-5 text-xl font-semibold">
-//             <MdKeyboardDoubleArrowRight />
-//           </div>
-//         </Flex>
-//       </Container>
-//     </>
-//   );
-// };
 
-// export default Shop_Grid;
 
 
 
@@ -134,7 +60,6 @@ const Shop_Grid = () => {
           </Flex>
         </Container>
       </div>
-
       {/* Product Grid Section */}
       <Container className="my-24">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full">
@@ -150,7 +75,6 @@ const Shop_Grid = () => {
             />
           ))}
         </div>
-
         {/* Pagination */}
         <Flex className="gap-x-[15px] mt-[50px] justify-between md:justify-end items-center">
           <p className="text-[#767676] text-sm font-normal leading-[30px]">
