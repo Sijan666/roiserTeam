@@ -1,19 +1,3 @@
-// import React from "react";
-// import Container from "../Container";
-// import Flex from "../Flex";
-// import { RiArrowRightSLine } from "react-icons/ri";
-// import Product from "../Product";
-// import Proimg from "/src/assets/Car.png";
-// import { MdKeyboardDoubleArrowRight } from "react-icons/md";
-
-
-
-
-
-
-
-
-import React from "react";
 import Container from "../Container"; 
 import Flex from "../Flex"; 
 import Product from "../Product"; 
