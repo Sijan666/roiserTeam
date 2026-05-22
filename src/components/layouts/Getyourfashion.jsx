@@ -68,7 +68,6 @@ const Getyourfashion = () => {
                             </SwiperSlide>
                         ))}
                     </Swiper>
-
                     {/* prev arrow */}
                     <button 
                         ref={(node) => setPrevBtn(node)} 
@@ -76,7 +75,6 @@ const Getyourfashion = () => {
                     >
                         &#8592;
                     </button>
-
                     {/* next arrow  */}
                     <button 
                         ref={(node) => setNextBtn(node)} 
