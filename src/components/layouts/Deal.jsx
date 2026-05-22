@@ -5,7 +5,6 @@ import { RiDiscountPercentLine } from "react-icons/ri";
 import Products from "../Products";
 import productImg from "/src/assets/product.png";
 import { Link } from "react-router-dom";
-// import Badge from "../Badge";
 
 
 const Deal = () => {
