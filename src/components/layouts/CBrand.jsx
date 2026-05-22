@@ -1,5 +1,5 @@
 import Container from "../Container";
-import Images from "../Images"; // Flex কম্পোনেন্ট আর লাগছে না, তাই বাদ দেওয়া হয়েছে
+import Images from "../Images";
 import mg from "/src/assets/mg.png";
 import bg from "/src/assets/bg.png";
 import img1 from "/src/assets/img1.png";
