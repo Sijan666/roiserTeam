@@ -65,11 +65,9 @@ const Footer = () => {
                 <p className="text-[#E53E3E] font-semibold text-2xl">+258 3692 2569</p>
                 </div>
               </div>
-              
                 <p className="text-[#74787C] text-[16px] pb-4">Monday - Friday: <span className="text-[#1A1A1A] text-[16px] font-medium">8:00am - 6:00pm</span> </p>
                 <p className="text-[#74787C] text-[16px] pb-4">Saturday: <span className="text-[#1A1A1A] text-[16px] font-medium">8:00am - 6:00pm</span> </p>
                 <p className="text-[#74787C] text-[16px] pb-4">Sunday: <span className="text-[#1A1A1A] text-[16px] font-medium">Service Close</span> </p>
-              
             </div>
             {/* 2 */}
             <div className="">
@@ -110,13 +108,12 @@ const Footer = () => {
               <div className="lg:w-[400px] w-full">
                 <p className="text-[#74787C] lg:text-sm pb-6">Subscribe to the mailing list to receive updates one the new arrivals and other discounts</p>
               <div className="bg-white flex justify-between py-1.5 px-3 border border-[#E4E5EE] rounded-sm">
-                  <input className="lg:pr-15 lg:pl-2 outline-0" type="email" name="" id="" placeholder="Your email address" />
-                  <Button btnText={"Subscribe"} className={'text-white font-extrabold text-sm bg-[#E53E3E] uppercase '}/>
+                  <input className="lg:pr-15 lg:pl-2 outline-0 w-full" type="email" name="" id="" placeholder="Your email address" />
+                  <Button btnText={"Subscribe"} className={'text-white font-extrabold text-sm bg-[#E53E3E] uppercase'}/>
               </div>
                   <p className="text-[#74787C] text-sm pt-5">I would like to receive news and special offer</p>
               </div>
             </div>
-
           </Flex>
           {/* Footer Bottom */}
           <Flex className={'justify-between border-t border-[#DDDDDE] py-6 flex flex-col lg:flex-row gap-y-5'}>
