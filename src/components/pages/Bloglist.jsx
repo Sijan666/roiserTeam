@@ -12,7 +12,7 @@ const Bloglist = () => {
   return (
     <>
         <div className="py-[110px] px-60 bg-[url('/src/assets/loginBg.png')] bg-cover bg-center bg-no-repeat">
-          <Container>
+          <Container className={'px-3 lg:px-0'}>
               <Flex className={'justify-between'}>
                   <h3 className='text-[#1A1A1A] text-[60px] font-semibold'>Blog Lists</h3>
                   <div className="flex gap-x-3 items-center">
@@ -28,7 +28,7 @@ const Bloglist = () => {
           </Container>
         </div>
         <div className="py-25">
-          <Container>
+          <Container className={'px-3 lg:px-0'}>
             <Flex className={'gap-x-10 items-start'}>
               <div className="left 70%">
                 <div className="card py-2.5 px-[15px] border border-[#E8E8E8] rounded-md">
