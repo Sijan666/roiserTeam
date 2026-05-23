@@ -13,7 +13,7 @@ const BlogDetailes = () => {
   return (
     <>
       <div className="bg-[url(/src/assets/shopGrid.png)] py-25">
-        <Container>
+        <Container className={'px-3 lg:px-0'}>
           <Flex className={"justify-between"}>
             <h3 className="text-[#1A1A1A] text-[60px] font-semibold">
               Blog Details
@@ -29,7 +29,7 @@ const BlogDetailes = () => {
         </Container>
       </div>
       <div className="py-25">
-        <Container>
+        <Container className={'px-3 lg:px-0'}>
           <Flex className={"gap-x-[50px] items-start"}>
             <div className="w-[952px]">
               {" "}
