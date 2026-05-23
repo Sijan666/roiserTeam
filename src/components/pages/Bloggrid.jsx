@@ -84,7 +84,7 @@ const Bloggrid = () => {
   return (
     <>
       <div className="bg-[url('/src/assets/loginBg.png')] bg-cover bg-center bg-no-repeat lg:py-[150px] py-25">
-        <Container>
+        <Container className={'px-3 lg:px-0'}>
           <Flex className={"justify-between flex-col lg:flex-row gap-y-3"}>
             <h3 className="text-[#1A1A1A] lg:text-6xl text-4xl font-semibold">
               Blog Grid
@@ -102,7 +102,7 @@ const Bloggrid = () => {
         </Container>
       </div>
       <div className="lg:py-25 py-10">
-        <Container>
+        <Container className={'px-3 lg:px-0'}>
           <div className="grid lg:grid-cols-3 gap-5 grid-cols-1 sm:grid-cols-2 grid-rows-1">
             {gridApi.map((item) => (
               <div key={item.id} className="">
