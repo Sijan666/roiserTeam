@@ -57,7 +57,7 @@ const ProductsDetails = () => {
   return (
     <>
       <div className="bg-[url('/src/assets/productsdetailsbg.png')] bg-cover bg-center bg-no-repeat lg:py-[150px] py-25">
-        <Container>
+        <Container className={'px-3 lg:px-0'}>
           <Flex className={"justify-between flex-col lg:flex-row gap-y-3"}>
             <h3 className="text-[#141414] lg:text-6xl text-4xl font-semibold font-Jost">
               Product Details
@@ -73,7 +73,7 @@ const ProductsDetails = () => {
           </Flex>
         </Container>
       </div>
-      <Container className={"my-20 lg:my-25"}>
+      <Container className={"my-20 lg:my-25 px-3 lg:px-0"}>
         <Flex className={"items-start lg:gap-x-6 flex flex-col lg:flex-row"}>
           <div className="flex lg:flex-col flex-row gap-5 lg:gap-0 mx-auto lg:mx-0 mb-5 lg:mb-0">
             <div className="lg:h-28 h-15 w-15 lg:w-28 bg-[#D9D9D9]"></div>
@@ -217,7 +217,6 @@ const ProductsDetails = () => {
             </div>
           </div>
         </Flex>
-
         {/* Filter Buttons */}
         <div className="flex lg:gap-x-7 gap-x-2 mt-20 border-b border-[#E8E8E8] pb-5">
           <h3
@@ -239,7 +238,6 @@ const ProductsDetails = () => {
             Reviews (2)
           </h3>
         </div>
-
         {/* Container Ref for MixItUp */}
         <div className="" ref={containerRef}>
           <Flex
@@ -257,7 +255,6 @@ const ProductsDetails = () => {
                 vitae natoque magna commodo quam,
               </p>
             </div>
-
             <div className="mix additional lg:w-[730px] w-[300px] text-[#74787C] text-base font-Jost leading-6">
               Sed porttitor lectus nibh. Donec sollicitudin molestie malesuada.
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
@@ -270,7 +267,6 @@ const ProductsDetails = () => {
                 vitae natoque magna commodo quam,
               </p>
             </div>
-
             <div className="mix reviews lg:w-[730px] w-[300px] text-[#74787C] text-base font-Jost leading-6">
               Sed porttitor lectus nibh. Donec sollicitudin molestie malesuada.
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
@@ -283,7 +279,6 @@ const ProductsDetails = () => {
                 vitae natoque magna commodo quam,
               </p>
             </div>
-
             <Images imgSrc={video} />
           </Flex>
         </div>
