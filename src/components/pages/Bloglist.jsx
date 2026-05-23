@@ -155,7 +155,6 @@ const Bloglist = () => {
                 {/* Recent Posts */}
                 <div className="p-6 md:p-[30px] border border-[#E8E8E8] rounded-md mt-8 md:mt-[30px]">
                   <h4 className="text-[#141414] font-semibold text-lg md:text-xl border-b pb-2.5 border-[#E8E8E8] mb-6 md:mb-[30px]">Recent Posts</h4>
-                  
                   <div className="flex gap-x-4 mb-5 md:mb-[15px] items-center cursor-pointer group">
                     <Images imgSrc={blogPost} className="w-[70px] h-[70px] md:w-20 md:h-20 object-cover rounded-md shrink-0"/>
                     <div className="w-full">
