@@ -9,7 +9,7 @@ const Shop_Grid = () => {
   return (
     <>
       <div className="bg-[#F5F5F3] py-24 w-full"> 
-        <Container>
+        <Container className={'px-3 lg:px-0'}>
           <Flex className="justify-between items-center w-full">
             <h3 className="text-[#1A1A1A] text-3xl md:text-[49px] font-semibold">
               Shop Grid
@@ -25,7 +25,7 @@ const Shop_Grid = () => {
         </Container>
       </div>
       {/* Product Grid Section */}
-      <Container className="my-24">
+      <Container className="my-24 px-3 lg:px-0">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full">
           {[...Array(8)].map((_, index) => (
             <Product
