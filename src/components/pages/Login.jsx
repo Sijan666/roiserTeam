@@ -9,7 +9,7 @@ const Login = () => {
   return (
     <>
       <div className="bg-[url('/src/assets/loginBg.png')] bg-cover bg-center bg-no-repeat lg:py-[150px] py-25">
-        <Container>
+        <Container className={'px-3 lg:px-0'}>
           <Flex className={"justify-between flex-col lg:flex-row gap-y-3"}>
             <h3 className="text-[#1A1A1A] lg:text-6xl text-4xl font-semibold">
               Account Login
@@ -25,7 +25,7 @@ const Login = () => {
         </Container>
       </div>
       <div className="lg:py-25 py-10">
-        <Container>
+        <Container className={'px-3 lg:px-0'}>
           <div className="lg:px-[120px] lg:py-25 px-5 py-7 bg-[#F6F6F7] lg:w-[780px] mx-auto">
             <h4 className="lg:text-[24px] text-xl font-semibold  text-[#141414] text-center">
               Login Into Your Account
