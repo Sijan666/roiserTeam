@@ -10,7 +10,7 @@ const Contact = () => {
   return (
     <>
       <div className="bg-[url('/src/assets/loginBg.png')] bg-cover bg-center bg-no-repeat lg:py-[150px] py-25">
-        <Container>
+        <Container className={'px-3 lg:px-0'}>
           <Flex className={"justify-between flex-col lg:flex-row gap-y-3"}>
             <h3 className="text-[#1A1A1A] lg:text-6xl text-4xl font-semibold">
               Contact
@@ -105,7 +105,7 @@ const Contact = () => {
             </div>
           </Flex>
         </Container>
-        <Container>
+        <Container className={'px-3 lg:px-0'}>
           <div className="mt-20">
             <Images imgSrc={contactMap} />
           </div>
