@@ -6,7 +6,7 @@ const Checkout = () => {
   return (
     <>
       <div className="bg-[url(/src/assets/shopGrid.png)] py-25 mb-25">
-        <Container>
+        <Container className={'px-3 lg:px-0'}>
           <Flex className={"justify-between"}>
             <h3 className="text-[#1A1A1A] text-[60px] font-semibold">
               Checkout
@@ -21,7 +21,7 @@ const Checkout = () => {
           </Flex>
         </Container>
       </div>
-      <Container className={"mb-25"}>
+      <Container className={"mb-25 px-3 lg:px-0"}>
         <div className="border border-[#E9E9E9] bg-white rounded-md py-4.5 px-[30px] text-[#141414] text-[16px] font-medium cursor-pointer hover:text-white hover:bg-[#E53E3E] hover:border-[#E53E3E] duration-300">
           Returning customers? Click here to login
         </div>
