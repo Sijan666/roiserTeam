@@ -110,7 +110,6 @@ const ProductsDetails = () => {
                   <FaSearchPlus className="bg-white text-black p-3.5 rounded-full absolute top-12 right-12 text-5xl cursor-pointer z-10" />
                 </div>
               </SwiperSlide>
-              
               <SwiperSlide>
                 <div className="relative outline-0">
                   <Images imgSrc={pro} className={"lg:h-[775px] h-auto w-full object-cover"} />
