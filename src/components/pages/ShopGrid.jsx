@@ -17,7 +17,7 @@ const ShopGrid = () => {
   return (
     <>
       <div className="bg-[url(/src/assets/shopGrid.png)] py-25">
-        <Container>
+        <Container className={'px-3 lg:px-0'}>
           <Flex className={"justify-between"}>
             <h3 className="text-[#1A1A1A] text-[60px] font-semibold">
               Shop Grid
@@ -32,7 +32,7 @@ const ShopGrid = () => {
           </Flex>
         </Container>
       </div>
-      <Container className={"my-[100px]"}>
+      <Container className={"my-[100px] px-3 lg:px-0"}>
         <Flex className={"mb-[50px] gap-x-5 items-start"}>
           <div className="w-[75%]">
             <Flex className={"mb-[30px] justify-between"}>
