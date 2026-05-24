@@ -17,7 +17,7 @@ const FAQ = () => {
     <>
       {/* Banner Part  */}
       <div className="bg-[url('/src/assets/faqBanner.jpg')] bg-center bg-cover bg-no-repeat py-[150px]">
-        <Container>
+        <Container className={'px-3 lg:px-0'}>
           <Flex className={"justify-between flex flex-col lg:flex-row gap-10"}>
             <h3 className="font-semibold font-Jost text-6xl text-[#1A1A1A]">
               Frequently asked questions
@@ -36,7 +36,7 @@ const FAQ = () => {
       </div>
       {/* Banner Part  */}
       <div className="py-[95px]">
-        <Container>
+        <Container className={'px-3 lg:px-0'}>
           <h4 className="text-3xl font-Jost font-semibold text-[#141414] pb-6">
             Frequently asked questions
           </h4>
@@ -70,14 +70,12 @@ const FAQ = () => {
                 <div
                   className="font-Jost py-5 px-6 border border-[#E8E8E8] lg:w-[830px] flex flex-col mt-3"
                   onClick={() => setDropTwo(!dropTwo)}
-                  // aria-expanded={dropTwo} 
                 >
                   <div className="flex items-center justify-between">
                     <li className="text-base text-[#141414] font-medium">
                       What benefits a customer can take?
                     </li>
                     <MdKeyboardArrowDown className="hover:rotate-180 duration-300" />
-                    {/* <MdKeyboardArrowDown className="duration-300 group-aria-expanded:rotate-180" /> */}
                   </div>
                   {dropTwo && (
                     <p className="text-base text-[#7B7E86] font-Jost lg:w-[776px] leading-[26px] pt-2">
