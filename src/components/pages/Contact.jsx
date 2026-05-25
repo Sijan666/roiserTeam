@@ -71,7 +71,6 @@ const Contact = () => {
                 <p className="text-[#74787C] text-base pt-6 pb-[15px] ">
                   Write Your Message
                 </p>
-                {/* <input type="number" className='w-full p-5 bg-white border border-[#EBEBEB] rounded-[5px] outline-none'/> */}
                 <textarea
                   name=""
                   rows={"5"}
