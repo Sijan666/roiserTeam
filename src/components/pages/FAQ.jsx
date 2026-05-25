@@ -207,27 +207,28 @@ const FAQ = () => {
               </ul>
             </div>
             {/* Input part  */}
-            <div className="bg-[#F6F6F6] p-10 flex flex-col gap-5 mt-5 lg:mt-0 w-full">
+            <div className="bg-[#F6F6F6] p-6 md:p-10 flex flex-col gap-4 md:gap-5 mt-5 lg:mt-0 w-full max-w-[550px]">
+              {/* Name Input */}
               <input
-                className="bg-white w-full lg:w-[477px] p-3 lg:p-6 font-Jost text-base border border-[#E8E8E8]"
+                className="bg-white w-full p-3 md:p-5 font-Jost text-base border border-[#E8E8E8] focus:outline-none focus:border-[#E53E3E] transition-colors"
                 type="text"
                 placeholder="Your Name"
               />
+              {/* Email Input */}
               <input
-                className="bg-white w-full lg:w-[477px] p-3 lg:p-6 font-Jost text-base border border-[#E8E8E8]"
+                className="bg-white w-full p-3 md:p-5 font-Jost text-base border border-[#E8E8E8] focus:outline-none focus:border-[#E53E3E] transition-colors"
                 type="email"
                 placeholder="Email Address"
               />
-              <input
-                className="bg-white w-full lg:w-[477px] p-3 lg:px-6 h-[145px] pb-18 font-Jost text-base border border-[#E8E8E8]"
-                type="text"
+              {/* Message Textarea */}
+              <textarea
+                className="bg-white w-full p-3 md:p-5 min-h-[150px] font-Jost text-base border border-[#E8E8E8] resize-y focus:outline-none focus:border-[#E53E3E] transition-colors"
                 placeholder="Type Message"
-              />
+              ></textarea>
+              {/* Submit Button */}
               <Button
-                className={
-                  "bg-[#E53E3E] mt-3 lg:w-[477px] text-sm font-semibold text-white hover:text-[#E53E3E] hover:bg-transparent hover:border"
-                }
-                btnText={"Submit Now"}
+                className="bg-[#E53E3E]! mt-2 w-full border border-transparent! text-sm md:text-base font-semibold text-white! hover:text-[#E53E3E]! hover:bg-transparent! hover:border-[#E53E3E]! transition-all duration-300 py-3 md:py-4"
+                btnText="Submit Now"
               />
             </div>
             {/* Input part  */}
