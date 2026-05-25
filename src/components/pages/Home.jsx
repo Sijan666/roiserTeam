@@ -13,7 +13,7 @@ const Home = () => {
         return (
         <>
                 <Helmet>
-                        <title>Home | Your Fashion Store</title>
+                        <title>Roiser | Your Fashion Store</title>
                         <meta name="description" content="Discover the latest fashion trends, daily deals, and top brands at our store."/>
                 </Helmet>
                 <Banner />
