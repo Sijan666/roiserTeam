@@ -207,7 +207,7 @@ const FAQ = () => {
               </ul>
             </div>
             {/* Input part  */}
-            <div className="bg-[#F6F6F6] p-6 md:p-10 flex flex-col gap-4 md:gap-5 mt-5 lg:mt-0 w-full max-w-[550px]">
+            <div className="bg-[#F6F6F6] p-6 md:p-10 flex flex-col gap-4 md:gap-5 mt-5 lg:mt-0 w-full">
               {/* Name Input */}
               <input
                 className="bg-white w-full p-3 md:p-5 font-Jost text-base border border-[#E8E8E8] focus:outline-none focus:border-[#E53E3E] transition-colors"
