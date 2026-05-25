@@ -207,19 +207,19 @@ const FAQ = () => {
               </ul>
             </div>
             {/* Input part  */}
-            <div className="bg-[#F6F6F6] p-10 flex flex-col gap-5">
+            <div className="bg-[#F6F6F6] p-10 flex flex-col gap-5 mt-5 lg:mt-0 w-full">
               <input
-                className="bg-white lg:w-[477px] p-6 font-Jost text-base border border-[#E8E8E8]"
+                className="bg-white w-full lg:w-[477px] p-3 lg:p-6 font-Jost text-base border border-[#E8E8E8]"
                 type="text"
                 placeholder="Your Name"
               />
               <input
-                className="bg-white lg:w-[477px] p-6 font-Jost text-base border border-[#E8E8E8]"
+                className="bg-white w-full lg:w-[477px] p-3 lg:p-6 font-Jost text-base border border-[#E8E8E8]"
                 type="email"
                 placeholder="Email Address"
               />
               <input
-                className="bg-white lg:w-[477px] px-6 h-[145px] pb-18 font-Jost text-base border border-[#E8E8E8]"
+                className="bg-white w-full lg:w-[477px] p-3 lg:px-6 h-[145px] pb-18 font-Jost text-base border border-[#E8E8E8]"
                 type="text"
                 placeholder="Type Message"
               />
