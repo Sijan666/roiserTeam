@@ -122,9 +122,11 @@ const Login = () => {
                 </p>
               </button>
             </form>
-            <button className="text-[#141414] pt-4 cursor-pointer hover:underline">
-              Lost your password?
-            </button>
+            <Link to={'/signup'}>
+              <button className="text-[#141414] pt-4 cursor-pointer hover:underline">
+                Lost your password?
+              </button>
+            </Link>
           </div>
         </Container>
       </div>
