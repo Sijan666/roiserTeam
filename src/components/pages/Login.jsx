@@ -30,7 +30,7 @@ const Login = () => {
             <h4 className="lg:text-[24px] text-xl font-semibold  text-[#141414] text-center">
               Login Into Your Account
             </h4>
-            <div className="lg:mt-[35px] lg:mb-[30px] my-5 border border-[#EBEBEB] bg-white lg:py-4 py-3 rounded-[5px] items-center flex justify-center">
+            <div className="lg:mt-[35px] lg:mb-[30px] my-5 border border-[#EBEBEB] bg-white lg:py-4 py-3 rounded-[5px] items-center flex justify-center cursor-pointer">
               <FcGoogle className=" mr-2" />
               <p className="text-base font-semibold text-[#141414] ">
                 Login with Google
