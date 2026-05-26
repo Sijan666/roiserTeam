@@ -8,7 +8,6 @@ import Flex from "../Flex";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { FcGoogle } from "react-icons/fc";
 
-// 1. Zod Schema: ভ্যালিডেশন রুলস ডিক্লেয়ার করা হয়েছে
 const signupSchema = z
   .object({
     name: z.string().min(2, { message: "Name must be at least 2 characters" }),
@@ -22,13 +21,12 @@ const signupSchema = z
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",
-    path: ["confirmPassword"], // Error টা confirmPassword ফিল্ডে দেখাবে
+    path: ["confirmPassword"],
   });
 
 const Signup = () => {
   const navigate = useNavigate();
 
-  // 2. React Hook Form সেটাপ
   const {
     register,
     handleSubmit,
@@ -40,17 +38,14 @@ const Signup = () => {
     },
   });
 
-  // 3. সাবমিট হ্যান্ডলার
   const onSubmit = async (data) => {
-    // API কল সিমুলেট করার জন্য ১ সেকেন্ড ডিলে দেওয়া হয়েছে
     await new Promise((resolve) => setTimeout(resolve, 1000));
     
-    // API তে পাঠানোর আগে confirmPassword বাদ দিতে পারেন চাইলে
-    const { confirmPassword, ...submitData } = data;
+    const {  ...submitData } = data;
     console.log("Signup Submitted Successfully:", submitData);
     
     alert("Registration Successful!");
-    navigate("/login"); // রেজিস্ট্রেশনের পর লগিন পেজে পাঠিয়ে দেওয়া
+    navigate("/login"); 
   };
 
   return (
@@ -73,33 +68,28 @@ const Signup = () => {
           </Flex>
         </Container>
       </div>
-
       <div className="lg:py-25 py-10">
         <Container className={"px-3 lg:px-0"}>
           <div className="lg:px-[120px] lg:py-25 px-5 py-7 bg-[#F6F6F7] lg:w-[780px] mx-auto">
             <h4 className="lg:text-[24px] text-xl font-semibold text-[#141414] text-center">
               Create Your Account
             </h4>
-
             <div className="mt-[35px] mb-[30px] border border-[#EBEBEB] bg-white lg:py-4 py-3 rounded-[5px] items-center flex justify-center cursor-pointer hover:bg-gray-50 transition-colors">
               <FcGoogle className="mr-2 text-2xl" />
               <p className="text-base font-semibold text-[#141414]">
                 Signup with Google
               </p>
             </div>
-
             <div className="mb-6">
               <Flex className={"justify-center items-center gap-x-4"}>
-                <div className="h-[1px] w-full bg-[#E7E7E7]"></div>
+                <div className="h-px w-full bg-[#E7E7E7]"></div>
                 <p className="text-base font-semibold text-[#141414]">OR</p>
-                <div className="h-[1px] w-full bg-[#E7E7E7]"></div>
+                <div className="h-px w-full bg-[#E7E7E7]"></div>
               </Flex>
             </div>
-
-            {/* ফর্ম সাবমিট ইভেন্ট হ্যান্ডল করা হচ্ছে */}
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="mb-4">
-                <p className="text-[#141414] text-[14px] pb-[10px]">
+                <p className="text-[#141414] text-[14px] pb-2.5">
                   Your name*
                 </p>
                 <input
@@ -113,9 +103,8 @@ const Signup = () => {
                   <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
                 )}
               </div>
-
               <div className="mb-4">
-                <p className="text-[#141414] text-[14px] pt-2 pb-[10px]">
+                <p className="text-[#141414] text-[14px] pt-2 pb-2.5">
                   Email Address*
                 </p>
                 <input
@@ -130,7 +119,7 @@ const Signup = () => {
                 )}
               </div>
               <div className="mb-4">
-                <p className="text-[#141414] text-[14px] pt-2 pb-[10px]">
+                <p className="text-[#141414] text-[14px] pt-2 pb-2.5">
                   Password*
                 </p>
                 <input
