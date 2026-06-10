@@ -5,6 +5,7 @@ import RootLayouts from "./components/layouts/RootLayouts";
 import Loader from "./components/Loader";
 import ReactLenis from "lenis/react";
 import ScrollToTop from "./components/ScrollToTop";
+
 const Home = lazy(() => import("./components/pages/Home"));
 const About = lazy(() => import("./components/pages/About"));
 const Checkout = lazy(() => import("./components/pages/Checkout"));
