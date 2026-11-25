@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+@theme {
+  --font-Jost: "Jost", sans-serif;
+  --font-redHatDisplay: "Red Hat Display", sans-serif;
+  --shadow-newMade: 0 30px 42px rgba(0, 0, 0, 0.04);
+  --shadow-newTwo: 0 4px 21px 0 rgba(229, 62, 62, 0.08);
+}
+
+@keyframes brand-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: var(--font-Jost);
+  }
+  button {
+    cursor: pointer;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .brand-marquee-viewport {
+    overflow: hidden;
+  }
+  .brand-marquee-track {
+    display: flex;
+    width: max-content;
+    animation: brand-marquee 240s linear infinite;
+  }
+  .brand-marquee-viewport:hover .brand-marquee-track,
+  .brand-marquee-viewport:focus-within .brand-marquee-track {
+    animation-play-state: paused;
+  }
+  .brand-marquee-group {
+    display: flex;
+    flex: none;
+    align-items: center;
+    gap: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-marquee-track {
+    width: 100%;
+    animation: none;
+  }
+  .brand-marquee-group {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem 2rem;
+    padding: 1.5rem;
+  }
+  .brand-marquee-group[aria-hidden="true"] {
+    display: none;
+  }
+}

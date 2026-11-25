@@ -1,32 +1,49 @@
 import { Helmet } from "react-helmet-async";
-import Banner from "../layouts/Banner";
-import Blog from "../layouts/Blog";
-import CategoryCollection from "../layouts/CategoryCollection";
-import CategorySlider from "../layouts/CategorySlider";
-import CBrand from "../layouts/CBrand";
-import CtaandBrand from "../layouts/CtaandBrand";
-import Deal from "../layouts/Deal";
-import Discount from "../layouts/Discount";
-import Getyourfashion from "../layouts/Getyourfashion";
+import CatalogStatus from "../common/CatalogStatus";
+import HomeHero from "../layout/home/HomeHero";
+import CategoryShowcase from "../layout/home/CategoryShowcase";
+import SeasonalPromoCards from "../layout/home/SeasonalPromoCards";
+import FeaturedProducts from "../layout/home/FeaturedProducts";
+import CategoryCollections from "../layout/home/CategoryCollections";
+import MidBanner from "../layout/home/MidBanner";
+import BrandMarquee from "../layout/home/BrandMarquee";
+import DealOfTheDay from "../layout/home/DealOfTheDay";
+import { useCatalog } from "../../hooks/useCatalog";
 
 const Home = () => {
-        return (
-        <>
-                <Helmet>
-                        <title>Roiser | Your Fashion Store</title>
-                        <meta name="description" content="Discover the latest fashion trends, daily deals, and top brands at our store."/>
-                </Helmet>
-                <Banner />
-                <CategorySlider />
-                <Discount />
-                <Getyourfashion />
-                <CategoryCollection />
-                <CtaandBrand />
-                <CBrand />
-                <Deal />
-                <Blog />
-        </>
-        );
+  const { products, categories, loading, error, retry } = useCatalog();
+
+  if (loading || error) {
+    return (
+      <>
+        <Helmet>
+          <title>Roiser | Modern eCommerce Fashion Store</title>
+        </Helmet>
+        <CatalogStatus loading={loading} error={error} onRetry={retry} />
+      </>
+    );
+  }
+
+  return (
+    <>
+      <Helmet>
+        <title>Roiser | Modern eCommerce Fashion Store</title>
+        <meta
+          name="description"
+          content="Explore curated fashion, trending apparel, statement jewelry, and premium outerwear at Roiser."
+        />
+      </Helmet>
+
+      <HomeHero categories={categories} />
+      <CategoryShowcase categories={categories} />
+      <SeasonalPromoCards />
+      <FeaturedProducts products={products} />
+      <CategoryCollections />
+      <MidBanner />
+      <BrandMarquee products={products} />
+      <DealOfTheDay products={products} />
+    </>
+  );
 };
 
 export default Home;

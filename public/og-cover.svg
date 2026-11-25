@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f8f5f1"/>
+  <circle cx="1040" cy="90" r="290" fill="#e53e3e" fill-opacity=".08"/>
+  <circle cx="150" cy="610" r="260" fill="#d9c6b3" fill-opacity=".2"/>
+  <path d="M100 196h1000" stroke="#e8ddd3" stroke-width="2"/>
+  <path d="M100 434h1000" stroke="#e8ddd3" stroke-width="2"/>
+  <text x="600" y="338" fill="#1a1a1a" font-family="Georgia,serif" font-size="112" font-weight="700" letter-spacing="12" text-anchor="middle">ROISER</text>
+  <text x="600" y="390" fill="#b63b36" font-family="Arial,sans-serif" font-size="24" font-weight="600" letter-spacing="8" text-anchor="middle">A MORE CONSIDERED EDIT</text>
+</svg>

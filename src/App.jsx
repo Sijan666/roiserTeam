@@ -1,53 +1,109 @@
 import React, { Suspense, lazy } from "react";
-import "./App.css";
-import { Routes, Route } from "react-router-dom";
-import RootLayouts from "./components/layouts/RootLayouts";
+import "./index.css";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import RootLayout from "./components/layout/RootLayout";
 import Loader from "./components/Loader";
 import ReactLenis from "lenis/react";
 import ScrollToTop from "./components/ScrollToTop";
+import { useAuth } from "./hooks/useAuth";
 
-const Home = lazy(() => import("./components/pages/Home"));
-const About = lazy(() => import("./components/pages/About"));
-const Checkout = lazy(() => import("./components/pages/Checkout"));
-const ShopGrid = lazy(() => import("./components/pages/ShopGrid"));
-const BlogDetailes = lazy(() => import("./components/pages/BlogDetailes"));
-const Shop_Grid = lazy(() => import("./components/pages/Shop_Grid"));
-const FAQ = lazy(() => import("./components/pages/FAQ"));
-const Bloglist = lazy(() => import("./components/pages/Bloglist"));
-const Bloggrid = lazy(() => import("./components/pages/Bloggrid"));
-const Login = lazy(() => import("./components/pages/Login"));
-const Signup = lazy(() => import("./components/pages/Signup"));
-const Contact = lazy(() => import("./components/pages/Contact"));
-const ProductsDetails = lazy(() => import("./components/pages/ProductsDetails"),);
-const Error = lazy(() => import("./components/pages/Error"));
+// Code-split pages for production performance
+const Home = lazy(() => import("./pages/Home"));
+const Shop = lazy(() => import("./pages/Shop"));
+const ProductDetails = lazy(() => import("./pages/ProductDetails"));
+const Cart = lazy(() => import("./pages/Cart"));
+const Wishlist = lazy(() => import("./pages/Wishlist"));
+const Checkout = lazy(() => import("./pages/Checkout"));
+const OrderSuccess = lazy(() => import("./pages/OrderSuccess"));
+const About = lazy(() => import("./pages/About"));
+const FAQ = lazy(() => import("./pages/FAQ"));
+const Contact = lazy(() => import("./pages/Contact"));
+const Login = lazy(() => import("./pages/Login"));
+const Signup = lazy(() => import("./pages/Signup"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+
+const ProtectedRoute = ({ children }) => {
+  const { isAuthenticated } = useAuth();
+  const location = useLocation();
+
+  if (!isAuthenticated) {
+    return (
+      <Navigate
+        to="/login"
+        state={{ from: `${location.pathname}${location.search}` }}
+        replace
+      />
+    );
+  }
+
+  return children;
+};
 
 function App() {
   return (
-    <>
-      <ReactLenis root options={{lerp: 0.05, duration: 1.5, smoothWheel: true, wheelMultiplier: 0.8,}}>
-        <Suspense fallback={<Loader />}>
-          <ScrollToTop/>
-            <Routes>
-              <Route path="/" element={<RootLayouts />}>
-                <Route index element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/checkout" element={<Checkout />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Signup />} />
-                <Route path="/faq" element={<FAQ />} />
-                <Route path="/shopgrid" element={<ShopGrid />} />
-                <Route path="/shop_grid" element={<Shop_Grid />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/bloglist" element={<Bloglist />} />
-                <Route path="/bloggrid" element={<Bloggrid />} />
-                <Route path="/blogdetailes" element={<BlogDetailes />} />
-                <Route path="/productdetails" element={<ProductsDetails />} />
-              </Route>
-              <Route path="*" element={<Error />} />
-            </Routes>
-        </Suspense>
-      </ReactLenis>
-    </>
+    <ReactLenis
+      root
+      options={{
+        lerp: 0.08,
+        duration: 1.2,
+        smoothWheel: true,
+        wheelMultiplier: 0.9,
+      }}
+    >
+      <ScrollToTop />
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route path="/" element={<RootLayout />}>
+            {/* Core Home & Shop */}
+            <Route index element={<Home />} />
+            <Route path="shop" element={<Shop />} />
+
+            {/* Dynamic Product Details by slug */}
+            <Route path="product/:slug" element={<ProductDetails />} />
+
+            {/* E-Commerce Flows */}
+            <Route path="cart" element={<Cart />} />
+            <Route path="wishlist" element={<Wishlist />} />
+            <Route
+              path="checkout"
+              element={
+                <ProtectedRoute>
+                  <Checkout />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="order-success/:orderId"
+              element={
+                <ProtectedRoute>
+                  <OrderSuccess />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* Editorial & Information */}
+            <Route path="about" element={<About />} />
+            <Route path="faq" element={<FAQ />} />
+            <Route path="contact" element={<Contact />} />
+
+            {/* Authentication */}
+            <Route path="login" element={<Login />} />
+            <Route path="signup" element={<Signup />} />
+
+            {/* Backwards compatibility aliases for previous prototype routes */}
+            <Route path="shopgrid" element={<Navigate to="/shop" replace />} />
+            <Route path="shop_grid" element={<Navigate to="/shop" replace />} />
+            <Route
+              path="productdetails"
+              element={<Navigate to="/product/monica-diara-party-dress" replace />}
+            />
+          </Route>
+
+          {/* 404 Catch-All */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
+    </ReactLenis>
   );
 }
 

@@ -1,11 +1,2 @@
-import ProductsDetails from "./ProductsDetails";
-
-const About = () => {
-  return (
-    <>
-      <ProductsDetails />
-    </>
-  );
-};
-
+import About from "../../pages/About";
 export default About;
