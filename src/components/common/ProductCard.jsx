@@ -15,6 +15,7 @@ const ProductCard = ({ product, className = "" }) => {
   if (!product) return null;
 
   const inWishlist = isInWishlist(product.id);
+  const isOutOfStock = !product.inStock || (product.stockCount !== undefined && product.stockCount <= 0);
 
   const handleCardClick = () => {
     navigate(`/product/${product.slug}`);
@@ -22,6 +23,7 @@ const ProductCard = ({ product, className = "" }) => {
 
   const handleAddToCart = (e) => {
     e.stopPropagation();
+    if (isOutOfStock) return;
     addToCart(product, 1);
   };
 
@@ -64,9 +66,14 @@ const ProductCard = ({ product, className = "" }) => {
           {/* Add to Cart button */}
           <button
             type="button"
-            title="Add to Cart"
+            disabled={isOutOfStock}
+            title={isOutOfStock ? "Out of Stock" : "Add to Cart"}
             onClick={handleAddToCart}
-            className="w-9 h-9 rounded-full bg-white text-[#1A1A1A] hover:bg-[#E53E3E] hover:text-white flex items-center justify-center shadow-md transition-colors duration-200"
+            className={`w-9 h-9 rounded-full flex items-center justify-center shadow-md transition-colors duration-200 ${
+              isOutOfStock
+                ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+                : "bg-white text-[#1A1A1A] hover:bg-[#E53E3E] hover:text-white"
+            }`}
           >
             <FaShoppingBag className="text-sm" />
           </button>
@@ -134,10 +141,15 @@ const ProductCard = ({ product, className = "" }) => {
           </div>
           <button
             type="button"
+            disabled={isOutOfStock}
             onClick={handleAddToCart}
-            className="text-xs font-semibold text-[#E53E3E] hover:text-black uppercase tracking-wide transition-colors"
+            className={`text-xs font-semibold uppercase tracking-wide transition-colors ${
+              isOutOfStock
+                ? "text-gray-400 cursor-not-allowed"
+                : "text-[#E53E3E] hover:text-black cursor-pointer"
+            }`}
           >
-            + Add
+            {isOutOfStock ? "Sold Out" : "+ Add"}
           </button>
         </div>
       </div>
