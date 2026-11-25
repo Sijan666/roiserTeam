@@ -12,6 +12,9 @@ const Login = () => {
   const location = useLocation();
 
   const [authError, setAuthError] = useState(null);
+  const [isForgotModalOpen, setIsForgotModalOpen] = useState(false);
+  const [forgotEmail, setForgotEmail] = useState("");
+  const [forgotStatus, setForgotStatus] = useState(null);
 
   const {
     register,
@@ -23,6 +26,18 @@ const Login = () => {
       password: "",
     },
   });
+
+  const handleForgotPasswordSubmit = (e) => {
+    e.preventDefault();
+    if (!forgotEmail || !forgotEmail.includes("@")) {
+      setForgotStatus({ type: "error", message: "Please provide a valid email address." });
+      return;
+    }
+    setForgotStatus({
+      type: "success",
+      message: `Password reset instructions have been dispatched to ${forgotEmail}. Please check your inbox.`,
+    });
+  };
 
   const onSubmit = async (data) => {
     try {
@@ -85,9 +100,16 @@ const Login = () => {
             <div>
               <div className="flex justify-between items-center mb-1.5">
                 <label className="text-xs font-semibold text-[#1A1A1A]">Password *</label>
-                <Link to="/faq" className="text-xs text-[#E53E3E] hover:underline">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsForgotModalOpen(true);
+                    setForgotStatus(null);
+                  }}
+                  className="text-xs text-[#E53E3E] hover:underline cursor-pointer"
+                >
                   Forgot password?
-                </Link>
+                </button>
               </div>
               <input
                 type="password"
@@ -123,6 +145,56 @@ const Login = () => {
             </Link>
           </p>
         </div>
+
+        {/* Forgot Password Modal */}
+        {isForgotModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs">
+            <div className="bg-white rounded-lg max-w-md w-full p-6 shadow-2xl border border-gray-200 space-y-4">
+              <h3 className="text-lg font-bold text-[#1A1A1A] font-Jost">
+                Reset Account Password
+              </h3>
+              <p className="text-xs text-[#74787C] leading-relaxed">
+                Enter your registered email address and we will dispatch a secure link to reset your account credentials.
+              </p>
+
+              {forgotStatus ? (
+                <div
+                  className={`p-3 rounded text-xs leading-relaxed ${
+                    forgotStatus.type === "success"
+                      ? "bg-emerald-50 text-emerald-800 border border-emerald-200"
+                      : "bg-red-50 text-red-700 border border-red-200"
+                  }`}
+                >
+                  {forgotStatus.message}
+                </div>
+              ) : (
+                <form onSubmit={handleForgotPasswordSubmit} className="space-y-3">
+                  <input
+                    type="email"
+                    required
+                    placeholder="name@example.com"
+                    value={forgotEmail}
+                    onChange={(e) => setForgotEmail(e.target.value)}
+                    className="w-full text-xs p-3 border border-gray-300 rounded outline-none focus:border-[#E53E3E]"
+                  />
+                  <Button type="submit" variant="primary" size="md" className="w-full">
+                    Send Reset Link
+                  </Button>
+                </form>
+              )}
+
+              <div className="pt-2 border-t border-gray-100 text-right">
+                <button
+                  type="button"
+                  onClick={() => setIsForgotModalOpen(false)}
+                  className="text-xs font-semibold text-gray-500 hover:text-black cursor-pointer"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </Container>
     </>
   );
