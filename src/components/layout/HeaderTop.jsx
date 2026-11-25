@@ -1,18 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Container from "../common/Container";
 import { IoIosArrowDown } from "react-icons/io";
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
 import { useWishlist } from "../../hooks/useWishlist";
 import { useAuth } from "../../hooks/useAuth";
+import { useCurrency } from "../../hooks/useCurrency";
 
 const HeaderTop = () => {
   const { wishlistCount } = useWishlist();
   const { user, isAuthenticated, logout } = useAuth();
+  const { currency, setCurrency, currencies } = useCurrency();
   const navigate = useNavigate();
-
-  const [language, setLanguage] = useState("English");
-  const [currency, setCurrency] = useState("USD");
 
   const handleLogout = () => {
     logout();
@@ -47,6 +46,12 @@ const HeaderTop = () => {
                       Signed in as <br />
                       <strong className="text-[#1A1A1A]">{user.email}</strong>
                     </div>
+                    <Link
+                      to="/account"
+                      className="px-3 py-2 hover:bg-gray-50 rounded transition-colors text-[#1A1A1A] font-semibold"
+                    >
+                      My Dashboard & Orders
+                    </Link>
                     <Link
                       to="/wishlist"
                       className="px-3 py-2 hover:bg-gray-50 rounded transition-colors"
@@ -122,57 +127,29 @@ const HeaderTop = () => {
             </li>
             <li className="text-white/40">|</li>
 
-            {/* Language Selector */}
-            <Popover className="relative">
-              <PopoverButton className="flex items-center gap-1 outline-none cursor-pointer hover:text-gray-200 transition-colors">
-                {language}
-                <IoIosArrowDown className="text-xs" />
-              </PopoverButton>
-              <PopoverPanel
-                anchor="bottom"
-                className="flex flex-col bg-white text-[#1A1A1A] p-2 rounded-md shadow-xl text-xs z-50 min-w-[120px] border border-gray-100 mt-2"
-              >
-                {["English", "Español", "Français", "Deutsch"].map((lang) => (
-                  <button
-                    key={lang}
-                    type="button"
-                    onClick={() => setLanguage(lang)}
-                    className={`text-left px-3 py-1.5 rounded transition-colors ${
-                      language === lang
-                        ? "bg-red-50 text-[#E53E3E] font-semibold"
-                        : "hover:bg-gray-50 text-gray-700"
-                    }`}
-                  >
-                    {lang}
-                  </button>
-                ))}
-              </PopoverPanel>
-            </Popover>
-
-            <li className="text-white/40">|</li>
-
             {/* Currency Selector */}
             <Popover className="relative">
-              <PopoverButton className="flex items-center gap-1 outline-none cursor-pointer hover:text-gray-200 transition-colors">
-                {currency}
+              <PopoverButton className="flex items-center gap-1.5 outline-none cursor-pointer hover:text-gray-200 transition-colors font-semibold">
+                <span>Currency: {currency}</span>
                 <IoIosArrowDown className="text-xs" />
               </PopoverButton>
               <PopoverPanel
                 anchor="bottom"
-                className="flex flex-col bg-white text-[#1A1A1A] p-2 rounded-md shadow-xl text-xs z-50 min-w-[100px] border border-gray-100 mt-2"
+                className="flex flex-col bg-white text-[#1A1A1A] p-2 rounded-md shadow-xl text-xs z-50 min-w-[130px] border border-gray-100 mt-2 font-medium"
               >
-                {["USD", "EUR", "GBP", "CAD"].map((curr) => (
+                {currencies.map((curr) => (
                   <button
-                    key={curr}
+                    key={curr.code}
                     type="button"
-                    onClick={() => setCurrency(curr)}
-                    className={`text-left px-3 py-1.5 rounded transition-colors ${
-                      currency === curr
-                        ? "bg-red-50 text-[#E53E3E] font-semibold"
+                    onClick={() => setCurrency(curr.code)}
+                    className={`text-left px-3 py-1.5 rounded transition-colors flex items-center justify-between cursor-pointer ${
+                      currency === curr.code
+                        ? "bg-red-50 text-[#E53E3E] font-bold"
                         : "hover:bg-gray-50 text-gray-700"
                     }`}
                   >
-                    {curr}
+                    <span>{curr.name}</span>
+                    <span className="text-[11px] text-gray-400 font-normal">{curr.rate}x</span>
                   </button>
                 ))}
               </PopoverPanel>
