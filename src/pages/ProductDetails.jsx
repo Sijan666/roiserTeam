@@ -30,16 +30,21 @@ const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState("description"); // 'description' | 'additional' | 'reviews'
 
+  // Reset component state when navigating between products
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    setUserSelectedImage(null);
+    setUserSelectedSize(null);
+    setUserSelectedColor(null);
+    setQuantity(1);
+    setActiveTab("description");
+  }, [slug]);
+
   const activeImage = userSelectedImage || product?.image;
   const selectedSize =
     userSelectedSize || (product?.sizes ? product.sizes[0] : "One Size");
   const selectedColor =
     userSelectedColor || (product?.colors ? product.colors[0]?.name : "Default");
-
-  // Scroll to top when slug changes
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [slug]);
 
   if (loading || error) {
     return (
@@ -65,12 +70,15 @@ const ProductDetails = () => {
   }
 
   const inWishlist = isInWishlist(product.id);
+  const isOutOfStock = !product.inStock || (product.stockCount !== undefined && product.stockCount <= 0);
 
   const handleAddToCart = () => {
+    if (isOutOfStock) return;
     addToCart(product, quantity, selectedSize, selectedColor);
   };
 
   const handleBuyNow = () => {
+    if (isOutOfStock) return;
     addToCart(product, quantity, selectedSize, selectedColor);
     navigate("/checkout");
   };
@@ -176,9 +184,15 @@ const ProductDetails = () => {
               <div className="flex items-center gap-3 mt-3">
                 <Rating value={product.rating} reviewCount={product.reviewCount} size="md" />
                 <span className="text-xs text-gray-400">|</span>
-                <span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">
-                  In Stock ({product.stockCount} items left)
-                </span>
+                {isOutOfStock ? (
+                  <span className="text-xs font-semibold text-red-600 bg-red-50 px-2 py-0.5 rounded">
+                    Out of Stock
+                  </span>
+                ) : (
+                  <span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">
+                    In Stock ({product.stockCount} items left)
+                  </span>
+                )}
               </div>
             </div>
 
@@ -262,21 +276,23 @@ const ProductDetails = () => {
             <div className="pt-2 flex flex-col sm:flex-row gap-3">
               <div className="flex items-center gap-3">
                 {/* Stepper */}
-                <div className="inline-flex items-center border border-gray-300 rounded-[3px] bg-white">
+                <div className={`inline-flex items-center border rounded-[3px] bg-white ${isOutOfStock ? 'opacity-50 border-gray-200' : 'border-gray-300'}`}>
                   <button
                     type="button"
+                    disabled={isOutOfStock}
                     onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                    className="px-3 py-2 sm:py-3 text-base font-semibold text-gray-600 hover:bg-gray-100 transition-colors cursor-pointer"
+                    className="px-3 py-2 sm:py-3 text-base font-semibold text-gray-600 hover:bg-gray-100 disabled:cursor-not-allowed transition-colors cursor-pointer"
                   >
                     -
                   </button>
                   <span className="px-3 text-sm font-bold text-[#1A1A1A] min-w-[32px] text-center">
-                    {quantity}
+                    {isOutOfStock ? 0 : quantity}
                   </span>
                   <button
                     type="button"
+                    disabled={isOutOfStock}
                     onClick={() => setQuantity((q) => Math.min(product.stockCount || 10, q + 1))}
-                    className="px-3 py-2 sm:py-3 text-base font-semibold text-gray-600 hover:bg-gray-100 transition-colors cursor-pointer"
+                    className="px-3 py-2 sm:py-3 text-base font-semibold text-gray-600 hover:bg-gray-100 disabled:cursor-not-allowed transition-colors cursor-pointer"
                   >
                     +
                   </button>
@@ -300,23 +316,25 @@ const ProductDetails = () => {
               {/* Add to Cart */}
               <Button
                 type="button"
+                disabled={isOutOfStock}
                 onClick={handleAddToCart}
-                variant="outlineDark"
+                variant={isOutOfStock ? "ghost" : "outlineDark"}
                 size="lg"
-                className="flex-1 flex items-center justify-center gap-2 py-2.5 sm:py-3 text-xs sm:text-sm"
+                className={`flex-1 flex items-center justify-center gap-2 py-2.5 sm:py-3 text-xs sm:text-sm ${isOutOfStock ? 'border border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed' : ''}`}
               >
-                <HiOutlineShoppingBag className="text-base" /> Add To Cart
+                <HiOutlineShoppingBag className="text-base" /> {isOutOfStock ? "Out of Stock" : "Add To Cart"}
               </Button>
 
               {/* Buy Now */}
               <Button
                 type="button"
+                disabled={isOutOfStock}
                 onClick={handleBuyNow}
                 variant="primary"
                 size="lg"
-                className="flex-1 py-2.5 sm:py-3 text-xs sm:text-sm"
+                className={`flex-1 py-2.5 sm:py-3 text-xs sm:text-sm ${isOutOfStock ? 'opacity-40 cursor-not-allowed' : ''}`}
               >
-                Buy Now
+                {isOutOfStock ? "Sold Out" : "Buy Now"}
               </Button>
             </div>
 
@@ -406,31 +424,52 @@ const ProductDetails = () => {
                     <Rating value={product.rating} showCount={false} className="mt-1" />
                   </div>
                   <div className="border-l border-gray-200 pl-4 text-xs text-[#74787C]">
-                    Based on {product.reviewCount} verified customer purchases.
+                    Based on {product.reviewCount} verified customer ratings and reviews.
                   </div>
                 </div>
 
                 <div className="space-y-4 divide-y divide-gray-100">
-                  <div className="pt-4">
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="font-semibold text-sm text-[#1A1A1A]">Jessica M.</span>
-                      <span className="text-xs text-gray-400">Verified Buyer &bull; 2 weeks ago</span>
+                  {product.reviews && product.reviews.length > 0 ? (
+                    product.reviews.map((rev, index) => (
+                      <div key={index} className="pt-4">
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="font-semibold text-sm text-[#1A1A1A]">
+                            {rev.reviewerName || "Verified Buyer"}
+                          </span>
+                          <span className="text-xs text-gray-400">
+                            {rev.date ? new Date(rev.date).toLocaleDateString() : "Verified Purchase"}
+                          </span>
+                        </div>
+                        <Rating value={rev.rating || 5} showCount={false} size="xs" className="mb-2" />
+                        <p className="text-xs text-gray-600">
+                          {rev.comment}
+                        </p>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="pt-4 space-y-4">
+                      <div>
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="font-semibold text-sm text-[#1A1A1A]">Jessica M.</span>
+                          <span className="text-xs text-gray-400">Verified Buyer &bull; 2 weeks ago</span>
+                        </div>
+                        <Rating value={5} showCount={false} size="xs" className="mb-2" />
+                        <p className="text-xs text-gray-600">
+                          Exceptional craftsmanship! The fit is true to size and the fabric feels like pure luxury. Delivery arrived in 3 days.
+                        </p>
+                      </div>
+                      <div className="pt-4 border-t border-gray-100">
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="font-semibold text-sm text-[#1A1A1A]">David R.</span>
+                          <span className="text-xs text-gray-400">Verified Buyer &bull; 1 month ago</span>
+                        </div>
+                        <Rating value={5} showCount={false} size="xs" className="mb-2" />
+                        <p className="text-xs text-gray-600">
+                          Top notch quality. Highly recommended for formal occasions or daily stylish wear.
+                        </p>
+                      </div>
                     </div>
-                    <Rating value={5} showCount={false} size="xs" className="mb-2" />
-                    <p className="text-xs text-gray-600">
-                      Exceptional craftsmanship! The fit is true to size and the fabric feels like pure luxury. Delivery arrived in 3 days.
-                    </p>
-                  </div>
-                  <div className="pt-4">
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="font-semibold text-sm text-[#1A1A1A]">David R.</span>
-                      <span className="text-xs text-gray-400">Verified Buyer &bull; 1 month ago</span>
-                    </div>
-                    <Rating value={5} showCount={false} size="xs" className="mb-2" />
-                    <p className="text-xs text-gray-600">
-                      Top notch quality. Highly recommended for formal occasions or daily stylish wear.
-                    </p>
-                  </div>
+                  )}
                 </div>
               </div>
             )}
