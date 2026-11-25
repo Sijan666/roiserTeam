@@ -2,7 +2,7 @@
 
 <img src="./src/assets/logo.png" alt="Roiser Logo" width="120" />
 
-# 🛍️ Roiser — Fashion eCommerce Store
+# Roiser — Fashion eCommerce Store
 
 **A modern, full-featured fashion eCommerce storefront built with React 19 & Vite 7**
 
@@ -16,7 +16,7 @@
 
 ---
 
-## 📸 Preview
+## Preview
 
 | Home | Shop | Product Details |
 |------|------|----------------|
@@ -28,9 +28,9 @@
 
 ---
 
-## ✨ Features
+## Features
 
-### 🛒 Shopping Experience
+### Shopping Experience
 - **Dynamic product catalog** fetched from [DummyJSON API](https://dummyjson.com) with fashion-focused categories
 - **Advanced filtering & sorting** — by category, size, price range (slider), and "newest" sort (URL-synced)
 - **Grid & List view toggle** with animated transitions
@@ -38,41 +38,41 @@
 - **Out-of-stock handling** — disabled buttons, "Sold Out" badge, stock count display
 - **Related products** carousel on every product page
 
-### 💳 Cart & Checkout
+### Cart & Checkout
 - **Persistent cart** — survives page refresh via `localStorage`, variant-aware (size + color)
 - **Cart drawer** — slide-over panel with live item count badge
 - **Promo / coupon codes**: `ROISER15`, `WELCOME15` (15% off), `ROISER30` (30% off)
-- **Smart shipping**: Free for orders over \$150, Standard \$10, Express \$15
-- **Coupon persists** across Cart → Checkout → Order receipt
+- **Smart shipping**: Free for orders over $150, Standard $10, Express $15
+- **Coupon persists** across Cart -> Checkout -> Order receipt
 - **Full checkout form** with real-time validation (email pattern, phone, address fields)
 - **Order receipt page** with order ID, itemized list, delivery address, coupon savings
 
-### 👤 Authentication & Account
+### Authentication & Account
 - **Client-side auth** with PBKDF2 SHA-256 password hashing (no plain-text passwords)
 - **Sign up / Log in / Log out**
 - **Forgot password** — inline modal dialog flow
 - **Protected routes** — `/account`, `/checkout`, `/order-success` require login
 - **Account dashboard** — order history, profile card, item thumbnails, "View Receipt" links
 
-### ❤️ Wishlist
+### Wishlist
 - Persistent wishlist via `localStorage`
 - Add/remove from product cards, product details, and list view
 - Dedicated wishlist page
 
-### 💱 Multi-Currency Support
+### Multi-Currency Support
 | Currency | Code | Symbol |
 |----------|------|--------|
-| US Dollar | USD | \$ |
+| US Dollar | USD | $ |
 | Euro | EUR | € |
 | British Pound | GBP | £ |
-| Canadian Dollar | CAD | C\$ |
+| Canadian Dollar | CAD | C$ |
 | Bangladeshi Taka | BDT | ৳ |
 
 Currency selection persists in `localStorage`; all prices update instantly across the entire site.
 
-### 🔍 SEO & Performance
+### SEO & Performance
 - `react-helmet-async` for dynamic `<title>` and `<meta>` per page
-- OG (Open Graph) cover image for social sharing
+- Open Graph (OG) cover image for social sharing
 - Auto-generated `sitemap.xml` on every build (`scripts/generateSitemap.mjs`)
 - `robots.txt` for search engine crawlers
 - Smooth scroll powered by [Lenis](https://lenis.darkroom.engineering/)
@@ -80,10 +80,10 @@ Currency selection persists in `localStorage`; all prices update instantly acros
 
 ---
 
-## 🏗️ Tech Stack
+## Tech Stack
 
 | Layer | Technology |
-|-------|------------|
+|------------|------------|
 | Framework | [React 19](https://react.dev) |
 | Build Tool | [Vite 7](https://vitejs.dev) |
 | Styling | [Tailwind CSS v4](https://tailwindcss.com) via `@tailwindcss/vite` |
@@ -99,7 +99,7 @@ Currency selection persists in `localStorage`; all prices update instantly acros
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 roiserTeam/
@@ -146,14 +146,14 @@ roiserTeam/
 │   │           └── SeasonalPromoCards.jsx
 │   │
 │   ├── context/              # React Context providers
-│   │   ├── auth.context.js   ← createContext only
-│   │   ├── AuthContext.jsx   ← Provider + PBKDF2 auth logic
+│   │   ├── auth.context.js   # createContext only
+│   │   ├── AuthContext.jsx   # Provider + PBKDF2 auth logic
 │   │   ├── cart.context.js
-│   │   ├── CartContext.jsx   ← Cart + coupon state, localStorage
+│   │   ├── CartContext.jsx   # Cart + coupon state, localStorage
 │   │   ├── catalog.context.js
-│   │   ├── CatalogContext.jsx ← DummyJSON fetch, caching
+│   │   ├── CatalogContext.jsx # DummyJSON fetch, caching
 │   │   ├── currency.context.js
-│   │   ├── CurrencyContext.jsx ← Multi-currency, localStorage
+│   │   ├── CurrencyContext.jsx # Multi-currency, localStorage
 │   │   ├── wishlist.context.js
 │   │   └── WishlistContext.jsx
 │   │
@@ -175,7 +175,7 @@ roiserTeam/
 │   │   ├── Contact.jsx
 │   │   ├── FAQ.jsx
 │   │   ├── Home.jsx
-│   │   ├── Login.jsx         # + Forgot password modal
+│   │   ├── Login.jsx         # Forgot password modal
 │   │   ├── NotFound.jsx
 │   │   ├── OrderSuccess.jsx  # Receipt with coupon & delivery info
 │   │   ├── ProductDetails.jsx
@@ -203,12 +203,12 @@ roiserTeam/
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
-- **Node.js** ≥ 18
-- **npm** ≥ 9
+- **Node.js** >= 18
+- **npm** >= 9
 
 ### Installation
 
@@ -237,27 +237,27 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ---
 
-## 🗺️ Pages & Routes
+## Pages & Routes
 
 | Route | Page | Auth Required |
 |-------|------|:---:|
-| `/` | Home | — |
-| `/shop` | Product listing + filters | — |
-| `/shop/:slug` | Product details | — |
-| `/cart` | Shopping cart | — |
-| `/wishlist` | Saved items | — |
-| `/checkout` | Order form | ✅ |
-| `/order-success` | Receipt | ✅ |
-| `/account` | Dashboard & orders | ✅ |
-| `/login` | Sign in | — |
-| `/signup` | Register | — |
-| `/about` | About page | — |
-| `/contact` | Contact form | — |
-| `/faq` | FAQ | — |
+| `/` | Home | No |
+| `/shop` | Product listing + filters | No |
+| `/shop/:slug` | Product details | No |
+| `/cart` | Shopping cart | No |
+| `/wishlist` | Saved items | No |
+| `/checkout` | Order form | Yes |
+| `/order-success` | Receipt | Yes |
+| `/account` | Dashboard & orders | Yes |
+| `/login` | Sign in | No |
+| `/signup` | Register | No |
+| `/about` | About page | No |
+| `/contact` | Contact form | No |
+| `/faq` | FAQ | No |
 
 ---
 
-## 🛍️ Demo Accounts & Promo Codes
+## Demo Accounts & Promo Codes
 
 ### Test Promo Codes
 
@@ -271,31 +271,31 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 | Method | Cost |
 |--------|------|
-| Standard | \$10.00 |
-| Express | \$15.00 |
-| Free Shipping | Orders over \$150 |
+| Standard | $10.00 |
+| Express | $15.00 |
+| Free Shipping | Orders over $150 |
 
-> **Note:** You can register any email/password on the sign-up page. All data is stored in your browser's `localStorage` — no server or database involved.
+> **Note:** You can register any email and password on the sign-up page. All data is stored in your browser's `localStorage` — no server or database is involved.
 
 ---
 
-## 🧩 State Management
+## State Management
 
-All state is managed via React Context API — no external state library required.
+All state is managed via the React Context API with no external state library required.
 
 ```
 HelmetProvider
-  └── CurrencyProvider       ← exchange rates, selected currency
-        └── AuthProvider     ← PBKDF2 auth, user session
-              └── CatalogProvider  ← product data from DummyJSON
-                    └── CartProvider    ← cart items + coupon
+  └── CurrencyProvider        # Exchange rates, selected currency
+        └── AuthProvider      # PBKDF2 auth, user session
+              └── CatalogProvider   # Product data from DummyJSON
+                    └── CartProvider      # Cart items + coupon
                           └── WishlistProvider
-                                └── <App />  ← routes + pages
+                                └── <App/>   # Routes + pages
 ```
 
 ---
 
-## 🔐 Authentication Details
+## Authentication Details
 
 | Feature | Implementation |
 |---------|---------------|
@@ -306,7 +306,7 @@ HelmetProvider
 
 ---
 
-## 🌐 Deployment
+## Deployment
 
 The project is deployed on **Vercel** with a single SPA rewrite rule so React Router handles all navigation:
 
@@ -322,23 +322,23 @@ The project is deployed on **Vercel** with a single SPA rewrite rule so React Ro
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Sijan666/roiserTeam)
 
-1. Push your fork to GitHub
-2. Import on [vercel.com](https://vercel.com)
-3. Set **Framework Preset** to `Vite`
-4. Click Deploy — done ✅
+1. Push your fork to GitHub.
+2. Import the repository on [vercel.com](https://vercel.com).
+3. Set **Framework Preset** to `Vite`.
+4. Click **Deploy**.
 
 ---
 
-## 🧪 Code Quality
+## Code Quality
 
-- **ESLint 9** (flat config) with `eslint-plugin-react`, `eslint-plugin-react-hooks`, `eslint-plugin-react-refresh`
+- **ESLint 9** (flat config) with `eslint-plugin-react`, `eslint-plugin-react-hooks`, and `eslint-plugin-react-refresh`
 - **react-refresh** rule enforced: component files must not mix component exports with non-component exports
 - All files pass `npm run lint` with **zero warnings**
 - Production build verified: `vite build` exits 0 with **351 modules** bundled
 
 ---
 
-## 📦 Build Output
+## Build Output
 
 | Metric | Value |
 |--------|-------|
@@ -350,41 +350,41 @@ The project is deployed on **Vercel** with a single SPA rewrite rule so React Ro
 
 ---
 
-## 🗂️ Category System
+## Category System
 
 Products are organized into logical groups via `src/utils/categories.js`:
 
 | URL Slug | Included DummyJSON Categories |
 |----------|-------------------------------|
-| `women` | womens-dresses, tops, womens-shoes, womens-bags, womens-jewellery, womens-watches |
-| `men` | mens-shirts, mens-shoes, mens-watches |
-| `accessories` | womens-jewellery, womens-bags, mens-watches, womens-watches, sunglasses |
-| `footwear` | mens-shoes, womens-shoes |
+| `women` | `womens-dresses`, `tops`, `womens-shoes`, `womens-bags`, `womens-jewellery`, `womens-watches` |
+| `men` | `mens-shirts`, `mens-shoes`, `mens-watches` |
+| `accessories` | `womens-jewellery`, `womens-bags`, `mens-watches`, `womens-watches`, `sunglasses` |
+| `footwear` | `mens-shoes`, `womens-shoes` |
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
-1. Fork the repository
+1. Fork the repository.
 2. Create a feature branch: `git checkout -b feature/my-feature`
 3. Commit your changes: `git commit -m 'feat: add my feature'`
 4. Push to the branch: `git push origin feature/my-feature`
-5. Open a Pull Request
+5. Open a Pull Request.
 
-Please make sure `npm run lint` passes before submitting a PR.
+Ensure `npm run lint` passes with zero warnings before submitting a pull request.
 
 ---
 
-## 📄 License
+## License
 
-This project is for **educational and portfolio purposes**.
+This project is licensed for **educational and portfolio purposes**.
 
 ---
 
 <div align="center">
 
-Made with ❤️ using React 19 + Vite 7 + Tailwind CSS v4
+Built with React 19, Vite 7, and Tailwind CSS v4
 
-**[🌐 Live Demo](https://roiser-team.vercel.app)** · **[🐛 Report Bug](https://github.com/Sijan666/roiserTeam/issues)** · **[✨ Request Feature](https://github.com/Sijan666/roiserTeam/issues)**
+**[Live Demo](https://roiser-team.vercel.app)** · **[Report Bug](https://github.com/Sijan666/roiserTeam/issues)** · **[Request Feature](https://github.com/Sijan666/roiserTeam/issues)**
 
 </div>
