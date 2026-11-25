@@ -1,15 +1,12 @@
+import { formatCurrencyWithRate } from "./currencyRates";
+
 /**
- * Currency formatter utility
+ * Global reactive currency formatter utility
+ * Converts base USD amounts to the currently active global currency.
  * @param {number} amount
- * @param {string} currency - default 'USD'
+ * @param {string} [overrideCurrency]
  * @returns {string}
  */
-export const formatCurrency = (amount, currency = 'USD') => {
-  const numericAmount = typeof amount === 'number' ? amount : parseFloat(amount) || 0;
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency,
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(numericAmount);
+export const formatCurrency = (amount, overrideCurrency) => {
+  return formatCurrencyWithRate(amount, overrideCurrency);
 };
