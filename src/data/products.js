@@ -10,8 +10,8 @@ const getDepartment = (category) => {
   if (["smartphones", "laptops", "tablets", "mobile-accessories"].includes(category)) {
     return "Electronics";
   }
-  if (["mens-shirts", "tops"].includes(category)) return "Men's Fashion";
-  if (["womens-dresses", "womens-jewellery"].includes(category)) return "Women's Fashion";
+  if (["mens-shirts"].includes(category)) return "Men's Fashion";
+  if (["womens-dresses", "womens-jewellery", "tops"].includes(category)) return "Women's Fashion";
   if (["mens-shoes", "womens-shoes"].includes(category)) return "Footwear";
   if (["beauty", "skin-care", "fragrances"].includes(category)) return "Beauty & Skincare";
   if (["mens-watches", "womens-watches", "sunglasses"].includes(category)) {
@@ -91,6 +91,7 @@ const mapProduct = (product, slug) => {
     isFeatured: product.rating >= 4.5 && product.id % 4 === 0,
     isDeal: product.discountPercentage > 12,
     tags: product.tags?.length ? product.tags : [product.category, department],
+    reviews: Array.isArray(product.reviews) ? product.reviews : [],
   };
 };
 
