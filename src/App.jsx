@@ -18,6 +18,7 @@ const OrderSuccess = lazy(() => import("./pages/OrderSuccess"));
 const About = lazy(() => import("./pages/About"));
 const FAQ = lazy(() => import("./pages/FAQ"));
 const Contact = lazy(() => import("./pages/Contact"));
+const Account = lazy(() => import("./pages/Account"));
 const Login = lazy(() => import("./pages/Login"));
 const Signup = lazy(() => import("./pages/Signup"));
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -87,6 +88,14 @@ function App() {
             <Route path="contact" element={<Contact />} />
 
             {/* Authentication */}
+            <Route
+              path="account"
+              element={
+                <ProtectedRoute>
+                  <Account />
+                </ProtectedRoute>
+              }
+            />
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />
 
