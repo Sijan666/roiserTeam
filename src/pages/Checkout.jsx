@@ -15,13 +15,25 @@ const createOrderId = () => "ORD-" + Date.now().toString().slice(-6);
 const createOrderTimestamp = () => new Date().toISOString();
 
 const Checkout = () => {
-  const { cart, cartSubtotal, cartCount, clearCart } = useCart();
+  const {
+    cart,
+    cartSubtotal,
+    cartCount,
+    clearCart,
+    appliedCoupon,
+    discountAmount,
+    discountRate,
+    applyCoupon,
+    removeCoupon,
+  } = useCart();
   const { user } = useAuth();
   const navigate = useNavigate();
 
   const [shippingMethod, setShippingMethod] = useState("standard");
   const [paymentMethod, setPaymentMethod] = useState("cod");
   const [isSubmittingOrder, setIsSubmittingOrder] = useState(false);
+  const [checkoutCouponCode, setCheckoutCouponCode] = useState("");
+  const [checkoutCouponMessage, setCheckoutCouponMessage] = useState(null);
 
   const {
     register,
@@ -44,8 +56,20 @@ const Checkout = () => {
 
   const shippingFee =
     shippingMethod === "express" ? 15.0 : cartSubtotal > 150 ? 0 : 10.0;
-  const estimatedTax = cartSubtotal * 0.05;
-  const orderTotal = cartSubtotal + shippingFee + estimatedTax;
+  const taxableAmount = Math.max(0, cartSubtotal - discountAmount);
+  const estimatedTax = taxableAmount * 0.05;
+  const orderTotal = Math.max(0, taxableAmount + shippingFee + estimatedTax);
+
+  const handleApplyCheckoutCoupon = (e) => {
+    e.preventDefault();
+    const result = applyCoupon(checkoutCouponCode);
+    if (result.success) {
+      setCheckoutCouponMessage({ type: "success", text: `${result.coupon.label} applied!` });
+      setCheckoutCouponCode("");
+    } else {
+      setCheckoutCouponMessage({ type: "error", text: result.error });
+    }
+  };
 
   const onPlaceOrder = async (formData) => {
     if (cart.length === 0) return;
@@ -61,11 +85,15 @@ const Checkout = () => {
     const orderId = createOrderId();
     const orderRecord = {
       orderId,
+      userId: user.id || null,
+      userEmail: user.email,
       createdAt: createOrderTimestamp(),
       customer: formData,
       items: cart,
       summary: {
         subtotal: cartSubtotal,
+        discountAmount,
+        couponCode: appliedCoupon?.code || null,
         shippingFee,
         shippingMethod,
         tax: estimatedTax,
@@ -173,11 +201,22 @@ const Checkout = () => {
                       </label>
                       <input
                         type="email"
-                        {...register("email", { required: "Valid email is required" })}
+                        {...register("email", {
+                          required: "Valid email is required",
+                          pattern: {
+                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                            message: "Enter a valid email address",
+                          },
+                        })}
                         className={`w-full text-xs sm:text-sm p-3 border rounded outline-none ${
                           errors.email ? "border-red-500" : "border-gray-200"
                         } focus:border-[#1A1A1A]`}
                       />
+                      {errors.email && (
+                        <span className="text-xs text-red-500 mt-1 block">
+                          {errors.email.message}
+                        </span>
+                      )}
                     </div>
 
                     <div>
@@ -186,11 +225,19 @@ const Checkout = () => {
                       </label>
                       <input
                         type="tel"
-                        {...register("phone", { required: "Phone is required" })}
+                        {...register("phone", {
+                          required: "Phone number is required",
+                          minLength: { value: 7, message: "Phone number is too short" },
+                        })}
                         className={`w-full text-xs sm:text-sm p-3 border rounded outline-none ${
                           errors.phone ? "border-red-500" : "border-gray-200"
                         } focus:border-[#1A1A1A]`}
                       />
+                      {errors.phone && (
+                        <span className="text-xs text-red-500 mt-1 block">
+                          {errors.phone.message}
+                        </span>
+                      )}
                     </div>
                   </div>
 
@@ -201,9 +248,16 @@ const Checkout = () => {
                     <input
                       type="text"
                       placeholder="House number and street name"
-                      {...register("address", { required: "Address is required" })}
-                      className="w-full text-xs sm:text-sm p-3 border border-gray-200 rounded outline-none focus:border-[#1A1A1A] mb-2"
+                      {...register("address", { required: "Street address is required" })}
+                      className={`w-full text-xs sm:text-sm p-3 border rounded outline-none ${
+                        errors.address ? "border-red-500" : "border-gray-200"
+                      } focus:border-[#1A1A1A] mb-1`}
                     />
+                    {errors.address && (
+                      <span className="text-xs text-red-500 mb-2 block">
+                        {errors.address.message}
+                      </span>
+                    )}
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -214,8 +268,15 @@ const Checkout = () => {
                       <input
                         type="text"
                         {...register("city", { required: "City is required" })}
-                        className="w-full text-xs sm:text-sm p-3 border border-gray-200 rounded outline-none focus:border-[#1A1A1A]"
+                        className={`w-full text-xs sm:text-sm p-3 border rounded outline-none ${
+                          errors.city ? "border-red-500" : "border-gray-200"
+                        } focus:border-[#1A1A1A]`}
                       />
+                      {errors.city && (
+                        <span className="text-xs text-red-500 mt-1 block">
+                          {errors.city.message}
+                        </span>
+                      )}
                     </div>
 
                     <div>
@@ -225,8 +286,15 @@ const Checkout = () => {
                       <input
                         type="text"
                         {...register("state", { required: "State is required" })}
-                        className="w-full text-xs sm:text-sm p-3 border border-gray-200 rounded outline-none focus:border-[#1A1A1A]"
+                        className={`w-full text-xs sm:text-sm p-3 border rounded outline-none ${
+                          errors.state ? "border-red-500" : "border-gray-200"
+                        } focus:border-[#1A1A1A]`}
                       />
+                      {errors.state && (
+                        <span className="text-xs text-red-500 mt-1 block">
+                          {errors.state.message}
+                        </span>
+                      )}
                     </div>
 
                     <div>
@@ -236,8 +304,15 @@ const Checkout = () => {
                       <input
                         type="text"
                         {...register("zipCode", { required: "Zip code is required" })}
-                        className="w-full text-xs sm:text-sm p-3 border border-gray-200 rounded outline-none focus:border-[#1A1A1A]"
+                        className={`w-full text-xs sm:text-sm p-3 border rounded outline-none ${
+                          errors.zipCode ? "border-red-500" : "border-gray-200"
+                        } focus:border-[#1A1A1A]`}
                       />
+                      {errors.zipCode && (
+                        <span className="text-xs text-red-500 mt-1 block">
+                          {errors.zipCode.message}
+                        </span>
+                      )}
                     </div>
                   </div>
 
@@ -355,8 +430,14 @@ const Checkout = () => {
                     {formatCurrency(cartSubtotal)}
                   </span>
                 </div>
+                {discountAmount > 0 && (
+                  <div className="flex justify-between text-emerald-600 font-medium">
+                    <span>Discount ({appliedCoupon?.code || `${(discountRate * 100).toFixed(0)}%`})</span>
+                    <span>-{formatCurrency(discountAmount)}</span>
+                  </div>
+                )}
                 <div className="flex justify-between">
-                  <span>Shipping</span>
+                  <span>Shipping ({shippingMethod === "express" ? "Express" : "Standard"})</span>
                   <span className="font-semibold text-[#1A1A1A]">
                     {shippingFee === 0 ? "FREE" : formatCurrency(shippingFee)}
                   </span>
@@ -371,6 +452,56 @@ const Checkout = () => {
                   <span>Total Order</span>
                   <span className="text-xl text-[#E53E3E]">{formatCurrency(orderTotal)}</span>
                 </div>
+              </div>
+
+              {/* Promo Code Box in Checkout */}
+              <div className="pt-2 border-t border-gray-200">
+                {appliedCoupon ? (
+                  <div className="flex items-center justify-between bg-white border border-emerald-200 p-2.5 rounded text-xs text-emerald-800">
+                    <span>
+                      Coupon: <strong>{appliedCoupon.code}</strong> ({(discountRate * 100).toFixed(0)}% off)
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        removeCoupon();
+                        setCheckoutCouponMessage(null);
+                      }}
+                      className="text-red-500 hover:underline font-semibold cursor-pointer"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                ) : (
+                  <div className="space-y-2">
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        placeholder="Promo code (e.g. ROISER15)"
+                        value={checkoutCouponCode}
+                        onChange={(e) => setCheckoutCouponCode(e.target.value)}
+                        className="flex-1 text-xs bg-white border border-gray-300 rounded px-3 py-2 outline-none uppercase font-semibold text-[#1A1A1A] focus:border-[#E53E3E]"
+                      />
+                      <Button
+                        type="button"
+                        onClick={handleApplyCheckoutCoupon}
+                        variant="outlineDark"
+                        size="sm"
+                      >
+                        Apply
+                      </Button>
+                    </div>
+                  </div>
+                )}
+                {checkoutCouponMessage && (
+                  <p
+                    className={`text-xs mt-1.5 font-medium ${
+                      checkoutCouponMessage.type === "success" ? "text-emerald-600" : "text-red-500"
+                    }`}
+                  >
+                    {checkoutCouponMessage.text}
+                  </p>
+                )}
               </div>
 
               {/* Payment Methods */}
