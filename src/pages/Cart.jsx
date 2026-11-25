@@ -8,31 +8,39 @@ import { formatCurrency } from "../utils/formatCurrency";
 import { FiTrash2, FiShoppingBag, FiArrowRight, FiCheck } from "react-icons/fi";
 
 const Cart = () => {
-  const { cart, updateQuantity, removeFromCart, clearCart, cartSubtotal, cartCount } = useCart();
+  const {
+    cart,
+    updateQuantity,
+    removeFromCart,
+    clearCart,
+    cartSubtotal,
+    cartCount,
+    appliedCoupon,
+    discountAmount,
+    discountRate,
+    applyCoupon,
+    removeCoupon,
+  } = useCart();
   const navigate = useNavigate();
 
   const [couponCode, setCouponCode] = useState("");
-  const [appliedDiscount, setAppliedDiscount] = useState(0);
   const [couponMessage, setCouponMessage] = useState(null);
 
   const handleApplyCoupon = (e) => {
     e.preventDefault();
-    const code = couponCode.trim().toUpperCase();
-    if (code === "ROISER15" || code === "WELCOME15") {
-      setAppliedDiscount(0.15); // 15% off
-      setCouponMessage({ type: "success", text: "15% Promo discount applied successfully!" });
-    } else if (code === "ROISER30") {
-      setAppliedDiscount(0.30); // 30% off
-      setCouponMessage({ type: "success", text: "30% VIP promo discount applied!" });
+    const result = applyCoupon(couponCode);
+    if (result.success) {
+      setCouponMessage({ type: "success", text: `${result.coupon.label} applied successfully!` });
+      setCouponCode("");
     } else {
-      setCouponMessage({ type: "error", text: "Invalid promo code. Try 'ROISER15'" });
+      setCouponMessage({ type: "error", text: result.error });
     }
   };
 
-  const discountAmount = cartSubtotal * appliedDiscount;
-  const shippingFee = cartSubtotal > 150 || cartSubtotal === 0 ? 0 : 15.0;
-  const estimatedTax = (cartSubtotal - discountAmount) * 0.05; // 5% tax
-  const orderTotal = Math.max(0, cartSubtotal - discountAmount + shippingFee + estimatedTax);
+  const shippingFee = cartSubtotal > 150 || cartSubtotal === 0 ? 0 : 10.0;
+  const taxableAmount = Math.max(0, cartSubtotal - discountAmount);
+  const estimatedTax = taxableAmount * 0.05; // 5% tax
+  const orderTotal = Math.max(0, taxableAmount + shippingFee + estimatedTax);
 
   if (cart.length === 0) {
     return (
@@ -277,18 +285,39 @@ const Cart = () => {
               <h4 className="text-sm font-bold text-[#1A1A1A] mb-2 uppercase tracking-wide">
                 Have a Promotional Voucher?
               </h4>
-              <form onSubmit={handleApplyCoupon} className="flex gap-2 max-w-md">
-                <input
-                  type="text"
-                  placeholder="Try 'ROISER15' or 'ROISER30'"
-                  value={couponCode}
-                  onChange={(e) => setCouponCode(e.target.value)}
-                  className="flex-1 text-xs sm:text-sm bg-white border border-gray-300 rounded px-3 py-2 outline-none uppercase font-semibold text-[#1A1A1A] focus:border-[#E53E3E]"
-                />
-                <Button type="submit" variant="primary" size="sm">
-                  Apply Code
-                </Button>
-              </form>
+              {appliedCoupon ? (
+                <div className="flex items-center justify-between bg-emerald-50 border border-emerald-200 p-3 rounded text-xs text-emerald-800">
+                  <div className="flex items-center gap-2">
+                    <FiCheck className="text-emerald-600 text-sm" />
+                    <span>
+                      Active Code: <strong>{appliedCoupon.code}</strong> ({(discountRate * 100).toFixed(0)}% Off)
+                    </span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      removeCoupon();
+                      setCouponMessage(null);
+                    }}
+                    className="text-red-500 hover:underline font-semibold cursor-pointer"
+                  >
+                    Remove
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={handleApplyCoupon} className="flex gap-2 max-w-md">
+                  <input
+                    type="text"
+                    placeholder="Try 'ROISER15' or 'ROISER30'"
+                    value={couponCode}
+                    onChange={(e) => setCouponCode(e.target.value)}
+                    className="flex-1 text-xs sm:text-sm bg-white border border-gray-300 rounded px-3 py-2 outline-none uppercase font-semibold text-[#1A1A1A] focus:border-[#E53E3E]"
+                  />
+                  <Button type="submit" variant="primary" size="sm">
+                    Apply Code
+                  </Button>
+                </form>
+              )}
 
               {couponMessage && (
                 <p
@@ -316,9 +345,9 @@ const Cart = () => {
                 </span>
               </div>
 
-              {appliedDiscount > 0 && (
+              {discountAmount > 0 && (
                 <div className="flex justify-between text-emerald-600 font-medium">
-                  <span>Discount ({(appliedDiscount * 100).toFixed(0)}%)</span>
+                  <span>Discount ({appliedCoupon?.code || `${(discountRate * 100).toFixed(0)}%`})</span>
                   <span>-{formatCurrency(discountAmount)}</span>
                 </div>
               )}
