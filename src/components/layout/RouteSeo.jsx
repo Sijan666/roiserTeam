@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { useLocation } from "react-router-dom";
 import { useCatalog } from "../../hooks/useCatalog";
+import { resolveCategoryMeta } from "../../utils/categories";
 import { absoluteUrl, DEFAULT_OG_IMAGE, SITE_URL } from "../../utils/seo";
 
 const routeMetadata = {
@@ -44,6 +45,11 @@ const routeMetadata = {
     description: "Complete your Roiser order using our secure checkout.",
     noindex: true,
   },
+  "/account": {
+    title: "My Account & Orders | Roiser",
+    description: "Manage your Roiser account profile and view previous orders.",
+    noindex: true,
+  },
   "/login": {
     title: "Account Login | Roiser",
     description: "Sign in to your Roiser account to manage your orders and shopping.",
@@ -73,10 +79,7 @@ const RouteSeo = () => {
   const { categories } = useCatalog();
   const searchParams = new URLSearchParams(location.search);
   const categorySlug = location.pathname === "/shop" ? searchParams.get("category") : null;
-  const category =
-    categorySlug && categorySlug !== "all"
-      ? categories.find((item) => item.slug === categorySlug)
-      : null;
+  const category = resolveCategoryMeta(categorySlug, categories);
   const isProductRoute = /^\/product\/[^/]+\/?$/.test(location.pathname);
   const isOrderSuccess = location.pathname.startsWith("/order-success/");
   const metadata = category
