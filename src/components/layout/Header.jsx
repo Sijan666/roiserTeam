@@ -33,10 +33,14 @@ const isActiveLink = (link, pathname, category) =>
 
 const NavigationLinks = ({ mobile = false, pathname, category, onNavigate }) => (
   <ul className={mobile ? "space-y-1" : "flex items-center gap-1 lg:gap-2"}>
-    {navLinks.map((link) => {
+    {navLinks.map((link, index) => {
       const active = isActiveLink(link, pathname, category);
       return (
-        <li key={link.label}>
+        <li
+          key={link.label}
+          className={mobile ? "mobile-menu-item-enter" : undefined}
+          style={mobile ? { animationDelay: `${index * 45}ms` } : undefined}
+        >
           <Link
             to={link.path}
             aria-current={active ? "page" : undefined}
@@ -253,13 +257,13 @@ const Header = () => {
       <Transition
         show={isMobileMenuOpen}
         enter="transition duration-200 ease-out motion-reduce:transition-none"
-        enterFrom="-translate-y-2 opacity-0"
-        enterTo="translate-y-0 opacity-100"
+        enterFrom="scale-y-0 opacity-0"
+        enterTo="scale-y-100 opacity-100"
         leave="transition duration-150 ease-in motion-reduce:transition-none"
-        leaveFrom="translate-y-0 opacity-100"
-        leaveTo="-translate-y-2 opacity-0"
+        leaveFrom="scale-y-100 opacity-100"
+        leaveTo="scale-y-0 opacity-0"
       >
-        <div id="mobile-navigation" className="absolute inset-x-0 top-full z-30 border-t border-gray-800 bg-[#1A1A1A] text-white shadow-xl lg:hidden">
+        <div id="mobile-navigation" className="absolute inset-x-0 top-full z-30 origin-top border-t border-gray-800 bg-[#1A1A1A] text-white shadow-xl lg:hidden">
           <Container className="py-4">
             <nav aria-label="Mobile navigation">
               <NavigationLinks mobile pathname={location.pathname} category={activeCategory} onNavigate={closeMobileMenu} />
