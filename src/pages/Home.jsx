@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import CatalogStatus from "../components/common/CatalogStatus";
 import HomeHero from "../components/layout/home/HomeHero";
@@ -12,6 +13,32 @@ import { useCatalog } from "../hooks/useCatalog";
 
 const Home = () => {
   const { products, categories, loading, error, retry } = useCatalog();
+
+  useEffect(() => {
+    if (loading || error) return undefined;
+
+    const sections = document.querySelectorAll("[data-home-reveal]");
+
+    if (!("IntersectionObserver" in window)) {
+      sections.forEach((section) => section.classList.add("is-revealed"));
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries, currentObserver) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-revealed");
+            currentObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, [loading, error]);
 
   if (loading || error) {
     return (

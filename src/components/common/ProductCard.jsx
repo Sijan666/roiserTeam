@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaHeart, FaRegHeart, FaEye, FaShoppingBag } from "react-icons/fa";
 import { useCart } from "../../hooks/useCart";
 import { useWishlist } from "../../hooks/useWishlist";
-import { formatCurrency } from "../../utils/formatCurrency";
+import { useCurrency } from "../../hooks/useCurrency";
 import Rating from "./Rating";
 import Badge from "./Badge";
 
@@ -11,6 +11,7 @@ const ProductCard = ({ product, className = "" }) => {
   const navigate = useNavigate();
   const { addToCart } = useCart();
   const { isInWishlist, toggleWishlist } = useWishlist();
+  const { formatPrice: formatCurrency } = useCurrency();
 
   if (!product) return null;
 
@@ -47,7 +48,7 @@ const ProductCard = ({ product, className = "" }) => {
   return (
     <div
       onClick={handleCardClick}
-      className={`group relative flex h-full w-full min-w-0 flex-col justify-between overflow-hidden rounded-xl border border-neutral-200/80 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-neutral-300 hover:shadow-[0_12px_30px_-10px_rgba(0,0,0,0.1)] cursor-pointer ${className}`}
+      className={`group relative flex h-full w-full min-w-0 flex-col justify-between overflow-hidden rounded-xl border border-neutral-200/80 bg-white transition-all duration-300 hover:border-neutral-300 hover:shadow-[0_12px_30px_-10px_rgba(0,0,0,0.1)] cursor-pointer ${className}`}
     >
       {/* Top Image Container */}
       <div className="relative aspect-4/5 w-full overflow-hidden bg-[#F7F7F8]">
@@ -109,13 +110,13 @@ const ProductCard = ({ product, className = "" }) => {
           src={product.image}
           alt={product.title}
           loading="lazy"
-          className={`h-full w-full object-contain p-3 transition-transform duration-500 ease-out sm:p-4 ${
-            isOutOfStock ? "opacity-60 grayscale-30" : "group-hover:scale-105"
+          className={`h-full w-full object-contain p-3 sm:p-4 ${
+            isOutOfStock ? "opacity-60 grayscale-30" : ""
           }`}
         />
 
-        {/* Desktop Hover Slide-Up Quick Add Bar */}
-        <div className="absolute inset-x-3 bottom-3 z-10 hidden translate-y-3 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 md:block">
+        {/* Desktop Hover Quick Add Bar */}
+        <div className="absolute inset-x-3 bottom-3 z-10 hidden opacity-0 transition-opacity duration-300 group-hover:opacity-100 md:block">
           <button
             type="button"
             disabled={isOutOfStock}

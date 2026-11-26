@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet-async";
 import Container from "../components/common/Container";
 import Button from "../components/common/Button";
 import { useCart } from "../hooks/useCart";
-import { formatCurrency } from "../utils/formatCurrency";
+import { useCurrency } from "../hooks/useCurrency";
 import { FiTrash2, FiShoppingBag, FiArrowRight, FiCheck } from "react-icons/fi";
 
 const Cart = () => {
@@ -21,6 +21,7 @@ const Cart = () => {
     applyCoupon,
     removeCoupon,
   } = useCart();
+  const { formatPrice: formatCurrency } = useCurrency();
   const navigate = useNavigate();
 
   const [couponCode, setCouponCode] = useState("");

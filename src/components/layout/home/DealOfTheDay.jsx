@@ -40,7 +40,7 @@ const DealOfTheDay = ({ products }) => {
   ];
 
   return (
-    <section className="bg-[#FAFAFA] py-10 sm:py-12 md:py-20">
+    <section data-home-reveal className="bg-[#FAFAFA] py-10 sm:py-12 md:py-20">
       <Container>
         <div
           className="overflow-hidden rounded-lg border border-gray-200 bg-cover bg-center p-4 sm:p-8 md:p-12"

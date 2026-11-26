@@ -3,7 +3,7 @@ import { FaArrowRight } from "react-icons/fa";
 import Container from "../../common/Container";
 
 const CategoryShowcase = ({ categories }) => (
-  <section className="border-b border-gray-100 py-12 md:py-20">
+  <section data-home-reveal className="border-b border-gray-100 py-12 md:py-20">
     <Container>
       <div className="mb-8 flex flex-col items-center justify-between border-b border-gray-200 pb-6 sm:flex-row">
         <div>
@@ -32,7 +32,7 @@ const CategoryShowcase = ({ categories }) => (
               to={`/shop?category=${category.slug}`}
               className="group flex flex-col items-center rounded-md bg-[#F6F6F7] p-4 text-center transition-all duration-300 hover:bg-[#E53E3E]"
             >
-              <div className="mb-3 flex aspect-square w-full items-center justify-center overflow-hidden rounded-md bg-white p-1.5 transition-transform group-hover:scale-102">
+              <div className="mb-3 flex aspect-square w-full items-center justify-center overflow-hidden rounded-md bg-white p-1.5">
                 <img
                   src={category.image}
                   alt={category.name}

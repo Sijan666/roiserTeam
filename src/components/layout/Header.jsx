@@ -1,15 +1,59 @@
-import React, { useState } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import Container from "../common/Container";
-import logo from "../../assets/logo.png";
-import { FiPhone, FiSearch, FiMenu, FiX } from "react-icons/fi";
-import { FaRegHeart, FaHeart } from "react-icons/fa";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Transition } from "@headlessui/react";
 import { BiShoppingBag } from "react-icons/bi";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { FiMenu, FiPhone, FiSearch, FiX } from "react-icons/fi";
 import { IoIosArrowDown } from "react-icons/io";
+import Container from "../common/Container";
 import { useCart } from "../../hooks/useCart";
-import { useWishlist } from "../../hooks/useWishlist";
-import { formatCurrency } from "../../utils/formatCurrency";
 import { useCatalog } from "../../hooks/useCatalog";
+import { useCurrency } from "../../hooks/useCurrency";
+import { useWishlist } from "../../hooks/useWishlist";
+import logo from "../../assets/logo.png";
+
+const navLinks = [
+  { label: "HOME", path: "/" },
+  { label: "SHOP", path: "/shop" },
+  { label: "WOMEN", path: "/shop?category=women", category: "women" },
+  { label: "MEN", path: "/shop?category=men", category: "men" },
+  { label: "ACCESSORIES", path: "/shop?category=accessories", category: "accessories" },
+  { label: "ABOUT", path: "/about" },
+  { label: "CONTACT", path: "/contact" },
+];
+
+const isActiveLink = (link, pathname, category) =>
+  link.path === "/"
+    ? pathname === "/"
+    : link.category
+      ? pathname === "/shop" && category === link.category
+      : link.path === "/shop"
+        ? pathname === "/shop" && !category
+        : pathname === link.path;
+
+const NavigationLinks = ({ mobile = false, pathname, category, onNavigate }) => (
+  <ul className={mobile ? "space-y-1" : "flex items-center gap-1 lg:gap-2"}>
+    {navLinks.map((link) => {
+      const active = isActiveLink(link, pathname, category);
+      return (
+        <li key={link.label}>
+          <Link
+            to={link.path}
+            aria-current={active ? "page" : undefined}
+            onClick={mobile ? onNavigate : undefined}
+            className={
+              mobile
+                ? `block border-b border-gray-800/50 py-2.5 text-sm font-semibold transition-colors hover:text-[#E53E3E] ${active ? "text-[#E53E3E]" : "text-white"}`
+                : `flex items-center px-3 py-3.5 text-xs font-semibold tracking-wider transition-colors duration-200 lg:px-4 lg:text-sm ${active ? "bg-black/40 text-[#E53E3E]" : "text-white/90 hover:text-[#E53E3E]"}`
+            }
+          >
+            {link.label}
+          </Link>
+        </li>
+      );
+    })}
+  </ul>
+);
 
 const Header = () => {
   const navigate = useNavigate();
@@ -17,285 +61,234 @@ const Header = () => {
   const { cartCount, cartSubtotal, openCart } = useCart();
   const { wishlistCount } = useWishlist();
   const { categories } = useCatalog();
-
+  const { currency, setCurrency, currencies, formatPrice } = useCurrency();
+  const activeCategory = new URLSearchParams(location.search).get("category");
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedCategory, setSelectedCategory] = useState(activeCategory || "all");
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const selectedCategoryName =
+    categories.find((category) => category.slug === selectedCategory)?.name || "All";
 
-  const handleSearchSubmit = (e) => {
-    e.preventDefault();
+  useEffect(() => {
+    setSelectedCategory(activeCategory || "all");
+  }, [activeCategory]);
+
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
     const params = new URLSearchParams();
-    if (searchQuery.trim()) params.append("search", searchQuery.trim());
-    if (selectedCategory && selectedCategory !== "all") {
-      params.append("category", selectedCategory);
-    }
-    navigate(`/shop?${params.toString()}`);
+    if (searchQuery.trim()) params.set("search", searchQuery.trim());
+    if (selectedCategory !== "all") params.set("category", selectedCategory);
+    setIsMobileMenuOpen(false);
+    const query = params.toString();
+    navigate(`/shop${query ? `?${query}` : ""}`);
   };
 
-  const navLinks = [
-    { label: "HOME", path: "/" },
-    { label: "SHOP", path: "/shop" },
-    { label: "WOMEN", path: "/shop?category=women" },
-    { label: "MEN", path: "/shop?category=men" },
-    { label: "ACCESSORIES", path: "/shop?category=accessories" },
-    { label: "ABOUT", path: "/about" },
-    { label: "CONTACT", path: "/contact" },
-  ];
+  const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
   return (
-    <header className="w-full bg-white border-b border-gray-100">
-      {/* Main Bar */}
-      <Container className="py-3 sm:py-4 md:py-6">
+    <header className="relative w-full border-b border-gray-100 bg-white">
+      <Container className="py-3 sm:py-4 md:py-5">
         <div className="flex items-center justify-between gap-2 sm:gap-4">
-          {/* Logo */}
-          <Link to="/" className="shrink-0 flex items-center">
-            <img src={logo} alt="Roiser Logo" className="h-7 sm:h-8 md:h-10 object-contain" />
+          <Link to="/" className="flex shrink-0 items-center">
+            <img src={logo} alt="Roiser Logo" className="h-7 w-auto object-contain sm:h-8 md:h-10" />
           </Link>
 
-          {/* Search Bar (Tablet & Desktop) */}
           <form
             onSubmit={handleSearchSubmit}
-            className="hidden md:flex items-center flex-1 max-w-xl mx-4 border-2 border-[#E8E8E8] rounded-[4px] p-1.5 focus-within:border-[#E53E3E] transition-colors"
+            role="search"
+            className="mx-3 hidden min-w-0 max-w-xl flex-1 items-center rounded-[4px] border-2 border-[#E8E8E8] p-1.5 transition-colors focus-within:border-[#E53E3E] lg:flex"
           >
-            {/* Category Dropdown */}
-            <div className="relative shrink-0 border-r border-gray-200 pr-2 mr-2">
+            <div className="relative mr-2 shrink-0 border-r border-gray-200 pr-2">
               <button
                 type="button"
-                onClick={() => setIsCategoryOpen(!isCategoryOpen)}
-                className="flex items-center gap-1.5 text-xs font-semibold text-[#1A1A1A] px-2 py-1 outline-none cursor-pointer hover:text-[#E53E3E]"
+                onClick={() => setIsCategoryOpen((open) => !open)}
+                aria-expanded={isCategoryOpen}
+                aria-controls="header-category-menu"
+                className="flex items-center gap-1.5 px-2 py-1 text-xs font-semibold text-[#1A1A1A] transition-colors hover:text-[#E53E3E] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#E53E3E]"
               >
-                <span className="truncate max-w-[110px]">
-                  {categories.find((c) => c.slug === selectedCategory)?.name || "All"}
-                </span>
-                <IoIosArrowDown className="text-xs shrink-0" />
+                <span className="max-w-[110px] truncate">{selectedCategoryName}</span>
+                <IoIosArrowDown className="shrink-0 text-xs" aria-hidden="true" />
               </button>
-
               {isCategoryOpen && (
                 <>
-                  {/* Backdrop to auto-close on outside click */}
-                  <div
-                    className="fixed inset-0 z-40"
+                  <button
+                    type="button"
+                    aria-label="Close category menu"
                     onClick={() => setIsCategoryOpen(false)}
+                    className="fixed inset-0 z-40 cursor-default"
                   />
-                  <div className="absolute top-full left-0 mt-2 bg-white rounded-md shadow-2xl border border-gray-200 py-1.5 min-w-[210px] max-h-72 overflow-y-auto z-50">
-                    <div className="px-3 py-1.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider border-b border-gray-100 mb-1">
-                      Filter Category
+                  <div
+                    id="header-category-menu"
+                    className="absolute left-0 top-full z-50 mt-2 max-h-72 min-w-[210px] overflow-y-auto rounded-md border border-gray-200 bg-white py-1.5 shadow-2xl"
+                  >
+                    <div className="mb-1 border-b border-gray-100 px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-gray-400">
+                      Filter category
                     </div>
-                    {categories.map((cat) => (
+                    {categories.map((category) => (
                       <button
-                        key={cat.id}
+                        key={category.id}
                         type="button"
                         onClick={() => {
-                          setSelectedCategory(cat.slug);
+                          setSelectedCategory(category.slug);
                           setIsCategoryOpen(false);
                         }}
-                        className={`w-full text-left px-3 py-2 text-xs transition-colors flex items-center justify-between cursor-pointer ${
-                          selectedCategory === cat.slug
-                            ? "bg-red-50 text-[#E53E3E] font-bold"
-                            : "text-gray-700 hover:bg-gray-50"
-                        }`}
+                        className={`flex w-full items-center justify-between gap-3 px-3 py-2 text-left text-xs transition-colors ${selectedCategory === category.slug ? "bg-red-50 font-bold text-[#E53E3E]" : "text-gray-700 hover:bg-gray-50"}`}
                       >
-                        <span>{cat.name}</span>
-                        <span className="text-[10px] text-gray-400 font-normal">
-                          ({cat.count})
-                        </span>
+                        <span>{category.name}</span>
+                        <span className="text-[10px] font-normal text-gray-400">({category.count})</span>
                       </button>
                     ))}
                   </div>
                 </>
               )}
             </div>
-
-            {/* Keyword Input */}
+            <label htmlFor="desktop-product-search" className="sr-only">Search products</label>
             <input
-              type="text"
+              id="desktop-product-search"
+              type="search"
               placeholder="Search products, brands, categories..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="flex-1 text-sm outline-none px-2 text-[#1A1A1A] placeholder:text-gray-400 bg-transparent"
+              onChange={(event) => setSearchQuery(event.target.value)}
+              className="min-w-0 flex-1 bg-transparent px-2 text-sm text-[#1A1A1A] outline-none placeholder:text-gray-400"
             />
-
-            {/* Submit Button */}
             <button
               type="submit"
-              className="bg-[#E53E3E] hover:bg-[#c93232] text-white px-4 py-2 rounded-[3px] text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5 cursor-pointer transition-colors shrink-0"
+              className="flex shrink-0 items-center gap-1.5 rounded-[3px] bg-[#E53E3E] px-4 py-2 text-xs font-semibold uppercase tracking-wider text-white transition-colors hover:bg-[#C93232] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E53E3E]"
             >
-              <FiSearch className="text-sm" />
-              <span>Search</span>
+              <FiSearch className="text-sm" aria-hidden="true" /> <span>Search</span>
             </button>
           </form>
 
-          {/* Right Action Icons & Phone */}
-          <div className="flex items-center gap-1.5 sm:gap-6">
-            {/* Phone (Desktop) */}
-            <div className="hidden xl:flex items-center gap-3 border-r border-gray-200 pr-6">
-              <div className="w-10 h-10 rounded-full bg-[#F5F6F2] flex items-center justify-center text-[#1A1A1A]">
-                <FiPhone className="text-base" />
-              </div>
-              <div>
-                <p className="text-[11px] text-[#74787C] uppercase tracking-wide">
-                  Call Us 24/7
-                </p>
-                <p className="text-sm font-semibold text-[#1A1A1A]">
-                  +(258) 2159-2159
-                </p>
-              </div>
-            </div>
-
-            {/* Wishlist Icon */}
+          <div className="flex shrink-0 items-center gap-1 sm:gap-2 lg:gap-3">
+            <a
+              href="tel:+25821592159"
+              className="hidden items-center gap-3 border-r border-gray-200 pr-5 text-[#1A1A1A] transition-colors hover:text-[#E53E3E] 2xl:flex"
+            >
+              <span className="flex size-10 items-center justify-center rounded-full bg-[#F5F6F2]">
+                <FiPhone className="text-base" aria-hidden="true" />
+              </span>
+              <span>
+                <span className="block text-[11px] uppercase tracking-wide text-[#74787C]">Call us 24/7</span>
+                <span className="block text-sm font-semibold">+(258) 2159-2159</span>
+              </span>
+            </a>
             <Link
               to="/wishlist"
-              className="relative p-1.5 sm:p-2 text-gray-700 hover:text-[#E53E3E] transition-colors"
-              title="View Wishlist"
+              aria-label={`View wishlist${wishlistCount ? `, ${wishlistCount} items` : ""}`}
+              title="View wishlist"
+              className="relative grid size-9 place-items-center text-gray-700 transition-colors hover:text-[#E53E3E] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#E53E3E] sm:size-10"
             >
-              <FaRegHeart className="text-lg sm:text-2xl" />
-              {wishlistCount > 0 && (
-                <span className="absolute top-0 right-0 w-4 h-4 bg-[#E53E3E] text-white rounded-full text-[10px] font-bold flex items-center justify-center">
-                  {wishlistCount}
-                </span>
-              )}
+              {wishlistCount > 0 ? <FaHeart className="text-lg text-[#E53E3E] sm:text-xl" aria-hidden="true" /> : <FaRegHeart className="text-lg sm:text-xl" aria-hidden="true" />}
+              {wishlistCount > 0 && <span className="absolute right-0 top-0 flex size-4 items-center justify-center rounded-full bg-[#E53E3E] text-[9px] font-bold text-white">{wishlistCount > 99 ? "99+" : wishlistCount}</span>}
             </Link>
-
-            {/* Cart Button */}
-            <div
-              onClick={openCart}
-              className="flex items-center gap-1.5 sm:gap-3 cursor-pointer group"
-              title="Open Shopping Cart"
-            >
-              <div className="relative p-1.5 sm:p-2 text-gray-700 group-hover:text-[#E53E3E] transition-colors">
-                <BiShoppingBag className="text-xl sm:text-3xl" />
-                {cartCount > 0 && (
-                  <span className="absolute top-0 right-0 w-4.5 h-4.5 bg-[#E53E3E] text-white rounded-full text-[10px] font-bold flex items-center justify-center shadow-xs">
-                    {cartCount}
-                  </span>
-                )}
-              </div>
-
-              <div className="hidden sm:block text-left">
-                <p className="text-[11px] text-[#74787C] leading-none mb-1">
-                  Your cart
-                </p>
-                <p className="text-sm font-semibold text-[#1A1A1A] leading-none">
-                  {formatCurrency(cartSubtotal)}
-                </p>
-              </div>
-            </div>
-
-            {/* Mobile Hamburger Toggle */}
             <button
               type="button"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-1.5 sm:p-2 text-gray-700 hover:text-[#E53E3E] transition-colors cursor-pointer"
-              aria-label="Toggle Menu"
+              onClick={openCart}
+              aria-label={`Open shopping cart${cartCount ? `, ${cartCount} items` : ""}`}
+              title="Open shopping cart"
+              className="group flex items-center gap-1.5 text-left text-gray-700 transition-colors hover:text-[#E53E3E]"
             >
-              {isMobileMenuOpen ? (
-                <FiX className="text-xl sm:text-2xl" />
-              ) : (
-                <FiMenu className="text-xl sm:text-2xl" />
-              )}
+              <span className="relative grid size-9 place-items-center sm:size-10">
+                <BiShoppingBag className="text-xl sm:text-2xl" aria-hidden="true" />
+                {cartCount > 0 && <span className="absolute right-0 top-0 flex size-4 items-center justify-center rounded-full bg-[#E53E3E] text-[9px] font-bold text-white">{cartCount > 99 ? "99+" : cartCount}</span>}
+              </span>
+              <span className="hidden text-left lg:block">
+                <span className="mb-1 block text-[11px] leading-none text-[#74787C]">Your cart</span>
+                <span className="block text-sm font-semibold leading-none text-[#1A1A1A]">{formatPrice(cartSubtotal)}</span>
+              </span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setIsMobileMenuOpen((open) => !open)}
+              className="grid size-9 place-items-center text-gray-700 transition-colors hover:text-[#E53E3E] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#E53E3E] lg:hidden sm:size-10"
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-navigation"
+            >
+              {isMobileMenuOpen ? <FiX className="text-xl sm:text-2xl" aria-hidden="true" /> : <FiMenu className="text-xl sm:text-2xl" aria-hidden="true" />}
             </button>
           </div>
         </div>
 
-        {/* Mobile Search Input (Visible only on mobile screens < 768px) */}
         <form
           onSubmit={handleSearchSubmit}
-          className="mt-2.5 flex md:hidden items-center border border-gray-200 rounded-[4px] p-1 focus-within:border-[#E53E3E]"
+          role="search"
+          className="mt-2.5 flex items-center rounded-[4px] border border-gray-200 p-1 transition-colors focus-within:border-[#E53E3E] lg:hidden"
         >
+          <label htmlFor="mobile-product-search" className="sr-only">Search products</label>
           <input
-            type="text"
+            id="mobile-product-search"
+            type="search"
             placeholder="Search products..."
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="flex-1 text-xs outline-none px-2 py-1 text-[#1A1A1A] bg-transparent min-w-0"
+            onChange={(event) => setSearchQuery(event.target.value)}
+            className="min-w-0 flex-1 bg-transparent px-2 py-1 text-xs text-[#1A1A1A] outline-none"
           />
           <button
             type="submit"
-            className="bg-[#E53E3E] text-white px-2.5 py-1.5 rounded-[3px] text-xs font-semibold shrink-0 cursor-pointer"
+            aria-label="Search"
+            className="flex size-8 shrink-0 items-center justify-center rounded-[3px] bg-[#E53E3E] text-white transition-colors hover:bg-[#C93232] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E53E3E]"
           >
-            <FiSearch />
+            <FiSearch aria-hidden="true" />
           </button>
         </form>
       </Container>
 
-      {/* Desktop Main Navigation Bar */}
-      <div className="hidden md:block bg-[#1A1A1A] text-white">
+      <nav className="hidden bg-[#1A1A1A] text-white lg:block" aria-label="Main navigation">
         <Container>
           <div className="flex items-center justify-between">
-            <nav className="flex items-center gap-1 lg:gap-2">
-              {navLinks.map((link) => {
-                const isActive =
-                  location.pathname + location.search === link.path ||
-                  (link.path === "/shop" && location.pathname === "/shop" && !location.search);
-
-                return (
-                  <Link
-                    key={link.label}
-                    to={link.path}
-                    className={`py-3.5 px-3 lg:px-4 text-xs lg:text-sm font-semibold tracking-wider transition-colors duration-200 flex items-center ${
-                      isActive
-                        ? "text-[#E53E3E] bg-black/40"
-                        : "text-white/90 hover:text-[#E53E3E]"
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                );
-              })}
-            </nav>
-
-            {/* Promo Flash */}
-            <div className="flex items-center gap-2 bg-[#E53E3E] py-2 px-4 rounded-sm text-xs font-bold uppercase tracking-wider text-white">
-              <span>Get 30% Off Today</span>
-              <span className="bg-white text-[#E53E3E] text-[10px] px-1.5 py-0.5 rounded-full">
-                SALE
-              </span>
-            </div>
+            <NavigationLinks pathname={location.pathname} category={activeCategory} />
+            <Link
+              to="/shop"
+              className="flex items-center gap-2 rounded-sm bg-[#E53E3E] px-4 py-2 text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-[#C93232] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            >
+              <span>Get 30% off today</span>
+              <span className="rounded-full bg-white px-1.5 py-0.5 text-[10px] text-[#E53E3E]">SALE</span>
+            </Link>
           </div>
         </Container>
-      </div>
+      </nav>
 
-      {/* Mobile Menu Dropdown */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden bg-[#1A1A1A] text-white border-t border-gray-800">
-          <Container className="py-4 space-y-2">
-            {navLinks.map((link) => (
-              <Link
-                key={link.label}
-                to={link.path}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="block py-2 text-sm font-semibold hover:text-[#E53E3E] transition-colors border-b border-gray-800/50"
-              >
-                {link.label}
-              </Link>
-            ))}
-            <div className="pt-2 flex justify-between text-xs text-gray-400">
-              <Link
-                to="/about"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="hover:text-white"
-              >
-                About Store
-              </Link>
-              <Link
-                to="/faq"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="hover:text-white"
-              >
-                Help & FAQ
-              </Link>
-              <Link
-                to="/contact"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="hover:text-white"
-              >
-                Contact Us
-              </Link>
+      <Transition
+        show={isMobileMenuOpen}
+        enter="transition duration-200 ease-out motion-reduce:transition-none"
+        enterFrom="-translate-y-2 opacity-0"
+        enterTo="translate-y-0 opacity-100"
+        leave="transition duration-150 ease-in motion-reduce:transition-none"
+        leaveFrom="translate-y-0 opacity-100"
+        leaveTo="-translate-y-2 opacity-0"
+      >
+        <div id="mobile-navigation" className="absolute inset-x-0 top-full z-30 border-t border-gray-800 bg-[#1A1A1A] text-white shadow-xl lg:hidden">
+          <Container className="py-4">
+            <nav aria-label="Mobile navigation">
+              <NavigationLinks mobile pathname={location.pathname} category={activeCategory} onNavigate={closeMobileMenu} />
+            </nav>
+            <div className="mt-4 flex items-center justify-between gap-4 border-t border-gray-800 pt-4">
+              <label htmlFor="mobile-currency" className="text-xs text-gray-300">Currency</label>
+              <div className="relative w-44 max-w-[65%]">
+                <select
+                  id="mobile-currency"
+                  value={currency}
+                  onChange={(event) => {
+                    setCurrency(event.target.value);
+                    closeMobileMenu();
+                  }}
+                  className="w-full appearance-none rounded-md border border-gray-700 bg-[#242424] py-2 pl-3 pr-8 text-xs text-white outline-none transition-colors focus:border-[#E53E3E]"
+                >
+                  {currencies.map((curr) => <option key={curr.code} value={curr.code}>{curr.code} — {curr.name}</option>)}
+                </select>
+                <IoIosArrowDown aria-hidden="true" className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-xs text-gray-300" />
+              </div>
+            </div>
+            <div className="mt-4 flex justify-between gap-3 text-xs text-gray-400">
+              <Link to="/about" onClick={closeMobileMenu} className="transition-colors hover:text-white">About Store</Link>
+              <Link to="/faq" onClick={closeMobileMenu} className="transition-colors hover:text-white">Help &amp; FAQ</Link>
+              <Link to="/contact" onClick={closeMobileMenu} className="transition-colors hover:text-white">Contact Us</Link>
             </div>
           </Container>
         </div>
-      )}
+      </Transition>
     </header>
   );
 };

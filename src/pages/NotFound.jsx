@@ -13,7 +13,7 @@ const NotFound = () => {
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
 
-      <Container className="py-16 md:py-24 text-center">
+      <Container className="site-page-enter py-16 text-center md:py-24">
         <div className="max-w-md mx-auto mb-8">
           <img
             src={errorImg}

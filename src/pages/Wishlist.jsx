@@ -5,7 +5,7 @@ import Container from "../components/common/Container";
 import Button from "../components/common/Button";
 import { useWishlist } from "../hooks/useWishlist";
 import { useCart } from "../hooks/useCart";
-import { formatCurrency } from "../utils/formatCurrency";
+import { useCurrency } from "../hooks/useCurrency";
 import { FaHeart, FaTrashAlt, FaShoppingBag } from "react-icons/fa";
 
 const WishlistImage = ({ src, alt, className }) => (
@@ -20,6 +20,7 @@ const WishlistImage = ({ src, alt, className }) => (
 const Wishlist = () => {
   const { wishlist, removeFromWishlist, clearWishlist, wishlistCount } = useWishlist();
   const { addToCart } = useCart();
+  const { formatPrice: formatCurrency } = useCurrency();
 
   const handleMoveToCart = (product) => {
     addToCart(product, 1);
@@ -72,7 +73,7 @@ const Wishlist = () => {
 
       <Container className="py-10 md:py-16">
         {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           {wishlist.filter(Boolean).map((item, idx) => {
             const key = item.id || item.slug || `wishlist-${idx}`;
             const productSlug = item.slug || item.id || "";
@@ -90,7 +91,7 @@ const Wishlist = () => {
                   <WishlistImage
                     src={itemImage}
                     alt={item.title || "Product"}
-                    className="w-full h-full object-contain p-4 hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-contain p-4"
                   />
                 </Link>
 

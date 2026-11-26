@@ -1,10 +1,12 @@
 import React, { useState, useMemo } from "react";
 import { useSearchParams, Link } from "react-router-dom";
+import { useLenis } from "lenis/react";
+import { scrollToTop } from "../utils/scrollToTop";
 import Container from "../components/common/Container";
 import CatalogStatus from "../components/common/CatalogStatus";
 import ProductCard from "../components/common/ProductCard";
 import Button from "../components/common/Button";
-import { formatCurrency } from "../utils/formatCurrency";
+import { useCurrency } from "../hooks/useCurrency";
 import { matchesCategoryFilter, resolveCategoryMeta } from "../utils/categories";
 import { useCatalog } from "../hooks/useCatalog";
 
@@ -18,6 +20,8 @@ const Shop = () => {
   const { products, categories, loading, error, retry } = useCatalog();
   const { addToCart } = useCart();
   const { isInWishlist, toggleWishlist } = useWishlist();
+  const { formatPrice: formatCurrency } = useCurrency();
+  const lenis = useLenis();
   const [searchParams, setSearchParams] = useSearchParams();
 
   // URL state as single source of truth
@@ -468,7 +472,7 @@ const Shop = () => {
                 </Button>
               </div>
             ) : viewMode === "grid" ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {paginatedProducts.map((product) => (
                   <ProductCard key={product.id} product={product} />
                 ))}
@@ -492,7 +496,7 @@ const Shop = () => {
                         <img
                           src={product.image}
                           alt={product.title}
-                          className="w-full h-full object-contain hover:scale-105 transition-transform"
+                          className="w-full h-full object-contain"
                         />
                       </Link>
                       <div className="flex-1 min-w-0 text-center sm:text-left">
@@ -564,7 +568,7 @@ const Shop = () => {
                   disabled={currentPage === 1}
                   onClick={() => {
                     setCurrentPage((p) => Math.max(1, p - 1));
-                    window.scrollTo({ top: 0, behavior: "smooth" });
+                    scrollToTop(lenis);
                   }}
                   className="px-2.5 sm:px-3 py-1.5 sm:py-2 border border-gray-200 rounded text-xs font-semibold text-gray-600 hover:bg-gray-50 disabled:opacity-40 cursor-pointer"
                 >
@@ -585,7 +589,7 @@ const Shop = () => {
                       type="button"
                       onClick={() => {
                         setCurrentPage(page);
-                        window.scrollTo({ top: 0, behavior: "smooth" });
+                        scrollToTop(lenis);
                       }}
                       className={`w-7 h-7 sm:w-9 sm:h-9 rounded text-xs font-semibold transition-colors cursor-pointer ${
                         currentPage === page
@@ -603,7 +607,7 @@ const Shop = () => {
                   disabled={currentPage === totalPages}
                   onClick={() => {
                     setCurrentPage((p) => Math.min(totalPages, p + 1));
-                    window.scrollTo({ top: 0, behavior: "smooth" });
+                    scrollToTop(lenis);
                   }}
                   className="px-2.5 sm:px-3 py-1.5 sm:py-2 border border-gray-200 rounded text-xs font-semibold text-gray-600 hover:bg-gray-50 disabled:opacity-40 cursor-pointer"
                 >

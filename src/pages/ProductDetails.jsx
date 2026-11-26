@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
+import { useLenis } from "lenis/react";
+import { scrollToTop } from "../utils/scrollToTop";
 import Container from "../components/common/Container";
 import CatalogStatus from "../components/common/CatalogStatus";
 import Button from "../components/common/Button";
@@ -9,7 +11,7 @@ import ProductSeo from "../components/layout/ProductSeo";
 import { useCart } from "../hooks/useCart";
 import { useWishlist } from "../hooks/useWishlist";
 import { useCatalog } from "../hooks/useCatalog";
-import { formatCurrency } from "../utils/formatCurrency";
+import { useCurrency } from "../hooks/useCurrency";
 
 import { FaHeart, FaRegHeart, FaShippingFast, FaUndoAlt, FaShieldAlt } from "react-icons/fa";
 import { HiOutlineShoppingBag } from "react-icons/hi";
@@ -21,6 +23,9 @@ const ProductDetails = () => {
   const { products, loading, error, retry } = useCatalog();
   const { addToCart } = useCart();
   const { isInWishlist, toggleWishlist } = useWishlist();
+  const { formatPrice: formatCurrency } = useCurrency();
+  const lenis = useLenis();
+  const previousSlug = useRef(slug);
 
   const product = products.find((p) => p.slug === slug);
 
@@ -32,13 +37,16 @@ const ProductDetails = () => {
 
   // Reset component state when navigating between products
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (previousSlug.current === slug) return;
+
+    previousSlug.current = slug;
+    scrollToTop(lenis);
     setUserSelectedImage(null);
     setUserSelectedSize(null);
     setUserSelectedColor(null);
     setQuantity(1);
     setActiveTab("description");
-  }, [slug]);
+  }, [lenis, slug]);
 
   const activeImage = userSelectedImage || product?.image;
   const selectedSize =
@@ -162,7 +170,7 @@ const ProductDetails = () => {
                   e.currentTarget.src =
                     "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&auto=format&fit=crop&q=80";
                 }}
-                className={`w-full h-full transition-transform duration-500 hover:scale-105 ${
+                className={`w-full h-full ${
                   (activeImage || product.image)?.includes("dummyjson")
                     ? "object-contain p-6"
                     : "object-cover"
@@ -482,7 +490,7 @@ const ProductDetails = () => {
             <h3 className="text-2xl font-bold text-[#1A1A1A] mb-8 font-Jost uppercase">
               You May Also Like
             </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
               {relatedProducts.map((p) => (
                 <ProductCard key={p.id} product={p} />
               ))}

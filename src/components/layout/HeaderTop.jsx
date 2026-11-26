@@ -46,46 +46,52 @@ const HeaderTop = () => {
                       Signed in as <br />
                       <strong className="text-[#1A1A1A]">{user.email}</strong>
                     </div>
-                    <Link
+                    <PopoverButton
+                      as={Link}
                       to="/account"
                       className="px-3 py-2 hover:bg-gray-50 rounded transition-colors text-[#1A1A1A] font-semibold"
                     >
                       My Dashboard & Orders
-                    </Link>
-                    <Link
+                    </PopoverButton>
+                    <PopoverButton
+                      as={Link}
                       to="/wishlist"
                       className="px-3 py-2 hover:bg-gray-50 rounded transition-colors"
                     >
                       My Wishlist ({wishlistCount})
-                    </Link>
-                    <Link
+                    </PopoverButton>
+                    <PopoverButton
+                      as={Link}
                       to="/checkout"
                       className="px-3 py-2 hover:bg-gray-50 rounded transition-colors"
                     >
                       Checkout
-                    </Link>
-                    <button
+                    </PopoverButton>
+                    <PopoverButton
+                      as="button"
                       type="button"
                       onClick={handleLogout}
                       className="text-left px-3 py-2 text-[#E53E3E] hover:bg-red-50 rounded transition-colors"
                     >
                       Sign Out
-                    </button>
+                    </PopoverButton>
                   </>
                 ) : (
                   <>
-                    <Link
+                    <PopoverButton
+                      as={Link}
                       to="/login"
                       className="px-3 py-2 hover:bg-gray-50 rounded transition-colors"
                     >
                       Sign In
-                    </Link>
-                    <Link
+                    </PopoverButton>
+                    <PopoverButton
+                      as={Link}
                       to="/signup"
                       className="px-3 py-2 hover:bg-gray-50 rounded transition-colors"
                     >
                       Create Account
-                    </Link>
+                    </PopoverButton>
                   </>
                 )}
               </PopoverPanel>
@@ -138,7 +144,7 @@ const HeaderTop = () => {
                 className="flex flex-col bg-white text-[#1A1A1A] p-2 rounded-md shadow-xl text-xs z-50 min-w-[130px] border border-gray-100 mt-2 font-medium"
               >
                 {currencies.map((curr) => (
-                  <button
+                  <PopoverButton
                     key={curr.code}
                     type="button"
                     onClick={() => setCurrency(curr.code)}
@@ -150,7 +156,7 @@ const HeaderTop = () => {
                   >
                     <span>{curr.name}</span>
                     <span className="text-[11px] text-gray-400 font-normal">{curr.rate}x</span>
-                  </button>
+                  </PopoverButton>
                 ))}
               </PopoverPanel>
             </Popover>

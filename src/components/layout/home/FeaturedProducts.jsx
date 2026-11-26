@@ -6,7 +6,7 @@ const FeaturedProducts = ({ products }) => {
   const featuredProducts = products.filter((product) => product.isFeatured).slice(0, 8);
 
   return (
-    <section className="bg-[#FAFAFA] py-10 sm:py-12 md:py-20">
+    <section data-home-reveal className="bg-[#FAFAFA] py-10 sm:py-12 md:py-20">
       <Container>
         <div className="mb-6 flex flex-col items-start justify-between border-b border-gray-200 pb-5 sm:mb-8 sm:flex-row sm:items-center sm:pb-6">
           <div>

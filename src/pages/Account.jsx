@@ -5,11 +5,12 @@ import Container from "../components/common/Container";
 import Button from "../components/common/Button";
 import { useAuth } from "../hooks/useAuth";
 import { storage } from "../utils/storage";
-import { formatCurrency } from "../utils/formatCurrency";
+import { useCurrency } from "../hooks/useCurrency";
 import { FiUser, FiPackage, FiShoppingBag, FiArrowRight } from "react-icons/fi";
 
 const Account = () => {
   const { user, logout } = useAuth();
+  const { formatPrice: formatCurrency } = useCurrency();
 
   const userOrders = useMemo(() => {
     const allOrders = storage.get("roiser_orders", []);

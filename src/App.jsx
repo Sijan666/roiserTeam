@@ -1,11 +1,13 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useEffect, useState } from "react";
 import "./index.css";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import RootLayout from "./components/layout/RootLayout";
 import Loader from "./components/Loader";
 import ReactLenis from "lenis/react";
 import ScrollToTop from "./components/ScrollToTop";
+import BackToTop from "./components/BackToTop";
 import { useAuth } from "./hooks/useAuth";
+import { MOBILE_SCROLL_QUERY } from "./utils/scrollToTop";
 
 // Code-split pages for production performance
 const Home = lazy(() => import("./pages/Home"));
@@ -41,17 +43,33 @@ const ProtectedRoute = ({ children }) => {
 };
 
 function App() {
+  const [isMobileViewport, setIsMobileViewport] = useState(() =>
+    window.matchMedia(MOBILE_SCROLL_QUERY).matches,
+  );
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(MOBILE_SCROLL_QUERY);
+    const handleViewportChange = (event) => {
+      setIsMobileViewport(event.matches);
+    };
+
+    mediaQuery.addEventListener("change", handleViewportChange);
+    return () => mediaQuery.removeEventListener("change", handleViewportChange);
+  }, []);
+
   return (
     <ReactLenis
       root
+      autoRaf={!isMobileViewport}
       options={{
-        lerp: 0.08,
-        duration: 1.2,
-        smoothWheel: true,
+        lerp: 0.1,
+        smoothWheel: !isMobileViewport,
+        syncTouch: false,
         wheelMultiplier: 0.9,
       }}
     >
       <ScrollToTop />
+      <BackToTop />
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" element={<RootLayout />}>

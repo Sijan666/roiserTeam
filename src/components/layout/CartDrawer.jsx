@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IoClose } from "react-icons/io5";
 import { FiTrash2, FiShoppingBag, FiArrowRight } from "react-icons/fi";
 import { useCart } from "../../hooks/useCart";
-import { formatCurrency } from "../../utils/formatCurrency";
+import { useCurrency } from "../../hooks/useCurrency";
 import Button from "../common/Button";
 
 const CartDrawer = () => {
   const { cart, isCartOpen, closeCart, removeFromCart, updateQuantity, cartSubtotal, cartCount } =
     useCart();
+  const { formatPrice: formatCurrency } = useCurrency();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isCartOpen) return undefined;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isCartOpen]);
 
   if (!isCartOpen) return null;
 
@@ -31,26 +42,33 @@ const CartDrawer = () => {
         className="absolute inset-0 bg-black/50 backdrop-blur-xs transition-opacity duration-300"
       />
 
-      <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
-        <div className="w-screen max-w-md bg-white shadow-2xl flex flex-col justify-between">
+      <div className="fixed inset-y-0 right-0 flex w-full max-w-md">
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Shopping cart"
+          className="flex h-full min-h-0 w-full flex-col bg-white shadow-2xl"
+        >
           {/* Header */}
-          <div className="p-5 border-b border-gray-100 flex items-center justify-between">
-            <div className="flex items-center gap-2">
+          <div className="flex shrink-0 items-center justify-between border-b border-gray-100 px-4 pb-4 pt-[calc(1rem+env(safe-area-inset-top))] sm:p-5">
+            <div className="flex min-w-0 items-center gap-2">
               <FiShoppingBag className="text-[#E53E3E] text-xl" />
-              <h3 className="font-semibold text-lg text-[#1A1A1A] font-Jost">
+              <h3 className="truncate font-Jost text-base font-semibold text-[#1A1A1A] sm:text-lg">
                 Shopping Cart ({cartCount})
               </h3>
             </div>
             <button
+              type="button"
+              aria-label="Close shopping cart"
               onClick={closeCart}
-              className="p-2 text-gray-400 hover:text-[#1A1A1A] transition-colors rounded-full hover:bg-gray-100"
+              className="ml-2 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full p-2 text-gray-400 transition-colors hover:bg-gray-100 hover:text-[#1A1A1A]"
             >
               <IoClose className="text-2xl" />
             </button>
           </div>
 
           {/* Cart Items List */}
-          <div className="flex-1 overflow-y-auto p-5 divide-y divide-gray-100">
+          <div className="min-h-0 flex-1 divide-y divide-gray-100 overflow-y-auto overscroll-contain p-4 sm:p-5">
             {cart.length === 0 ? (
               <div className="h-full flex flex-col items-center justify-center text-center py-12">
                 <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mb-4">
@@ -76,13 +94,13 @@ const CartDrawer = () => {
               cart.map((item) => (
                 <div
                   key={`${item.id}-${item.selectedSize}-${item.selectedColor}`}
-                  className="py-4 flex gap-4 items-start"
+                  className="flex items-start gap-3 py-4 sm:gap-4"
                 >
                   {/* Thumbnail */}
                   <Link
                     to={`/product/${item.slug}`}
                     onClick={closeCart}
-                    className="w-20 h-20 bg-[#F6F6F7] rounded-md shrink-0 p-2 flex items-center justify-center overflow-hidden"
+                    className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-md bg-[#F6F6F7] p-2 sm:h-20 sm:w-20"
                   >
                     <img
                       src={item.image}
@@ -92,7 +110,7 @@ const CartDrawer = () => {
                   </Link>
 
                   {/* Info */}
-                  <div className="flex-1 min-w-0">
+                  <div className="min-w-0 flex-1">
                     <Link
                       to={`/product/${item.slug}`}
                       onClick={closeCart}
@@ -100,15 +118,15 @@ const CartDrawer = () => {
                     >
                       {item.title}
                     </Link>
-                    <div className="flex items-center gap-2 text-xs text-[#74787C] mt-1 mb-2">
-                      <span>Size: {item.selectedSize}</span>
-                      <span>•</span>
-                      <span>Color: {item.selectedColor}</span>
+                    <div className="mb-2 mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-[#74787C] sm:text-xs">
+                      <span className="break-words">Size: {item.selectedSize}</span>
+                      <span aria-hidden="true">•</span>
+                      <span className="break-words">Color: {item.selectedColor}</span>
                     </div>
 
-                    <div className="flex items-center justify-between">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
                       {/* Quantity Stepper */}
-                      <div className="flex items-center border border-gray-200 rounded-sm">
+                      <div className="flex shrink-0 items-center rounded-sm border border-gray-200">
                         <button
                           type="button"
                           onClick={() =>
@@ -119,11 +137,11 @@ const CartDrawer = () => {
                               item.selectedColor
                             )
                           }
-                          className="px-2.5 py-0.5 text-xs font-semibold text-gray-600 hover:bg-gray-100 transition-colors"
+                          className="inline-flex h-8 w-8 items-center justify-center text-xs font-semibold text-gray-600 transition-colors hover:bg-gray-100 sm:h-9 sm:w-9"
                         >
                           -
                         </button>
-                        <span className="px-2.5 text-xs font-semibold text-[#1A1A1A]">
+                        <span className="min-w-8 px-1 text-center text-xs font-semibold text-[#1A1A1A]">
                           {item.quantity}
                         </span>
                         <button
@@ -136,14 +154,14 @@ const CartDrawer = () => {
                               item.selectedColor
                             )
                           }
-                          className="px-2.5 py-0.5 text-xs font-semibold text-gray-600 hover:bg-gray-100 transition-colors"
+                          className="inline-flex h-8 w-8 items-center justify-center text-xs font-semibold text-gray-600 transition-colors hover:bg-gray-100 sm:h-9 sm:w-9"
                         >
                           +
                         </button>
                       </div>
 
                       {/* Price */}
-                      <span className="font-semibold text-sm text-[#1A1A1A]">
+                      <span className="whitespace-nowrap text-sm font-semibold text-[#1A1A1A]">
                         {formatCurrency(item.price * item.quantity)}
                       </span>
                     </div>
@@ -152,6 +170,7 @@ const CartDrawer = () => {
                   {/* Remove Button */}
                   <button
                     type="button"
+                    aria-label={`Remove ${item.title} from cart`}
                     title="Remove item"
                     onClick={() =>
                       removeFromCart(
@@ -160,7 +179,7 @@ const CartDrawer = () => {
                         item.selectedColor
                       )
                     }
-                    className="text-gray-400 hover:text-[#E53E3E] transition-colors p-1"
+                    className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full p-1 text-gray-400 transition-colors hover:text-[#E53E3E]"
                   >
                     <FiTrash2 className="text-base" />
                   </button>
@@ -171,7 +190,7 @@ const CartDrawer = () => {
 
           {/* Footer & Checkout */}
           {cart.length > 0 && (
-            <div className="p-5 border-t border-gray-100 bg-[#FBFBFA] space-y-4">
+            <div className="shrink-0 space-y-3 border-t border-gray-100 bg-[#FBFBFA] px-4 pb-[calc(1rem+env(safe-area-inset-bottom))] pt-4 sm:space-y-4 sm:p-5">
               <div className="space-y-1.5">
                 <div className="flex justify-between items-center text-sm text-[#74787C]">
                   <span>Subtotal</span>
@@ -184,18 +203,18 @@ const CartDrawer = () => {
                 </p>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 gap-2 min-[380px]:grid-cols-2 sm:gap-3">
                 <Button
                   onClick={handleViewCartClick}
                   variant="outlineDark"
-                  className="w-full text-xs sm:text-sm py-3"
+                  className="min-h-11 w-full px-3 py-2 text-xs sm:text-sm"
                 >
                   View Cart
                 </Button>
                 <Button
                   onClick={handleCheckoutClick}
                   variant="primary"
-                  className="w-full text-xs sm:text-sm py-3 flex items-center justify-center gap-1"
+                  className="flex min-h-11 w-full items-center justify-center gap-1 px-3 py-2 text-xs sm:text-sm"
                 >
                   Checkout <FiArrowRight />
                 </Button>

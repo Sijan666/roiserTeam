@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Container from "../components/common/Container";
 import Button from "../components/common/Button";
-import { formatCurrency } from "../utils/formatCurrency";
+import { useCurrency } from "../hooks/useCurrency";
 import { storage } from "../utils/storage";
 import { useAuth } from "../hooks/useAuth";
 import { FiCheckCircle, FiPrinter, FiAlertCircle } from "react-icons/fi";
@@ -11,6 +11,7 @@ import { FiCheckCircle, FiPrinter, FiAlertCircle } from "react-icons/fi";
 const OrderSuccess = () => {
   const { orderId } = useParams();
   const { user } = useAuth();
+  const { formatPrice: formatCurrency } = useCurrency();
 
   // Retrieve matching order from localStorage and verify ownership
   const order = useMemo(() => {

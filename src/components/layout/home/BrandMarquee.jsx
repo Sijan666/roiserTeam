@@ -10,7 +10,10 @@ const BrandMarquee = ({ products }) => {
   ];
 
   return (
-    <section className="relative overflow-hidden border-y border-[#EEE8E2] bg-[#F8F5F1] py-14 md:py-20">
+    <section
+      data-home-reveal
+      className="relative overflow-hidden border-y border-[#EEE8E2] bg-[#F8F5F1] py-14 md:py-20"
+    >
       <Container>
         <div className="mx-auto mb-10 max-w-2xl text-center md:mb-12">
           <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.3em] text-[#E53E3E]">

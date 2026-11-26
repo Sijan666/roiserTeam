@@ -6,7 +6,7 @@ import Container from "../components/common/Container";
 import Button from "../components/common/Button";
 import { useCart } from "../hooks/useCart";
 import { useAuth } from "../hooks/useAuth";
-import { formatCurrency } from "../utils/formatCurrency";
+import { useCurrency } from "../hooks/useCurrency";
 import { storage } from "../utils/storage";
 
 const ORDERS_STORAGE_KEY = "roiser_orders";
@@ -27,6 +27,7 @@ const Checkout = () => {
     removeCoupon,
   } = useCart();
   const { user } = useAuth();
+  const { formatPrice: formatCurrency } = useCurrency();
   const navigate = useNavigate();
 
   const [shippingMethod, setShippingMethod] = useState("standard");

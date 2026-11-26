@@ -1,16 +1,19 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
+import { useLenis } from "lenis/react";
+import { scrollToTop } from "../utils/scrollToTop";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
+  const lenis = useLenis();
+  const previousPathname = useRef(pathname);
 
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "instant",
-    });
-  }, [pathname]);
+    if (previousPathname.current === pathname) return;
+
+    previousPathname.current = pathname;
+    scrollToTop(lenis, true);
+  }, [pathname, lenis]);
 
   return null;
 };
